@@ -1,0 +1,18 @@
+
+#+hugo_base_dir: ./
+
+
+* Blog Ideas
+** DONE my-first-blog
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-first-blog
+:END:
+This is my post body
+
+*** headline 1
+**** title 
+*** headline 2
+**** title3
+
+*** headline 3
+**** title5
