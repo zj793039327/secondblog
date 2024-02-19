@@ -1,4 +1,4 @@
-
+﻿
 #+hugo_base_dir: ./
 
 
@@ -16,3 +16,7 @@ This is my post body
 
 *** headline 3
 **** title5
+** TODO 脉学笔记1
+:PROPERTIES:
+:EXPORT_FILE_NAME: yi_mai_xue_01
+:END:
