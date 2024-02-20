@@ -1,22 +1,30 @@
 # -*- org -*- #
 #+STARTUP: overview :: 自动折叠
 #+STARTUP: logdrawer :: 启动logbook drawer
-#+TAGS: A1 A9 Z1 Z9
-#+PROPERTY: Effort_ALL 0 0:10 0:20 0:30 1:00 2:00 3:00 4:00 8:00
-#+OPTIONS: p:t :: 导出时间显示计划日期 d:1 :: 导出drawer
+#+STARTUP: latexpreview
 #+HTML_HEAD: <link rel="stylesheep" type="text/css" href="styles/readtheorg.css">
 #+LANGUAGE: zh-CN ::导出时候，会显示目录而不是「toc」
 #+hugo_base_dir: ./
-#+toc: headlines 2
 #+options: toc:t num:t
 
-* TODO Day 1 构造过程抽象                                              :tech:
-SCHEDULED: <2024-02-19 Mon>
+
+#+TITLE: 21天 master SICP
+#+AUTHOR: zj56
+#+EMAIL: nothing
+
+
+* DONE Day 1 构造过程抽象                                              :tech:
+CLOSED: [2024-02-20 Tue 10:17] SCHEDULED: <2024-02-19 Mon>
 :PROPERTIES:
 :EXPORT_FILE_NAME: 21_master_sicp_day_01
 :END:
+第一天的学习，会从基本开始，了解程序的基本概念，了解lisp语言，掌握基本代码的编写
+
+#+hugo: more
+
 ** 计算过程的定义
 计算过程是思维的高级抽象，看不见摸不着，但是又有现实的意义，可以完成某些智力的工作。
+
 #+begin_quote
 我们这些程序员肯定感触很深，比如刚刚火起来的[[https://openai.com/sora][sora]][fn:1]。
 
@@ -27,7 +35,6 @@ SCHEDULED: <2024-02-19 Mon>
 程序就是这样无声无息的改变世界的。
 
 #+end_quote
-
 
 一个计算过程需要精密而准确的执行相应的程序。
 
@@ -88,7 +95,7 @@ pycharm就带一个python的REPL环境，如下图
 2. 随意嵌套 =(* (+ 1 2) (- 2 1))=
 
 但是也有一些缺点，比如不格式化的化，很难看明白
-*** Naming and the Environment 命名和环境
+*** Naming and the Environment 命名和环境                    :lispbase:
 *命名* ：将一段代码，通过 =define= 关键字，创建别名，可以随意引用
 
 *环境* ：环境是程序运行中的内存，会存储已经命名过的名字+名字代表的对象（pair）
@@ -183,14 +190,151 @@ lisp中的元素到现在，总体介绍分为以下的
 
 正则序(normal order)，则是代换的过程中绝不计算，都代换完在计算
 优点是直观，缺点则是部分需要重复计算，比如这里的 =(+ 5 1)=
+“fully expand and then reduce”
+
+在某些练习中，正则序和应用序表现的效果也不一样的。
+
+#+begin_src scheme
+
+  ; Exercise 1.5
+    (define (p) (p))
+    (define (test x y)
+      (if (= x 0) 0 y))
+
+  ; (test 0 (p)) 直接死循环了
+  ;; 这里用了app order的话，会先对param求值，(p)本身就是死循环
+  ;; 如果用了正则序，则不会求值，会一直expend，(p)不会被执行，则返回0
+  ;; https://www.cnblogs.com/ssaylo/p/13633403.html
+#+end_src
+
+*** Conditional Expressions and Predicates                    :lispbase:
+这是介绍第二个 special form
+就是控制流：if
+#+begin_src scheme
+  (define (abs x)  
+    (cond ((> x 0) x)
+          ((= x 0) 0)
+          ((< x 0) (- x))
+    )
+  )
+#+end_src
+上面这个例子，就是基本的if语句
+通过cond这个关键字，进行 「case analysis」 这个动作， =cond= 的标准用法如下，可以包含多个条件和执行内容
+其中，p 代表 predicate，需要返回true 或者 false，e 代表执行的表达式
+从p1 开始执行，如果true，则执行，如果fase，就执行下一个。如果都为false，则返回 undifined
+#+begin_src scheme
+  (cond (⟨p1 ⟩ ⟨e1 ⟩)
+        (⟨p2 ⟩ ⟨e2 ⟩)
+         ...
+        (⟨pn ⟩ ⟨en ⟩))
+#+end_src
+
+控制流的cond，还会有一个默认的选项
+
+#+begin_src scheme
+  (define (abs x)
+     (cond ((< x 0) (- x))
+           (else x)))
+#+end_src
 
 
-* TODO Day 5 编译器和解释器
+另外，scheme中还提供了原生的  =if= 关键字，这里更像一个三目运算符
+
+#+begin_src scheme
+      (define (abs x)
+        (if (< x 0)
+            (- x) x))
+
+#+end_src
+
+predicate 也支持进行组合
+1. and  =(and ⟨e 1⟩ . . . ⟨e n⟩)=
+2. or =(or ⟨e 1⟩ . . . ⟨e n⟩)=
+3. not =(not ⟨e⟩)=
+
+比如，你可以自己亲手定义 =>==
+
+#+begin_src scheme
+  (define (>= x y) (or (> x y) (= x y)))
+  ;or
+  (define (>= x y) (not (< x y)))
+#+end_src
+
+
+cond 也支持对操作符进行设置，如下：
+
+#+begin_src scheme
+(define (a-plus-abs-b a b)
+   ((if (> b 0) + -) a b))
+#+end_src
+* TODO Day 2 实践，求牛顿平方根
+SCHEDULED: <2024-02-20 Tue>
+:PROPERTIES:
+:EXPORT_FILE_NAME: 21_master_sicp_day_02
+:END:
+通过已经学习到的东西，矫正概念，进行更有意思的计算
+#+hugo: more
+
+** Day 1 的复习
+通过了第一天的学习，基本上明白了以下的内容
+1. 程序的结构，基础元素等
+2. lisp语言的基础
+   1. 基本元素计算，前缀表达式， =prefix-notation=
+   2. special forms 特殊元素， =define=, =cond=
+   3. 由于1、2组合而成的复合表达式
+   4. 针对符合表达式，通过 =代换模型 subsitution model= 进行人工智能的计算（笑）
+3. 做了一些练习题
+   1. 在lisp中，操作符也可以用来 cond
+   2. 人工智能代换的时候，有2种顺序，应用序和正则序，两者在极端场景下，效果不一样
+
+** 数学概念和计算机概念的区分
+
+数学比较重要的是概念定义，严谨的定义；计算机概念中，更重视的是操作。
+书中举例说了，比如要计算平方根
+数学概念很简单
+
+#+begin_src
+  x 的平方根 = the y such that y ≥ 0 and y 的平方 = x.
+#+end_src
+
+但是这只是个概念，无法用来计算，写一样的lisp代码也没办法计算。
+
+** 可操作的平方根计算
+比较通常的办法，就是使用牛顿的逐步逼近法（successive approximations）
+#+begin_quote
+我看到这里开始一脸懵逼了
+
+1. 平方根的逼近求值法 [fn:6]
+2. 迭代法求平方根 [fn:5]
+3. quara的一个比较好的回答 [fn:7]
+
+参考了一个文档，逐渐明白一些了，
+
+#+end_quote
+
+
+#+BEGIN_details
+#+begin_summary
+牛顿法的具体推导过程
+#+end_summary
+$$
+x^2 = 2 \
+x^2 - 2=0 \
+假设 f(x) = x^2 -2, f'(x) = 2x \
+此时，2的2次方根，就是x的解 \
+
+$$
+#+END_details
+
 
 * Footnotes
+
+[fn:7] quora的一个比较好的回答 [[https://www.quora.com/How-do-you-use-the-Newton-Raphson-method-to-obtain-successive-approximations-of-2-as-the-ratio-of-two-integers][link]] 
 [fn:1] openAI在24年2月推出的文生视频模型 sora https://openai.com/sora
 [fn:2] "Recursive Functions of Symbolic Expressions and Their Computation By Machine"
 （符号表达式的递归函数及其机械计算，McCarthy 1960）
-
 [fn:3] 解密Chez Scheme https://guenchi.github.io/0x7c06.html
 [fn:4] 思科官方的chezScheme 用户手册 https://cisco.github.io/ChezScheme/csug9.5/index.html
+[fn:5] 迭代法求平方根 https://www.physixfan.com/diedaifaqiupingfanggen/
+[fn:6] 平方根的逼近求值法 https://blog.csdn.net/weixin_42290927/article/details/106453060
+

@@ -1,0 +1,70 @@
+;; Exercise 1.1
+
+10
+(+ 5 3 4)
+(- 9 1)
+(/ 6 2)
+(+ (* 2 4) (- 4 6))
+(define a 3)
+(define b (+ a 1))
+(+ a b (* a b))
+(= a b)
+(if (and (> b a) (< b (* a b)))
+    b a)
+
+(cond ((= a 4) 6)
+      ((= b 4) (+ 6 7 a))
+      (else 25))
+
+(+ 2 (if (> b a) b a))
+
+(* (cond ((> a b) a)
+         ((< a b) b)
+         (else -1))
+
+    (+ a 1))
+
+;; Exercise 1.2
+
+(/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5)))))
+   (* 3 (- 6 2) (- 2 7)))
+
+;; Exercise 1.3: Deﬁne a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers.
+(define (sum-of-squares x y)
+  (+ (* x x) (* y y)))
+(define (>= x y) (not (< x y)))
+(define (exe-1.3 x y z)
+  [cond ((and (>= x y) (>= y z)) (sum-of-squares x y))
+	((and (>= x y) (>= z y)) (sum-of-squares x z))
+	((and (>= y x) (>= x z)) (sum-of-squares y x))
+	((and (>= y x) (>= z x)) (sum-of-squares y z))
+	((and (>= z x) (>= y x)) (sum-of-squares z y))
+	((and (>= z x) (>= x y)) (sum-of-squares x z))
+	]
+  )
+  
+(>= 3 2)
+(exe-1.3 1 2 3)
+(exe-1.3 1 2 2)
+(exe-1.3 2 2 1)
+
+;; Exercise 1.4: Observe that our model of evaluation allows for combinations whose operators are compound expressions. Use this observation to describe the behavior of the following procedure:
+(define (a-plus-abs-b a b)
+   ((if (> b 0) + -) a b))
+
+(a-plus-abs-b 1 2)
+(a-plus-abs-b 1 -2)
+;; 原来操作符也可以用if来进行选择设置
+
+;; Exercise 1.5: Ben Bitdiddle has invented a test to determine whether the interpreter he is faced with is using applicativeorder evaluation or normal-order evaluation. He deﬁnes the following two procedures:
+
+(define (p) (p))
+(define (test x y)
+  (if (= x 0) 0 y))
+
+; (test 0 (p)) 直接死循环了
+;; 这里用了app order的话，会先对param求值，(p)本身就是死循环
+;; 如果用了正则序，则不会求值，会一直expend，(p)不会被执行，则返回0
+;; https://www.cnblogs.com/ssaylo/p/13633403.html
+;; 另外，哪里有答案呐：http://community.schemewiki.org/?SICP-Solutions
+;; 随便一下就搜到了

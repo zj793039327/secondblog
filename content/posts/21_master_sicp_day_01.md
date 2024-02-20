@@ -1,9 +1,10 @@
 +++
 title = "Day 1 构造过程抽象"
 author = ["zhangjing56"]
+date = 2024-02-20T10:17:00+08:00
 publishDate = 2024-02-19T00:00:00+08:00
 tags = ["tech"]
-draft = true
+draft = false
 +++
 
 <div class="ox-hugo-toc toc has-section-numbers">
@@ -14,14 +15,19 @@ draft = true
 - <span class="section-num">2</span> [用Lisp编程](#用lisp编程)
 - <span class="section-num">3</span> [程序设计的基本元素](#程序设计的基本元素)
     - <span class="section-num">3.1</span> [Expressions 表达式](#expressions-表达式)
-    - <span class="section-num">3.2</span> [Naming and the Environment 命名和环境](#naming-and-the-environment-命名和环境)
+    - <span class="section-num">3.2</span> [Naming and the Environment 命名和环境](#naming-and-the-environment-命名和环境):lispbase:
     - <span class="section-num">3.3</span> [Evaluation Combinations 组合式求值](#evaluation-combinations-组合式求值)
     - <span class="section-num">3.4</span> [Compound Procedures 复合过程](#compound-procedures-复合过程)
     - <span class="section-num">3.5</span> [The Substitution Model for Procedure Application 过程的代换模型](#the-substitution-model-for-procedure-application-过程的代换模型)
         - <span class="section-num">3.5.1</span> [Applicative order versus normal order 应用序 和正则序](#applicative-order-versus-normal-order-应用序-和正则序)
+    - <span class="section-num">3.6</span> [Conditional Expressions and Predicates](#conditional-expressions-and-predicates):lispbase:
 
 </div>
 <!--endtoc-->
+
+第一天的学习，会从基本开始，了解程序的基本概念，了解lisp语言，掌握基本代码的编写
+
+<!--more-->
 
 
 ## <span class="section-num">1</span> 计算过程的定义 {#计算过程的定义}
@@ -95,7 +101,7 @@ lisp 主要的特点，在于将『数据』和『程序』进行了几乎无差
 但是也有一些缺点，比如不格式化的化，很难看明白
 
 
-### <span class="section-num">3.2</span> Naming and the Environment 命名和环境 {#naming-and-the-environment-命名和环境}
+### <span class="section-num">3.2</span> Naming and the Environment 命名和环境 <span class="tag"><span class="lispbase">lispbase</span></span> {#naming-and-the-environment-命名和环境}
 
 **命名** ：将一段代码，通过 `define` 关键字，创建别名，可以随意引用
 
@@ -194,6 +200,86 @@ lisp中的元素到现在，总体介绍分为以下的
 
 正则序(normal order)，则是代换的过程中绝不计算，都代换完在计算
 优点是直观，缺点则是部分需要重复计算，比如这里的 `(+ 5 1)`
+“fully expand and then reduce”
+
+在某些练习中，正则序和应用序表现的效果也不一样的。
+
+```scheme
+
+; Exercise 1.5
+  (define (p) (p))
+  (define (test x y)
+    (if (= x 0) 0 y))
+
+; (test 0 (p)) 直接死循环了
+;; 这里用了app order的话，会先对param求值，(p)本身就是死循环
+;; 如果用了正则序，则不会求值，会一直expend，(p)不会被执行，则返回0
+;; https://www.cnblogs.com/ssaylo/p/13633403.html
+```
+
+
+### <span class="section-num">3.6</span> Conditional Expressions and Predicates <span class="tag"><span class="lispbase">lispbase</span></span> {#conditional-expressions-and-predicates}
+
+这是介绍第二个 special form
+就是控制流：if
+
+```scheme
+(define (abs x)
+  (cond ((> x 0) x)
+        ((= x 0) 0)
+        ((< x 0) (- x))
+  )
+)
+```
+
+上面这个例子，就是基本的if语句
+通过cond这个关键字，进行 「case analysis」 这个动作， `cond` 的标准用法如下，可以包含多个条件和执行内容
+其中，p 代表 predicate，需要返回true 或者 false，e 代表执行的表达式
+从p1 开始执行，如果true，则执行，如果fase，就执行下一个。如果都为false，则返回 undifined
+
+```scheme
+(cond (⟨p1 ⟩ ⟨e1 ⟩)
+      (⟨p2 ⟩ ⟨e2 ⟩)
+       ...
+      (⟨pn ⟩ ⟨en ⟩))
+```
+
+控制流的cond，还会有一个默认的选项
+
+```scheme
+(define (abs x)
+   (cond ((< x 0) (- x))
+         (else x)))
+```
+
+另外，scheme中还提供了原生的  `if` 关键字，这里更像一个三目运算符
+
+```scheme
+(define (abs x)
+  (if (< x 0)
+      (- x) x))
+```
+
+predicate 也支持进行组合
+
+1.  and  `(and ⟨e 1⟩ . . . ⟨e n⟩)`
+2.  or `(or ⟨e 1⟩ . . . ⟨e n⟩)`
+3.  not `(not ⟨e⟩)`
+
+比如，你可以自己亲手定义 `>=`
+
+```scheme
+(define (>= x y) (or (> x y) (= x y)))
+;or
+(define (>= x y) (not (< x y)))
+```
+
+cond 也支持对操作符进行设置，如下：
+
+```scheme
+(define (a-plus-abs-b a b)
+   ((if (> b 0) + -) a b))
+```
 
 [^fn:1]: openAI在24年2月推出的文生视频模型 sora <https://openai.com/sora>
 [^fn:2]: "Recursive Functions of Symbolic Expressions and Their Computation By Machine"
