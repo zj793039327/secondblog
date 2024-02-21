@@ -1,5 +1,9 @@
 baseURL = 'https://example.org/'
 languageCode = 'zh-CN'
 title = "JINGs BLOG"
-theme = 'capsule'
+# theme = 'capsule'
 toc = true
+
+[module]
+  [[module.imports]]
+    path = "github.com/kaushalmodi/hugo-onyx-theme"

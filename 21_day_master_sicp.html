@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN ::导出时候，会显示目录而不是「toc」" xml:lang="zh-CN ::导出时候，会显示目录而不是「toc」">
+<head>
+<!-- 2024-02-21 Wed 13:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>21天 master SICP</title>
+<meta name="author" content="zj56" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheep" type="text/css" href="styles/readtheorg.css">
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">21天 master SICP</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf5abeb1">1. <span class="done DONE">DONE</span> Day 1 构造过程抽象&#xa0;&#xa0;&#xa0;<span class="tag"><span class="tech">tech</span></span></a>
+<ul>
+<li><a href="#org8b22626">1.1. 计算过程的定义</a></li>
+<li><a href="#orga569e6a">1.2. 用Lisp编程</a></li>
+<li><a href="#org0a91b58">1.3. 程序设计的基本元素</a>
+<ul>
+<li><a href="#org519215a">1.3.1. Expressions 表达式</a></li>
+<li><a href="#org5bdc408">1.3.2. Naming and the Environment 命名和环境&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></a></li>
+<li><a href="#org3badd00">1.3.3. Evaluation Combinations 组合式求值</a></li>
+<li><a href="#org31f9bca">1.3.4. Compound Procedures 复合过程</a></li>
+<li><a href="#orgb53330e">1.3.5. The Substitution Model for Procedure Application 过程的代换模型</a></li>
+<li><a href="#org04c79ac">1.3.6. Conditional Expressions and Predicates&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org40ba22d">2. <span class="todo TODO">TODO</span> Day 2 实践，求牛顿平方根</a>
+<ul>
+<li><a href="#org498dbd1">2.1. Day 1 的复习</a></li>
+<li><a href="#orgbc074ee">2.2. 数学概念和计算机概念的区分</a></li>
+<li><a href="#orgfdccb84">2.3. 可操作的平方根计算</a>
+<ul>
+<li><a href="#org914db03">2.3.1. 牛顿法求平方根的数学理解</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgf5abeb1" class="outline-2">
+<h2 id="orgf5abeb1"><span class="section-number-2">1.</span> <span class="done DONE">DONE</span> Day 1 构造过程抽象&#xa0;&#xa0;&#xa0;<span class="tag"><span class="tech">tech</span></span></h2>
+<div class="outline-text-2" id="text-1">
+<p>
+第一天的学习，会从基本开始，了解程序的基本概念，了解lisp语言，掌握基本代码的编写
+</p>
+</div>
+
+<div id="outline-container-org8b22626" class="outline-3">
+<h3 id="org8b22626"><span class="section-number-3">1.1.</span> 计算过程的定义</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+计算过程是思维的高级抽象，看不见摸不着，但是又有现实的意义，可以完成某些智力的工作。
+</p>
+
+<blockquote>
+<p>
+我们这些程序员肯定感触很深，比如刚刚火起来的<a href="https://openai.com/sora">sora</a><sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。
+</p>
+
+
+<div id="orgf61f112" class="figure">
+<p><img src="http://img.skydrift.cn/1708322070.png?imageMogr2/thumbnail/!70p" alt="!70p" width="50%" height="50%" />
+</p>
+<p><span class="figure-number">Figure 1: </span>sora</p>
+</div>
+
+<p>
+程序就是这样无声无息的改变世界的。
+</p>
+</blockquote>
+
+<p>
+一个计算过程需要精密而准确的执行相应的程序。
+</p>
+
+<p>
+好的程序应该像是设计良好的汽车，或者是核反应堆一样，具有某种模块化的设计，其中的各个部分可以独立的构造、替换、排除错误。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga569e6a" class="outline-3">
+<h3 id="orga569e6a"><span class="section-number-3">1.2.</span> 用Lisp编程</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+lisp是20世纪50年代后期发明的一种语言，主要是为了对 list 进行 processing的语言。
+称为【递归方程】，作者是John McCarthy<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
+</p>
+<blockquote>
+<p>
+是的，这里的lisp，其实就是  list + processing
+</p>
+</blockquote>
+<p>
+Lisp的名字，来自表表处理（LISt PROCESSING），Lisp语言的设计是提供了符号计算的能力，去解决一些程序设计问题
+比如代数表达式的符号微分和积分。
+</p>
+
+<p>
+Lisp不是刻意设计的结果，是一种实验性的，非正式的发展实现。lisp发展到现在，已经有很多种方言了，参见下面的发展图
+</p>
+
+
+<div id="orgf7ae556" class="figure">
+<p><img src="http://img.skydrift.cn/1708328694.png" alt="1708328694.png" width="50%" height="50%" />
+</p>
+<p><span class="figure-number">Figure 2: </span>lisp的发展历程(from wikipedia)]</p>
+</div>
+
+<blockquote>
+<p>
+值得一说的是，ChezScheme<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>是业界最快的scheme编译器，之前是在思科的收费软件，后来进行了开源
+</p>
+</blockquote>
+<p>
+lisp 主要的特点，在于将『数据』和『程序』进行了几乎无差别的对待，在数据处理方面，效果更好。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a91b58" class="outline-3">
+<h3 id="org0a91b58"><span class="section-number-3">1.3.</span> 程序设计的基本元素</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+任何一门强力的程序设计语言，都需要考虑以下的一些概念
+</p>
+
+<ol class="org-ol">
+<li><b>基本的表达形式</b> ： <i>语言最基本的颗粒度</i></li>
+<li><b>组合的方法</b> ： <i>通过组合的方式，可以将简单的东西拼装成复杂的东西</i></li>
+<li><b>抽象的方法</b> ： <i>为复杂或者简单的东西命名，并将这些东西当做单元去操作</i></li>
+</ol>
+
+<blockquote>
+<p>
+简明扼要，这其实就是语言的概念，少一个都不行。因此，在lisp中，其实只有5个元素
+</p>
+</blockquote>
+</div>
+<div id="outline-container-org519215a" class="outline-4">
+<h4 id="org519215a"><span class="section-number-4">1.3.1.</span> Expressions 表达式</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+学习语言最好的方式，就是有一个运行环境，在命令行里面敲代码，一边敲代码，一边执行。
+</p>
+
+<blockquote>
+<p>
+个人理解，这里的命令行是指<a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>(Read eval print loop)，比如典型的，命令行就是一种REPL。
+当然，大一些的函数，还是不方便在REPL中编写和运行的。但是一些小的，3-5行的还是比较合适。
+pycharm就带一个python的REPL环境，如下图
+</p>
+
+<div id="org0c80fc9" class="figure">
+<p><img src="http://img.skydrift.cn/1708330824.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+</p>
+<p><span class="figure-number">Figure 3: </span>python Console(REPL)</p>
+</div>
+</blockquote>
+<p>
+这里演示一些基本的lisp例子
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(+ 137 349)
+;486
+</pre>
+</div>
+
+<p>
+在lisp中，计算逻辑使用了前缀表达式(prefix-notation)
+前缀表达式虽然反直觉，但是有很多优点
+</p>
+<ol class="org-ol">
+<li>随意扩充 <code>(* 1 2 3 4 5)</code></li>
+<li>随意嵌套 <code>(* (+ 1 2) (- 2 1))</code></li>
+</ol>
+
+<p>
+但是也有一些缺点，比如不格式化的化，很难看明白
+</p>
+</div>
+</div>
+<div id="outline-container-org5bdc408" class="outline-4">
+<h4 id="org5bdc408"><span class="section-number-4">1.3.2.</span> Naming and the Environment 命名和环境&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+<b>命名</b> ：将一段代码，通过 <code>define</code> 关键字，创建别名，可以随意引用
+</p>
+
+<p>
+<b>环境</b> ：环境是程序运行中的内存，会存储已经命名过的名字+名字代表的对象（pair）
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme">(define size 2)
+(* 2 size)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3badd00" class="outline-4">
+<h4 id="org3badd00"><span class="section-number-4">1.3.3.</span> Evaluation Combinations 组合式求值</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+一种分而治之的思想，整体程序的运行，其实就是两步
+</p>
+
+<ol class="org-ol">
+<li>分开求所有子表达式（sub-expressions）的值（operands）</li>
+<li>将所有表达式的值（the operands）使用操作符（the operator）进行计算</li>
+</ol>
+
+<p>
+求值的过程，就称之为 conbination
+</p>
+
+<p>
+可以照着这张图进行理解
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme">(* (+ 2 (* 4 6))
+  (+ 3 5 7))
+</pre>
+</div>
+
+<div id="orgd9b09b9" class="figure">
+<p><img src="http://img.skydrift.cn/1708335477.png" alt="1708335477.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>表达式求值示意图（来源原书）</p>
+</div>
+
+<p>
+你会发现，这些符号中， <code>+</code> 这种的属于内置符号（built-in），
+你自己定义的 <code>size</code> 这种的属于命名符号，
+但是对于 <code>(define x 2)</code> 这种的表达式，lisp采取的措施就不是求值，
+这属于特殊的规则（special form）
+</p>
+</div>
+</div>
+<div id="outline-container-org31f9bca" class="outline-4">
+<h4 id="org31f9bca"><span class="section-number-4">1.3.4.</span> Compound Procedures 复合过程</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+lisp中的元素到现在，总体介绍分为以下的
+</p>
+
+<ol class="org-ol">
+<li>数字、算数，作为基础数据和过程</li>
+<li>可嵌套的组合，提供了一种组合的手段</li>
+<li>定义，将name和values关联在一起，提供了抽象</li>
+</ol>
+
+<p>
+本章节， 将会介绍更强力的工具：过程定义（procedure definitions），可以针对一个元素进行抽象重命名
+</p>
+<blockquote>
+<p>
+这不就是函数me
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(define (square x) (* x x))
+
+   ;基本的定义语句如下：
+(define (⟨name⟩ ⟨formal parameters⟩)
+  ⟨ body⟩)
+
+(define (sum-of-squares x y)
+  (+ (square x) (square y)))
+
+(define (f a)
+ (sum-of-squares (+ a 1) (* a 2)))
+
+</pre>
+</div>
+
+<p>
+光看过程，其实无法猜测里面是什么东西
+</p>
+</div>
+</div>
+<div id="outline-container-orgb53330e" class="outline-4">
+<h4 id="orgb53330e"><span class="section-number-4">1.3.5.</span> The Substitution Model for Procedure Application 过程的代换模型</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+代换模型（substitution model）简言之，就是在过程执行的时候，
+系统会将抽象的名字换成原始的过程，并且运行。
+</p>
+
+<blockquote>
+<p>
+说白了，其实就遍历二叉树，深度遍历二叉树。
+递归，将所有表达式入栈，
+递归到最末尾，依次求值出栈。
+</p>
+</blockquote>
+
+<p>
+当然，现实中的编译器、解释器不只是代换这么简单，还会更加复杂。
+书籍的 <i>第五章</i> 会给出一个完整的解释器和编译器。
+</p>
+
+<blockquote>
+<p>
+是否有点期待呢？
+</p>
+
+<p>
+现在看了目录之后，发现总共就只有5章，突然有点慌
+</p>
+</blockquote>
+</div>
+
+<ol class="org-ol">
+<li><a id="org5526703"></a>Applicative order versus normal order 应用序 和正则序<br />
+<div class="outline-text-5" id="text-1-3-5-1">
+<p>
+比如计算下面的表达式
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme">(f 5)
+</pre>
+</div>
+
+<div id="orgf1f34dd" class="figure">
+<p><img src="http://img.skydrift.cn/1708354294.png" alt="1708354294.png" width="50%" height="50%" />
+</p>
+<p><span class="figure-number">Figure 5: </span>应用序</p>
+</div>
+
+
+<p>
+应用序(Applicative order)，是计算的过程中能算就算，当然是基础计算
+缺点是不直观，优点是速度较快，scheme中，用的就是应用序的代换模型
+</p>
+
+
+<div id="orgbed1908" class="figure">
+<p><img src="http://img.skydrift.cn/1708354305.png" alt="1708354305.png" width="50%" height="50%" />
+</p>
+<p><span class="figure-number">Figure 6: </span>正则序</p>
+</div>
+
+<p>
+正则序(normal order)，则是代换的过程中绝不计算，都代换完在计算
+优点是直观，缺点则是部分需要重复计算，比如这里的 <code>(+ 5 1)</code>
+“fully expand and then reduce”
+</p>
+
+<p>
+在某些练习中，正则序和应用序表现的效果也不一样的。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">
+; Exercise 1.5
+  (define (p) (p))
+  (define (test x y)
+    (if (= x 0) 0 y))
+
+; (test 0 (p)) 直接死循环了
+;; 这里用了app order的话，会先对param求值，(p)本身就是死循环
+;; 如果用了正则序，则不会求值，会一直expend，(p)不会被执行，则返回0
+;; https://www.cnblogs.com/ssaylo/p/13633403.html
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org04c79ac" class="outline-4">
+<h4 id="org04c79ac"><span class="section-number-4">1.3.6.</span> Conditional Expressions and Predicates&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></h4>
+<div class="outline-text-4" id="text-1-3-6">
+<p>
+这是介绍第二个 special form
+就是控制流：if
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme">(define (abs x)  
+  (cond ((&gt; x 0) x)
+        ((= x 0) 0)
+        ((&lt; x 0) (- x))
+  )
+)
+</pre>
+</div>
+<p>
+上面这个例子，就是基本的if语句
+通过cond这个关键字，进行 「case analysis」 这个动作， <code>cond</code> 的标准用法如下，可以包含多个条件和执行内容
+其中，p 代表 predicate，需要返回true 或者 false，e 代表执行的表达式
+从p1 开始执行，如果true，则执行，如果fase，就执行下一个。如果都为false，则返回 undifined
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme">(cond (⟨p1 ⟩ ⟨e1 ⟩)
+      (⟨p2 ⟩ ⟨e2 ⟩)
+       ...
+      (⟨pn ⟩ ⟨en ⟩))
+</pre>
+</div>
+
+<p>
+控制流的cond，还会有一个默认的选项
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(define (abs x)
+   (cond ((&lt; x 0) (- x))
+         (else x)))
+</pre>
+</div>
+
+
+<p>
+另外，scheme中还提供了原生的  <code>if</code> 关键字，这里更像一个三目运算符
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(define (abs x)
+  (if (&lt; x 0)
+      (- x) x))
+
+</pre>
+</div>
+
+<p>
+predicate 也支持进行组合
+</p>
+<ol class="org-ol">
+<li>and  <code>(and ⟨e 1⟩ . . . ⟨e n⟩)</code></li>
+<li>or <code>(or ⟨e 1⟩ . . . ⟨e n⟩)</code></li>
+<li>not <code>(not ⟨e⟩)</code></li>
+</ol>
+
+<p>
+比如，你可以自己亲手定义 <code>&gt;=</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(define (&gt;= x y) (or (&gt; x y) (= x y)))
+;or
+(define (&gt;= x y) (not (&lt; x y)))
+</pre>
+</div>
+
+
+<p>
+cond 也支持对操作符进行设置，如下：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(define (a-plus-abs-b a b)
+   ((if (&gt; b 0) + -) a b))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org40ba22d" class="outline-2">
+<h2 id="org40ba22d"><span class="section-number-2">2.</span> <span class="todo TODO">TODO</span> Day 2 实践，求牛顿平方根</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+通过已经学习到的东西，矫正概念，进行更有意思的计算
+</p>
+</div>
+
+<div id="outline-container-org498dbd1" class="outline-3">
+<h3 id="org498dbd1"><span class="section-number-3">2.1.</span> Day 1 的复习</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+通过了第一天的学习，基本上明白了以下的内容
+</p>
+<ol class="org-ol">
+<li>程序的结构，基础元素等</li>
+<li>lisp语言的基础
+<ol class="org-ol">
+<li>基本元素计算，前缀表达式， <code>prefix-notation</code></li>
+<li>special forms 特殊元素， <code>define</code>, <code>cond</code></li>
+<li>由于1、2组合而成的复合表达式</li>
+<li>针对符合表达式，通过 <code>代换模型 subsitution model</code> 进行人工智能的计算（笑）</li>
+</ol></li>
+<li>做了一些练习题
+<ol class="org-ol">
+<li>在lisp中，操作符也可以用来 cond</li>
+<li>人工智能代换的时候，有2种顺序，应用序和正则序，两者在极端场景下，效果不一样</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgbc074ee" class="outline-3">
+<h3 id="orgbc074ee"><span class="section-number-3">2.2.</span> 数学概念和计算机概念的区分</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+数学比较重要的是概念定义，严谨的定义；计算机概念中，更重视的是操作。
+书中举例说了，比如要计算平方根
+数学概念很简单
+</p>
+
+<pre class="example">
+x 的平方根 = the y such that y ≥ 0 and y 的平方 = x.
+</pre>
+
+<p>
+但是这只是个概念，无法用来计算，写一样的lisp代码也没办法计算。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfdccb84" class="outline-3">
+<h3 id="orgfdccb84"><span class="section-number-3">2.3.</span> 可操作的平方根计算</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+比较通常的办法，就是使用牛顿的逐步逼近法（successive approximations）
+</p>
+<blockquote>
+<p>
+我看到这里开始一脸懵逼了
+</p>
+
+<ol class="org-ol">
+<li>平方根的逼近求值法 <sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup></li>
+<li>迭代法求平方根 <sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup></li>
+<li>quara的一个比较好的回答 <sup><a id="fnr.6" class="footref" href="#fn.6" role="doc-backlink">6</a></sup></li>
+</ol>
+
+<p>
+参考了一个文档，逐渐明白一些了，
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-org914db03" class="outline-4">
+<h4 id="org914db03"><span class="section-number-4">2.3.1.</span> 牛顿法求平方根的数学理解</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+牛顿法的具体推导过程
+</p>
+
+<p>
+y = x<sup>2</sup> 这个函数，坐标系中，是经典的反抛物线图案，
+</p>
+
+<p>
+求 根号2 的时候，相当于y=2，求x的值。
+</p>
+
+<p>
+结合图像分析，相当于是求 纵坐标 y=2的时候，曲线对应x的横坐标。
+</p>
+
+<p>
+牛顿法的话，结合右图进行分析<img src="http://img.skydrift.cn/1708429907.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+</p>
+
+<ol class="org-ol">
+<li>将 y = x<sup>2</sup> 进行简化，变成 y= x<sup>2</sup> - 2，就变成了上图的样子</li>
+<li>这样一来，曲线和x轴的交点就变成了要求的根号2，整个函数变成了 f(x) = x<sup>2</sup> -2</li>
+<li>随便找一个x0点，针对x0进行求导，f'(x) = 2x，如图，导数是一条直线</li>
+<li>直线与x轴的交点，作为x1，可以明显看到，x1会更接近实际的x，但是不等于x</li>
+<li>继续3的步骤，直到 xn，会逐步收敛到x，进而求出非常接近的x</li>
+</ol>
+
+<p>
+以上，就是结合图形的直观理解，可以看到，这个方法非常的直观
+</p>
+
+<p>
+接下来，会结合上面的直观理念，进行公式级别的推导计算
+</p>
+
+
+<p>
+看下上面的图，已知条件如下
+</p>
+<ol class="org-ol">
+<li>直线的斜率为 f'(x0)</li>
+<li>直线经过了一个点：(x0, f(x0))，这就是在曲线找到的一个随机点</li>
+<li>直线经过了另一个点：(x1, 0)，这就是x轴的交点</li>
+</ol>
+
+<p>
+可以得到2个公式
+</p>
+
+<p>
+$$
+</p>
+
+<p>
+基础公式：y = f'(x<sub>0</sub>)x<sub>1</sub> + b , 其中, 斜率为 f'(x<sub>0</sub>)
+</p>
+
+<p>
+$$
+</p>
+
+<p>
+套用2个点位，可以得到下面2个公式,
+</p>
+
+<p>
+$$
+</p>
+<ol class="org-ol">
+<li>套用(x<sub>0</sub>, f(x<sub>0</sub>)) : f(x<sub>0</sub>) = f'(x<sub>0</sub>)x<sub>0</sub>+b \</li>
+
+<li>套用(x<sub>1</sub>, 0) : 0 = f'(x<sub>0</sub>)x<sub>1</sub>+b \</li>
+</ol>
+<p>
+$$
+</p>
+
+<p>
+两个公式进行相减，可以将b消除，并且得到可以便于计算的公式
+</p>
+
+<p>
+$$
+</p>
+
+<p>
+f(x<sub>0</sub>) = f'(x<sub>0</sub>)x<sub>0</sub> - f'(x<sub>0</sub>)x<sub>1</sub>
+</p>
+
+<p>
+$$
+</p>
+
+<p>
+公式进行变换，则可以得到对于 \(x_1\) 的求值公式
+</p>
+
+
+<p>
+f'(x<sub>0</sub>)x<sub>1</sub> = f'(x<sub>0</sub>)x<sub>0</sub> - f(x<sub>0</sub>)\
+</p>
+
+<p>
+x<sub>1</sub> = \frac{f'(x_0)x_0 - f(x_0)}{f'(x_0)} \
+</p>
+
+<p>
+x<sub>1</sub> = x<sub>0</sub> - \frac{f(x_0)}{f'(x_0)}
+</p>
+
+
+
+\begin{equation}
+\label{eq:1}
+C = W\log_{2} (1+\mathrm{SNR})
+\end{equation}
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+openAI在24年2月推出的文生视频模型 sora <a href="https://openai.com/sora">https://openai.com/sora</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+"Recursive Functions of Symbolic Expressions and Their Computation By Machine"
+（符号表达式的递归函数及其机械计算，McCarthy 1960）
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+思科官方的chezScheme 用户手册 <a href="https://cisco.github.io/ChezScheme/csug9.5/index.html">https://cisco.github.io/ChezScheme/csug9.5/index.html</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+平方根的逼近求值法 <a href="https://blog.csdn.net/weixin_42290927/article/details/106453060">https://blog.csdn.net/weixin_42290927/article/details/106453060</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5" role="doc-backlink">5</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+迭代法求平方根 <a href="https://www.physixfan.com/diedaifaqiupingfanggen/">https://www.physixfan.com/diedaifaqiupingfanggen/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6" role="doc-backlink">6</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+quora的一个比较好的回答 <a href="https://www.quora.com/How-do-you-use-the-Newton-Raphson-method-to-obtain-successive-approximations-of-2-as-the-ratio-of-two-integers">link</a> 
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: zj56</p>
+<p class="date">Created: 2024-02-21 Wed 13:30</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
