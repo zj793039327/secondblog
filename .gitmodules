@@ -1,3 +1,9 @@
 [submodule "themes/hugo-onyx-theme"]
 	path = themes/hugo-onyx-theme
 	url = https://github.com/kaushalmodi/hugo-onyx-theme.git
+[submodule "themes/capsule"]
+	path = themes/capsule
+	url = https://github.com/sudorook/capsule
+[submodule "themes/even"]
+	path = themes/even
+	url = https://github.com/olOwOlo/hugo-theme-even
