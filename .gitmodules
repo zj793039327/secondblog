@@ -4,3 +4,12 @@
 [submodule "themes/capsule"]
 	path = themes/capsule
 	url = https://github.com/sudorook/capsule
+[submodule "tmemes"]
+	path = tmemes
+	url = https://github.com/kaushalmodi/hugo-onyx-theme.git
+[submodule "theme"]
+	path = theme
+	url = https://github.com/kaushalmodi/hugo-onyx-theme.git
+[submodule "themes/hugo-onyx-theme"]
+	path = themes/hugo-onyx-theme
+	url = https://github.com/kaushalmodi/hugo-onyx-theme.git
