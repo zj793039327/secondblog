@@ -1,6 +1,6 @@
 +++
 title = "Day 1 构造过程抽象"
-author = ["zhangjing56"]
+author = ["joe567"]
 date = 2024-02-20T10:17:00+08:00
 publishDate = 2024-02-19T00:00:00+08:00
 tags = ["tech"]
@@ -52,7 +52,7 @@ lisp是20世纪50年代后期发明的一种语言，主要是为了对 list 进
 
 > 是的，这里的lisp，其实就是  list + processing
 
-Lisp的名字，来自表表处理（LISt PROCESSING），Lisp语言的设计是提供了符号计算的能力，去解决一些程序设计问题
+Lisp的名字，来自表处理（LISt PROCESSING），Lisp语言的设计是提供了符号计算的能力，去解决一些程序设计问题
 比如代数表达式的符号微分和积分。
 
 Lisp不是刻意设计的结果，是一种实验性的，非正式的发展实现。lisp发展到现在，已经有很多种方言了，参见下面的发展图
