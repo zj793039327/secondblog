@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+
+
+1 Day 1 的复习
+2 数学概念和计算机概念的区分
+3 可操作的平方根计算
+
+3.1 牛顿法求平方根的数学理解
+3.2 使用scheme实现牛顿法
+
+
+4 块封装 和 局部变量控制
+5 过程和计算
+
+5.1 迭代 VS 递归
+
+
+
+
+通过已经学习到的东西，矫正概念，进行更有意思的计算">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Day 2 实践，求牛顿平方根" />
+<meta property="og:description" content="
+
+
+1 Day 1 的复习
+2 数学概念和计算机概念的区分
+3 可操作的平方根计算
+
+3.1 牛顿法求平方根的数学理解
+3.2 使用scheme实现牛顿法
+
+
+4 块封装 和 局部变量控制
+5 过程和计算
+
+5.1 迭代 VS 递归
+
+
+
+
+通过已经学习到的东西，矫正概念，进行更有意思的计算" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/posts/21_master_sicp_day_02/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-20T00:00:00+08:00" />
+<meta property="article:modified_time" content="2024-02-24T17:49:00+08:00" />
+
+<title>Day 2 实践，求牛顿平方根 | JINGs BLOG</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="https://example.org/posts/21_master_sicp_day_02/">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.781e31156237cb34456e4cdb81249c4c1713e03a940c4bac2453e2178133bc68.js" integrity="sha256-eB4xFWI3yzRFbkzbgSScTBcT4DqUDEusJFPiF4EzvGg=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  MathJax = {
+    loader: {load: ['[tex]/color']},
+    tex: {
+	  packages: {'[+]': ['color']},
+          displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+	  inlineMath: [['\\(', '\\)'],['$', '$']],               
+	  formatError: (jax, err) => {
+	      console.log(jax, err);
+	      jax.formatError(err);
+	  }
+
+      },
+      
+  };
+</script>
+
+  
+
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>JINGs BLOG</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Day 2 实践，求牛顿平方根</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#day-1-的复习"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> Day 1 的复习</a></li>
+    <li><a href="#数学概念和计算机概念的区分"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> 数学概念和计算机概念的区分</a></li>
+    <li><a href="#可操作的平方根计算"><!-- raw HTML omitted -->3<!-- raw HTML omitted --> 可操作的平方根计算</a>
+      <ul>
+        <li><a href="#牛顿法求平方根的数学理解"><!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> 牛顿法求平方根的数学理解</a></li>
+        <li><a href="#使用scheme实现牛顿法"><!-- raw HTML omitted -->3.2<!-- raw HTML omitted --> 使用scheme实现牛顿法</a></li>
+      </ul>
+    </li>
+    <li><a href="#块封装-和-局部变量控制"><!-- raw HTML omitted -->4<!-- raw HTML omitted --> 块封装 和 局部变量控制</a></li>
+    <li><a href="#过程和计算"><!-- raw HTML omitted -->5<!-- raw HTML omitted --> 过程和计算</a>
+      <ul>
+        <li><a href="#迭代-vs-递归"><!-- raw HTML omitted -->5.1<!-- raw HTML omitted --> 迭代 VS 递归</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/21_master_sicp_day_02/">Day 2 实践，求牛顿平方根</a>
+  </h1>
+  
+  <h5>February 24, 2024</h5>
+
+
+
+  
+
+  
+  <div>
+    
+      <a href="/tags/tech/">Tech</a>
+  </div>
+  
+
+
+
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><!-- raw HTML omitted -->1<!-- raw HTML omitted --> <a href="#day-1-%e7%9a%84%e5%a4%8d%e4%b9%a0">Day 1 的复习</a></li>
+<li><!-- raw HTML omitted -->2<!-- raw HTML omitted --> <a href="#%e6%95%b0%e5%ad%a6%e6%a6%82%e5%bf%b5%e5%92%8c%e8%ae%a1%e7%ae%97%e6%9c%ba%e6%a6%82%e5%bf%b5%e7%9a%84%e5%8c%ba%e5%88%86">数学概念和计算机概念的区分</a></li>
+<li><!-- raw HTML omitted -->3<!-- raw HTML omitted --> <a href="#%e5%8f%af%e6%93%8d%e4%bd%9c%e7%9a%84%e5%b9%b3%e6%96%b9%e6%a0%b9%e8%ae%a1%e7%ae%97">可操作的平方根计算</a>
+<ul>
+<li><!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> <a href="#%e7%89%9b%e9%a1%bf%e6%b3%95%e6%b1%82%e5%b9%b3%e6%96%b9%e6%a0%b9%e7%9a%84%e6%95%b0%e5%ad%a6%e7%90%86%e8%a7%a3">牛顿法求平方根的数学理解</a></li>
+<li><!-- raw HTML omitted -->3.2<!-- raw HTML omitted --> <a href="#%e4%bd%bf%e7%94%a8scheme%e5%ae%9e%e7%8e%b0%e7%89%9b%e9%a1%bf%e6%b3%95">使用scheme实现牛顿法</a></li>
+</ul>
+</li>
+<li><!-- raw HTML omitted -->4<!-- raw HTML omitted --> <a href="#%e5%9d%97%e5%b0%81%e8%a3%85-%e5%92%8c-%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f%e6%8e%a7%e5%88%b6">块封装 和 局部变量控制</a></li>
+<li><!-- raw HTML omitted -->5<!-- raw HTML omitted --> <a href="#%e8%bf%87%e7%a8%8b%e5%92%8c%e8%ae%a1%e7%ae%97">过程和计算</a>
+<ul>
+<li><!-- raw HTML omitted -->5.1<!-- raw HTML omitted --> <a href="#%e8%bf%ad%e4%bb%a3-vs-%e9%80%92%e5%bd%92">迭代 VS 递归</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>通过已经学习到的东西，矫正概念，进行更有意思的计算</p>
+<h2 id="day-1-的复习">
+  <!-- raw HTML omitted -->1<!-- raw HTML omitted --> Day 1 的复习
+  <a class="anchor" href="#day-1-%e7%9a%84%e5%a4%8d%e4%b9%a0">#</a>
+</h2>
+<p>通过了第一天的学习，基本上明白了以下的内容</p>
+<ol>
+<li>程序的结构，基础元素等</li>
+<li>lisp语言的基础
+<ol>
+<li>基本元素计算，前缀表达式， <code>prefix-notation</code></li>
+<li>special forms 特殊元素， <code>define</code>, <code>cond</code></li>
+<li>由于1、2组合而成的复合表达式</li>
+<li>针对符合表达式，通过 <code>代换模型 subsitution model</code> 进行人工智能的计算（笑）</li>
+</ol>
+</li>
+<li>做了一些练习题
+<ol>
+<li>在lisp中，操作符也可以用来 cond</li>
+<li>人工智能代换的时候，有2种顺序，应用序和正则序，两者在极端场景下，效果不一样</li>
+</ol>
+</li>
+</ol>
+<h2 id="数学概念和计算机概念的区分">
+  <!-- raw HTML omitted -->2<!-- raw HTML omitted --> 数学概念和计算机概念的区分
+  <a class="anchor" href="#%e6%95%b0%e5%ad%a6%e6%a6%82%e5%bf%b5%e5%92%8c%e8%ae%a1%e7%ae%97%e6%9c%ba%e6%a6%82%e5%bf%b5%e7%9a%84%e5%8c%ba%e5%88%86">#</a>
+</h2>
+<p>数学比较重要的是概念定义，严谨的定义；计算机概念中，更重视的是操作。
+书中举例说了，比如要计算平方根
+数学概念很简单</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">x 的平方根 = the y such that y ≥ 0 and y 的平方 = x.
+</code></pre><p>但是这只是个概念，无法用来计算，写一样的lisp代码也没办法计算。</p>
+<h2 id="可操作的平方根计算">
+  <!-- raw HTML omitted -->3<!-- raw HTML omitted --> 可操作的平方根计算
+  <a class="anchor" href="#%e5%8f%af%e6%93%8d%e4%bd%9c%e7%9a%84%e5%b9%b3%e6%96%b9%e6%a0%b9%e8%ae%a1%e7%ae%97">#</a>
+</h2>
+<p>比较通常的办法，就是使用牛顿的逐步逼近法（successive approximations）</p>
+<blockquote>
+<p>我看到这里开始一脸懵逼了</p>
+<ol>
+<li>平方根的逼近求值法 <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+<li>迭代法求平方根 <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+<li>quara的一个比较好的回答 <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></li>
+</ol>
+<p>参考了一个文档，逐渐明白一些了，</p>
+</blockquote>
+<h3 id="牛顿法求平方根的数学理解">
+  <!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> 牛顿法求平方根的数学理解
+  <a class="anchor" href="#%e7%89%9b%e9%a1%bf%e6%b3%95%e6%b1%82%e5%b9%b3%e6%96%b9%e6%a0%b9%e7%9a%84%e6%95%b0%e5%ad%a6%e7%90%86%e8%a7%a3">#</a>
+</h3>
+<p>牛顿法的具体推导过程</p>
+<p>y = x^2 这个函数，坐标系中，是经典的反抛物线图案，</p>
+<p>求 根号2 的时候，相当于y=2，求x的值。</p>
+<p>结合图像分析，相当于是求 纵坐标 y=2的时候，曲线对应x的横坐标。</p>
+<p>牛顿法的话，结合右图进行分析<img src="http://img.skydrift.cn/1708429907.png" alt="" /></p>
+<ol>
+<li>将 y = x^2 进行简化，变成 y= x^2 - 2，就变成了上图的样子</li>
+<li>这样一来，曲线和x轴的交点就变成了要求的根号2，整个函数变成了 f(x) = x^2 -2</li>
+<li>随便找一个 x_0 点，针对 x_0 进行求导，f&rsquo;(x) = 2x，如图，导数是一条直线</li>
+<li>直线与x轴的交点，作为 x_1，可以明显看到，x_1 会更接近实际的x，但是不等于x</li>
+<li>继续3的步骤，直到 x_n，会逐步收敛到x，进而求出非常接近的x</li>
+</ol>
+<p>以上，就是结合图形的直观理解，可以看到，这个方法非常的直观</p>
+<p>接下来，会结合上面的直观理念，进行公式级别的推导计算</p>
+<p>看下上面的图，已知条件如下</p>
+<ol>
+<li>直线的斜率为 f&rsquo;(x_0)</li>
+<li>直线经过了一个点：(x_0, f(x_0))，这就是在曲线找到的一个随机点</li>
+<li>直线经过了另一个点：(x_1, 0)，这就是x轴的交点</li>
+</ol>
+<p>可以得到2个公式</p>
+<p>\[ 基础公式：y = f&rsquo;(x_0)x_1 + b , 其中, 斜率为 f&rsquo;(x_0) \]</p>
+<p>套用2个点位，可以得到下面2个公式,</p>
+<p>\[ 1. 套用(x_0, f(x_0)) : f(x_0) = f&rsquo;(x_0)x_0+b \]
+\[ 2. 套用(x_1, 0) : 0 = f&rsquo;(x_0)x_1+b \]</p>
+<p>两个公式进行相减，可以将b消除，并且得到可以便于计算的公式</p>
+<p>\[ f(x_0) = f&rsquo;(x_0)x_0 - f&rsquo;(x_0)x_1 \]</p>
+<p>公式进行变换，则可以得到对于 \(x_1\) 的求值公式</p>
+<p>\begin{eqnarray}</p>
+<p>f&rsquo;(x_0)x_1 = f&rsquo;(x_0)x_0 - f(x_0) \\</p>
+<p>x_1 = \frac{f&rsquo;(x_0)x_0 - f(x_0)}{f&rsquo;(x_0)} \\</p>
+<p>x_1 = x_0 - \frac{f(x_0)}{f&rsquo;(x_0)}</p>
+<p>\end{eqnarray}</p>
+<p>至此，求值公式已经ok，对于一元二次方程，展开的方式<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>已经非常明显了。</p>
+<p>将公式套用到 \(f(x) = x^2-2\) 的话，从 \(x_0\) 计算 \(x_1\) 的方式就很简单了</p>
+<p>\begin{equation}
+x_1=x_0 - \frac{x_0^2-2}{2x_0}
+\end{equation}</p>
+<p>经过简化，公式如下</p>
+<p>\begin{equation}
+x_1=\frac{x_0+\frac{2}{x_0}}{2}
+\end{equation}</p>
+<h3 id="使用scheme实现牛顿法">
+  <!-- raw HTML omitted -->3.2<!-- raw HTML omitted --> 使用scheme实现牛顿法
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8scheme%e5%ae%9e%e7%8e%b0%e7%89%9b%e9%a1%bf%e6%b3%95">#</a>
+</h3>
+<p>实现代码很简单</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(sqrt x)
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">sqrt-iter</span> <span style="color:#ae81ff">1.0</span> x))
+</span></span></code></pre></div><p>主入口函数，就是sqrt这个，其中调用了
+sqrt-iter 这个函数，这个函数有2个入参
+1.0 就是初始的 \(x_0\)
+x 则是要求的目标值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sqrt-iter</span> guess x)
+</span></span><span style="display:flex;"><span> (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
+</span></span><span style="display:flex;"><span>     guess
+</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">sqrt-iter</span> (<span style="color:#a6e22e">improve</span> guess x) x)))
+</span></span></code></pre></div><p><code>sqrt-iter</code> 函数的定义如上
+这个函数内部其实就只有一个判定
+如果收敛到目标值，就返回，否则，优化并且迭代</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">improve</span> guess x)
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">average</span> guess (/ x guess)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">average</span> x y)
+</span></span><span style="display:flex;"><span>  (/ (+ x y) <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
+</span></span><span style="display:flex;"><span>  (&lt; (abs (- (<span style="color:#a6e22e">square</span> guess) x)) <span style="color:#ae81ff">0.001</span>))
+</span></span></code></pre></div><p>其中的3个子函数如上。都比较简单</p>
+<p><code>good-enough?</code> 用来判定是否达到了收敛阈值，可以看到，判定是相对反向的：
+通过 <code>square</code> 方法，来判定计算的value进行平方以后和目标值的差距。</p>
+<p><code>average</code> 中规中矩的函数，求平均数</p>
+<p><code>improve</code> 这是核心函数，用来计算新的 \(x_n\), guess 就是 \(x_n-1\)，x就是\(y\)</p>
+<p>这个函数整体就是在执行公式5，即 \(x_1=\frac{x_0+\frac{2}{x_0}}{2}\)</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></span><span style="background-color:#3c3d38"><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">square</span> x)
+</span></span><span style="display:flex;"><span>    (* x x))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sqrt-iter</span> guess x)
+</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
+</span></span><span style="display:flex;"><span>      guess
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">sqrt-iter</span> (<span style="color:#a6e22e">improve</span> guess x) x)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex; background-color:#3c3d38"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">improve</span> guess x)
+</span></span><span style="display:flex; background-color:#3c3d38"><span>    (<span style="color:#a6e22e">average</span> guess (/ x guess)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">average</span> x y)
+</span></span><span style="display:flex;"><span>    (/ (+ x y) <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
+</span></span><span style="display:flex;"><span>    (&lt; (abs (- (<span style="color:#a6e22e">square</span> guess) x)) <span style="color:#ae81ff">0.001</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(sqrt x)
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">sqrt-iter</span> <span style="color:#ae81ff">1.0</span> x)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>版本1 的代码如上。</p>
+<p>可以看到，这其中是有一段递归的，比如 <code>sqrt-iter</code> 调用了自己，可以将上面的函数调用关系， 变成一棵树展示出来</p>
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+<figure><img src="http://img.skydrift.cn/1708663434.png"/>
+</figure>
+
+<p>函数被拆解成了不同的小结构，每个结构各司其职，都封装了逻辑，
+每个小结构逻辑都很简单。</p>
+<p>每个大结构，不会也不需要关注小结构的内部实现。这就是抽象层次的问题。
+大的结构，抽象层次高，小结构抽象层次低，</p>
+<p>抽象层次也只是层次，不代表复杂度，抽象层次高的函数，不一定就会比低层次的更复杂。</p>
+<h2 id="块封装-和-局部变量控制">
+  <!-- raw HTML omitted -->4<!-- raw HTML omitted --> 块封装 和 局部变量控制
+  <a class="anchor" href="#%e5%9d%97%e5%b0%81%e8%a3%85-%e5%92%8c-%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f%e6%8e%a7%e5%88%b6">#</a>
+</h2>
+<p>可以看到，在这个过程中，很多函数名称出现了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(sqrt x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
+</span></span><span style="display:flex;"><span>    (&lt; (abs (- (<span style="color:#a6e22e">square</span> guess) x)) <span style="color:#ae81ff">0.001</span>))
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">improve</span> guess x) (<span style="color:#a6e22e">average</span> guess (/ x guess)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sqrt-iter</span> guess x)
+</span></span><span style="display:flex;"><span>     (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">good-enough?</span> guess x)
+</span></span><span style="display:flex;"><span>         guess
+</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">sqrt-iter</span> (<span style="color:#a6e22e">improve</span> guess x) x)))
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">sqrt-iter</span> <span style="color:#ae81ff">1.0</span> x)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>如上，这是第二版改动，可以看到，把一些工具函数，可以直接定义在大函数内部，这样，就算是一个更高级别的封装了</p>
+<p>不会污染全局变量，内部定义的函数，可见性只限制在内部</p>
+<p>进一步的说明，变量 <code>x</code> 也是一个局部变量，可以共享使用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(sqrt x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">good-enough?</span> guess)
+</span></span><span style="display:flex;"><span>  (&lt; (abs (- (<span style="color:#a6e22e">square</span> guess) x)) <span style="color:#ae81ff">0.001</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">improve</span> guess)
+</span></span><span style="display:flex;"><span>   (<span style="color:#a6e22e">average</span> guess (/ x guess)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sqrt-iter</span> guess)
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">good-enough?</span> guess)
+</span></span><span style="display:flex;"><span>      guess
+</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">sqrt-iter</span> (<span style="color:#a6e22e">improve</span> guess))))
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">sqrt-iter</span> <span style="color:#ae81ff">1.0</span>)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>这种情况，称之为 <strong>词法作用域 (lexical scoping)</strong></p>
+<blockquote>
+<p>在现代的编程中，这种块结构稀松平常，比如</p>
+<ol>
+<li>面向对象编程</li>
+<li>重构改善</li>
+<li>设计模式</li>
+<li>领域对象模型等</li>
+</ol>
+<p>这些讨论的，其实都是如何用好这种 <code>块结构</code> ，却很少有人讨论这种结构一开始是怎么设计出来的，来源于 老的 Algol 60 语言。</p>
+</blockquote>
+<h2 id="过程和计算">
+  <!-- raw HTML omitted -->5<!-- raw HTML omitted --> 过程和计算
+  <a class="anchor" href="#%e8%bf%87%e7%a8%8b%e5%92%8c%e8%ae%a1%e7%ae%97">#</a>
+</h2>
+<p>编写程序也是有各种套路的，就像是摄影和下棋一样，学会了套路和流程，才算是上道儿了。
+接下来，就要介绍各种组合拳了。</p>
+<ol>
+<li>研究各种函数流程的执行结构</li>
+<li>研究不同执行流程的时间复杂度，空间复杂度</li>
+<li>这些代表性的函数，只是用来演示的，不能作为生产环境使用</li>
+</ol>
+<h3 id="迭代-vs-递归">
+  <!-- raw HTML omitted -->5.1<!-- raw HTML omitted --> 迭代 VS 递归
+  <a class="anchor" href="#%e8%bf%ad%e4%bb%a3-vs-%e9%80%92%e5%bd%92">#</a>
+</h3>
+<p>不知道大家是怎么看待 这两个概念的，其实我本身在阅读之前，是没有明确的区别的。
+`
+由于之前学了yin神的计算机课，大概知道了迭代是递归的一种（尾递归），但是还是看出了解一下比较好</p>
+<p>阶乘的实现举例</p>
+<p>递归实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">factorial</span> n)
+</span></span><span style="display:flex;"><span>   (<span style="color:#66d9ef">if </span>(= n <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>       <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>       (* n (<span style="color:#a6e22e">factorial</span> (- n <span style="color:#ae81ff">1</span>)))))
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+<figure><img src="http://img.skydrift.cn/1708666024.png?imageMogr2/thumbnail/!70p"/>
+</figure>
+
+<p>迭代实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">factorial</span> n)
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">fact-iter</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1</span> n))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fact-iter</span> product counter max-count)
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">if </span>(&gt; counter max-count)
+</span></span><span style="display:flex;"><span>      product
+</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">fact-iter</span> (* counter product) (+ counter <span style="color:#ae81ff">1</span>) max-count)))
+</span></span></code></pre></div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+<figure><img src="http://img.skydrift.cn/1708666046.png?imageMogr2/thumbnail/!70p"/>
+</figure>
+
+<p>可以看到，递归在执行的时候，其实是 <code>不计算</code> 的，只有都展开之后才开始计算；而迭代则不一样，每次迭代都会计算。</p>
+<p><code>递归</code> ：就递归来说，递归有明显的展开和收缩的过程，这个过程产生一种链条（chain），每次调用都有一种延迟计算（deferred operations）挂靠在链条上。
+解释器要执行递归，需要把chain都保存起来，这个例子中，空间的增长是线性的(n 的正比)，这就是一个 <code>线性递归</code> 的过程</p>
+<p><code>迭代</code> ：这个过程中，没有展开和收缩的过程，每次执行，就是单独的，这种过程就是一个 <code>迭代计算</code> 过程</p>
+<p>注意，代码中有递归调用，并不代表这个计算过程是递归的，比如 迭代实现中，也有 <code>fact-iter</code> 的递归调用</p>
+<p>这就是 <code>递归计算过程</code> 和 <code>递归函数</code> 的区别。</p>
+<p>一个简单的可以看出来到底是递归还是迭代的办法，就是看下递归的表达式
+看下这个表达式，是否会阻碍了其他表达式的计算<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<p>比如</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span> (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">++</span> a b)
+</span></span><span style="display:flex;"><span>   (<span style="color:#66d9ef">if </span>( = a <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>       b
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">inc</span> (<span style="color:#a6e22e">++</span> (<span style="color:#a6e22e">dec</span> a) b))) <span style="color:#75715e">;; 最后的求值表达式中，有inc在++外面，导致inc进行了延迟计算，这样就产生了chain</span>
+</span></span><span style="display:flex;"><span>   )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (++ 4 5)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (inc (++ 3 5)))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (inc (inc (++ 2 5)))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (inc (inc (inc (++ 1 5))))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (inc (inc (inc (inc (++ 0 5)))))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (inc (inc (inc (inc (5)))))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (inc (inc (inc (6))))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (inc (inc 7))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; (inc 8)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; 9</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">++</span> a b)
+</span></span><span style="display:flex;"><span>   (<span style="color:#66d9ef">if </span>( = a <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>   b
+</span></span><span style="display:flex;"><span>   (<span style="color:#a6e22e">++</span> (<span style="color:#a6e22e">dec</span> a) (<span style="color:#a6e22e">inc</span> b)))) <span style="color:#75715e">;; 最后的求值表达式中，inc 在++里面</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;;(++ 4 5)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;;(++ 3 6)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;;(++ 2 7)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;;(++ 1 8)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;;(++ 0 9)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;;9</span>
+</span></span></code></pre></div><div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>平方根的逼近求值法 <a href="https://blog.csdn.net/weixin_42290927/article/details/106453060">https://blog.csdn.net/weixin_42290927/article/details/106453060</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>迭代法求平方根 <a href="https://www.physixfan.com/diedaifaqiupingfanggen/">https://www.physixfan.com/diedaifaqiupingfanggen/</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>quora的一个比较好的回答 <a href="https://www.quora.com/How-do-you-use-the-Newton-Raphson-method-to-obtain-successive-approximations-of-2-as-the-ratio-of-two-integers">link</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://zh.wikipedia.org/wiki/%E7%89%9B%E9%A1%BF%E6%B3%95">维基百科-牛顿法</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>SICP解答（练习1.9）<a href="http://community.schemewiki.org/?sicp-ex-1.9">http://community.schemewiki.org/?sicp-ex-1.9</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#day-1-的复习"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> Day 1 的复习</a></li>
+    <li><a href="#数学概念和计算机概念的区分"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> 数学概念和计算机概念的区分</a></li>
+    <li><a href="#可操作的平方根计算"><!-- raw HTML omitted -->3<!-- raw HTML omitted --> 可操作的平方根计算</a>
+      <ul>
+        <li><a href="#牛顿法求平方根的数学理解"><!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> 牛顿法求平方根的数学理解</a></li>
+        <li><a href="#使用scheme实现牛顿法"><!-- raw HTML omitted -->3.2<!-- raw HTML omitted --> 使用scheme实现牛顿法</a></li>
+      </ul>
+    </li>
+    <li><a href="#块封装-和-局部变量控制"><!-- raw HTML omitted -->4<!-- raw HTML omitted --> 块封装 和 局部变量控制</a></li>
+    <li><a href="#过程和计算"><!-- raw HTML omitted -->5<!-- raw HTML omitted --> 过程和计算</a>
+      <ul>
+        <li><a href="#迭代-vs-递归"><!-- raw HTML omitted -->5.1<!-- raw HTML omitted --> 迭代 VS 递归</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

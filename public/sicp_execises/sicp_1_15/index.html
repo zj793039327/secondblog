@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Exercise 1.15 # The sine of an angle (specified in radians) can be computed by making use of the approximation $sinx≈x$ if x is sufficiently small, and the trigonometric identity $$ sinx=3sin\frac{x}{3}−4sin^3\frac{x}{3} $$ to reduce the size of the argument of sin. (For purposes of this exercise an angle is considered sufficiently small if its magnitude is not greater than 0.1 radians.) These ideas are incorporated in the following procedures:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
+<meta property="og:description" content="Exercise 1.15 # The sine of an angle (specified in radians) can be computed by making use of the approximation $sinx≈x$ if x is sufficiently small, and the trigonometric identity $$ sinx=3sin\frac{x}{3}−4sin^3\frac{x}{3} $$ to reduce the size of the argument of sin. (For purposes of this exercise an angle is considered sufficiently small if its magnitude is not greater than 0.1 radians.) These ideas are incorporated in the following procedures:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/sicp_execises/sicp_1_15/" /><meta property="article:section" content="sicp_execises" />
+
+
+
+<title>Sicp 1 15 | JINGs BLOG</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="https://example.org/sicp_execises/sicp_1_15/">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.781e31156237cb34456e4cdb81249c4c1713e03a940c4bac2453e2178133bc68.js" integrity="sha256-eB4xFWI3yzRFbkzbgSScTBcT4DqUDEusJFPiF4EzvGg=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  MathJax = {
+    loader: {load: ['[tex]/color']},
+    tex: {
+	  packages: {'[+]': ['color']},
+          displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+	  inlineMath: [['\\(', '\\)'],['$', '$']],               
+	  formatError: (jax, err) => {
+	      console.log(jax, err);
+	      jax.formatError(err);
+	  }
+
+      },
+      
+  };
+</script>
+
+  
+
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>JINGs BLOG</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Sicp 1 15</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#exercise-115">Exercise 1.15</a></li>
+    <li><a href="#原文以及解析">原文以及解析</a></li>
+    <li><a href="#本人解析">本人解析</a>
+      <ul>
+        <li><a href="#p的调用次数">p的调用次数</a></li>
+        <li><a href="#空间复杂度growth-in-space">空间复杂度（growth in space）</a></li>
+        <li><a href="#时间复杂度number-of-steps">时间复杂度（number of steps）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="exercise-115">
+  Exercise 1.15
+  <a class="anchor" href="#exercise-115">#</a>
+</h2>
+<p>The sine of an angle (specified in radians) can be computed by making use of the approximation $sinx≈x$  if x is sufficiently small, and the trigonometric identity
+</p>
+$$
+sinx=3sin\frac{x}{3}−4sin^3\frac{x}{3}
+$$
+<p>
+to reduce the size of the argument of sin. (For purposes of this exercise an angle is considered <code>sufficiently small</code> if its magnitude is not greater than 0.1 radians.) These ideas are incorporated in the following procedures:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">cube</span> x) (* x x x))
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">p</span> x) (- (* <span style="color:#ae81ff">3</span> x) (* <span style="color:#ae81ff">4</span> (<span style="color:#a6e22e">cube</span> x))))
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sine</span> angle)
+</span></span><span style="display:flex;"><span>   (<span style="color:#66d9ef">if </span>(not (&gt; (abs angle) <span style="color:#ae81ff">0.1</span>))
+</span></span><span style="display:flex;"><span>       angle
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">p</span> (<span style="color:#a6e22e">sine</span> (/ angle <span style="color:#ae81ff">3.0</span>)))))
+</span></span></code></pre></div><ol>
+<li>How many times is the procedure <code>p</code> applied when <code>(sine 12.15)</code> is evaluated?</li>
+<li>What is the order of growth in space and number of steps (as a function of <code>a</code>) used by the process generated by the sine procedure when <code>(sine a)</code> is evaluated?</li>
+</ol>
+<p>通过递归的思路，计算sin的值，计算的过程已经给出，本题的主要目标，是通过让读者分析这函数的计算过程，然后得出自己的结论。</p>
+<h2 id="原文以及解析">
+  原文以及解析
+  <a class="anchor" href="#%e5%8e%9f%e6%96%87%e4%bb%a5%e5%8f%8a%e8%a7%a3%e6%9e%90">#</a>
+</h2>
+<p><a href="https://sicp-solutions.net/post/sicp-solution-exercise-1-15/">https://sicp-solutions.net/post/sicp-solution-exercise-1-15/</a></p>
+<h2 id="本人解析">
+  本人解析
+  <a class="anchor" href="#%e6%9c%ac%e4%ba%ba%e8%a7%a3%e6%9e%90">#</a>
+</h2>
+<p>这题其实比较简单， 只要代换一次就可以了</p>
+<table>
+<thead>
+<tr>
+<th>sine递归次数</th>
+<th>Angle</th>
+<th>p的调用</th>
+<th>表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>12.15</td>
+<td>0</td>
+<td>(sine 12.15)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4.05</td>
+<td>0</td>
+<td>(p (sine 4.05))</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.35</td>
+<td>0</td>
+<td>(p (p (sine 1.35)))</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.45</td>
+<td>0</td>
+<td>(p (p (p (sine 0.45))))</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.15</td>
+<td>0</td>
+<td>(p (p (p (p (sine 0.15)))))</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0.05</td>
+<td>0</td>
+<td>(p (p (p (p (p(sine 0.05))))))</td>
+</tr>
+<tr>
+<td>7</td>
+<td></td>
+<td></td>
+<td>(p (p (p (p (p 0.05)))))</td>
+</tr>
+</tbody>
+</table>
+<h3 id="p的调用次数">
+  p的调用次数
+  <a class="anchor" href="#p%e7%9a%84%e8%b0%83%e7%94%a8%e6%ac%a1%e6%95%b0">#</a>
+</h3>
+<p>通过表，可以看出来，这明显是个递归，因为p被阻碍无法调用，最终递归的深度是5</p>
+<p>12.15进行到5次的时候，value已经＜0.1了</p>
+<h4 id="增加一些打印进行验证猜想">
+  增加一些打印进行验证猜想
+  <a class="anchor" href="#%e5%a2%9e%e5%8a%a0%e4%b8%80%e4%ba%9b%e6%89%93%e5%8d%b0%e8%bf%9b%e8%a1%8c%e9%aa%8c%e8%af%81%e7%8c%9c%e6%83%b3">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span><span style="color:#f92672">#</span>lang racket
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">cube</span> x) (* x x x))
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">p</span> x)
+</span></span><span style="display:flex;"><span>  (display (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;calcp\n&#34;</span>))
+</span></span><span style="display:flex;"><span>  (- (* <span style="color:#ae81ff">3</span> x) (* <span style="color:#ae81ff">4</span> (<span style="color:#a6e22e">cube</span> x))))
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">sine</span> angle)
+</span></span><span style="display:flex;"><span>   (display (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;~s\n&#34;</span> angle))
+</span></span><span style="display:flex;"><span>   (<span style="color:#66d9ef">if </span>(not (&gt; (abs angle) <span style="color:#ae81ff">0.1</span>))
+</span></span><span style="display:flex;"><span>       angle
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">p</span> (<span style="color:#a6e22e">sine</span> (/ angle <span style="color:#ae81ff">3.0</span>)))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">sine</span> <span style="color:#ae81ff">12.15</span>)
+</span></span></code></pre></div><p><img src="http://img.skydrift.cn/1710399754.png?imageMogr2/thumbnail/!70p" alt="" /></p>
+<p>可以看到，循环的终止条件如下
+</p>
+$$
+\frac{a}{3^n}<0.1
+$$
+<p>
+因为要不断的 循环 / 3，接下来计算下n的值，则就是代表循环的次数
+</p>
+$$
+log(\frac{a}{0.1}) <log(3^n) \\
+log(a)-log(0.1)<nlog(3) \\
+\frac{log(a)-log(0.1)}{log(3)} <n \\
+$$
+<h3 id="空间复杂度growth-in-space">
+  空间复杂度（growth in space）
+  <a class="anchor" href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6growth-in-space">#</a>
+</h3>
+<p>空间复杂度，就是 $\Theta(n) = log_3(n)$</p>
+<p>原因是需要不断进行/3操作，直到&lt;0.1</p>
+<h3 id="时间复杂度number-of-steps">
+  时间复杂度（number of steps）
+  <a class="anchor" href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6number-of-steps">#</a>
+</h3>
+<p>时间复杂度和空间复杂度类似，都是log的</p>
+<blockquote>
+<p>到这里，感觉高中数学也都忘记了</p>
+<p>这个n到底该怎么算呢。。。</p>
+<p>算了，直接放答案把</p>
+<p>(ceiling(/ (log (/ 12.15 0.1)) (log 3)))</p>
+<p>看懂也不容易啊</p>
+</blockquote>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#exercise-115">Exercise 1.15</a></li>
+    <li><a href="#原文以及解析">原文以及解析</a></li>
+    <li><a href="#本人解析">本人解析</a>
+      <ul>
+        <li><a href="#p的调用次数">p的调用次数</a></li>
+        <li><a href="#空间复杂度growth-in-space">空间复杂度（growth in space）</a></li>
+        <li><a href="#时间复杂度number-of-steps">时间复杂度（number of steps）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-03-13 Wed 19:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sicp练习题1</title>
+<meta name="author" content="j56" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">sicp练习题1</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc0ad954">1. Chapter 1. Building Abstractions with Procedures <code>[12/14]</code></a>
+<ul>
+<li><a href="#orgfa3b72d">1.1. 1.1 The Elements of Programming</a>
+<ul>
+<li><a href="#org1f55eda">1.1.1. <span class="done DONE">DONE</span> Exercise 1.1 basics</a></li>
+<li><a href="#orgafb7cc4">1.1.2. <span class="done DONE">DONE</span> Exercise 1.2 嵌套</a></li>
+<li><a href="#orgad7178e">1.1.3. <span class="done DONE">DONE</span> Exercise 1.3</a></li>
+<li><a href="#org26e3175">1.1.4. <span class="done DONE">DONE</span> Exercise 1.4 操作符也可以cond</a></li>
+<li><a href="#orgc20f23f">1.1.5. <span class="done DONE">DONE</span> Exercise 1.5 理解正则序</a></li>
+<li><a href="#org8436f1b">1.1.6. <span class="done DONE">DONE</span> Exercise 1.6 special form的执行序列问题</a></li>
+<li><a href="#orga12806b">1.1.7. <span class="done DONE">DONE</span> Exercise 1.7 优化goods-enouth</a></li>
+<li><a href="#orgc482edd">1.1.8. <span class="done DONE">DONE</span> Exercise 1.8 求立方根</a></li>
+</ul>
+</li>
+<li><a href="#org62fad2c">1.2. 1.2 Procedures and the Processes They Generate</a>
+<ul>
+<li><a href="#orge6cd6ad">1.2.1. <span class="done DONE">DONE</span> Exercise 1.9 直观感受递归和迭代的不同</a></li>
+<li><a href="#orgce94ca1">1.2.2. <span class="done DONE">DONE</span> Exercise 1.10 Ackermann 函数</a></li>
+<li><a href="#orgc094c0f">1.2.3. <span class="done DONE">DONE</span> Exercise 1.11 分别用递归和迭代编写一个函数</a></li>
+<li><a href="#orgb35439b">1.2.4. <span class="done DONE">DONE</span> Exercise 1.12 帕斯卡三角形</a></li>
+<li><a href="#orga523a73">1.2.5. <span class="todo HOLD">HOLD</span> Exercise 1.13 证明斐波那契数列是最接近的整数&#xa0;&#xa0;&#xa0;<span class="tag"><span class="WAITING">WAITING</span>&#xa0;<span class="HOLD">HOLD</span></span></a></li>
+<li><a href="#org3fbeca8">1.2.6. <span class="todo TODO">TODO</span> Exercise 1.14 分析找零钱的计算过程，分析时间和空间复杂度</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc0ad954" class="outline-2">
+<h2 id="orgc0ad954"><span class="section-number-2">1.</span> Chapter 1. Building Abstractions with Procedures <code>[12/14]</code></h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgfa3b72d" class="outline-3">
+<h3 id="orgfa3b72d"><span class="section-number-3">1.1.</span> 1.1 The Elements of Programming</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org1f55eda" class="outline-4">
+<h4 id="org1f55eda"><span class="section-number-4">1.1.1.</span> <span class="done DONE">DONE</span> Exercise 1.1 basics</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">
+10
+(+ 5 3 4)
+(- 9 1)
+(/ 6 2)
+(+ (* 2 4) (- 4 6))
+(define a 3)
+(define b (+ a 1))
+(+ a b (* a b))
+(= a b)
+(<span style="color: #51afef;">if</span> (<span style="color: #51afef;">and</span> (&gt; b a) (&lt; b (* a b)))
+    b a)
+
+(<span style="color: #51afef;">cond</span> ((= a 4) 6)
+      ((= b 4) (+ 6 7 a))
+      (else 25))
+
+(+ 2 (<span style="color: #51afef;">if</span> (&gt; b a) b a))
+
+(* (<span style="color: #51afef;">cond</span> ((&gt; a b) a)
+         ((&lt; a b) b)
+         (else -1))
+
+    (+ a 1))
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgafb7cc4" class="outline-4">
+<h4 id="orgafb7cc4"><span class="section-number-4">1.1.2.</span> <span class="done DONE">DONE</span> Exercise 1.2 嵌套</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5)))))
+    (* 3 (- 6 2) (- 2 7)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgad7178e" class="outline-4">
+<h4 id="orgad7178e"><span class="section-number-4">1.1.3.</span> <span class="done DONE">DONE</span> Exercise 1.3</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+Deﬁne a procedure
+that takes three numbers as arguments and
+returns the sum of the squares of the two
+larger numbers.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sum-of-squares</span> x y)
+  (+ (* x x) (* y y)))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">&gt;=</span> x y) (not (&lt; x y)))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">exe-1.3</span> x y z)
+  [cond ((<span style="color: #51afef;">and</span> (&gt;= x y) (&gt;= y z)) (sum-of-squares x y))
+        ((<span style="color: #51afef;">and</span> (&gt;= x y) (&gt;= z y)) (sum-of-squares x z))
+        ((<span style="color: #51afef;">and</span> (&gt;= y x) (&gt;= x z)) (sum-of-squares y x))
+        ((<span style="color: #51afef;">and</span> (&gt;= y x) (&gt;= z x)) (sum-of-squares y z))
+        ((<span style="color: #51afef;">and</span> (&gt;= z x) (&gt;= y x)) (sum-of-squares z y))
+        ((<span style="color: #51afef;">and</span> (&gt;= z x) (&gt;= x y)) (sum-of-squares x z))
+        ]
+  )
+
+(&gt;= 3 2)
+(exe-1.3 1 2 3)
+(exe-1.3 1 2 2)
+(exe-1.3 2 2 1)
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org26e3175" class="outline-4">
+<h4 id="org26e3175"><span class="section-number-4">1.1.4.</span> <span class="done DONE">DONE</span> Exercise 1.4 操作符也可以cond</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<pre class="example">
+(define (a-plus-abs-b a b)
+   ((if (&gt; b 0) + -) a b))
+
+(a-plus-abs-b 1 2)
+(a-plus-abs-b 1 -2)
+
+</pre>
+</div>
+</div>
+<div id="outline-container-orgc20f23f" class="outline-4">
+<h4 id="orgc20f23f"><span class="section-number-4">1.1.5.</span> <span class="done DONE">DONE</span> Exercise 1.5 理解正则序</h4>
+<div class="outline-text-4" id="text-1-1-5">
+<p>
+Ben Bitdiddle has invented a test to determine
+whether the interpreter he is faced with is using
+applicativeorder evaluation or normal-order
+evaluation. He deﬁnes the following two procedures:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">p</span>) (p))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">test</span> x y)
+  (<span style="color: #51afef;">if</span> (= x 0) 0 y))
+</pre>
+</div>
+
+
+<p>
+(test 0 (p)) 直接死循环了
+这里用了app order的话，会先对param求值，(p)本身就是死循环
+如果用了正则序，则不会求值，会一直expend，(p)不会被执行，则返回0
+<a href="https://www.cnblogs.com/ssaylo/p/13633403.html">https://www.cnblogs.com/ssaylo/p/13633403.html</a>
+另外，哪里有答案呐：<a href="http://community.schemewiki.org/?SICP-Solutions">http://community.schemewiki.org/?SICP-Solutions</a>
+随便一下就搜到了
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8436f1b" class="outline-4">
+<h4 id="org8436f1b"><span class="section-number-4">1.1.6.</span> <span class="done DONE">DONE</span> Exercise 1.6 special form的执行序列问题</h4>
+<div class="outline-text-4" id="text-1-1-6">
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">improve</span> guess x)
+  (average guess (/ x guess)))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">average</span> x y)
+  (/ (+ x y) 2))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">good-enough?</span> guess x)
+  (&lt; (abs (- (square guess) x)) 0.001))
+
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt</span> x)
+  (sqrt-iter 1.0 x))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">new-if</span> predicate then-clause else-clause)
+  (<span style="color: #51afef;">cond</span> (predicate then-clause)
+        (<span style="color: #51afef;">else</span> else-clause)))
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">&#36825;&#20010;&#30452;&#25509;&#27515;&#24490;&#29615;&#20102;&#65292;&#21306;&#21035;&#23601;&#26159; if &#21644; new-if</span>
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt-iter2</span> guess x)
+  (new-if (good-enough? guess x)
+          guess
+          (sqrt-iter2 (improve guess x) x)))
+</pre>
+</div>
+
+<p>
+解释如下：原始的if 是 spcial-form，执行按照应用序处理，
+因此只会计算多个参数中的一个，新定义的 new-if是正则序的，
+会将所有的param求值，因此会陷入死循环中无法脱出
+</p>
+
+<p>
+一个更直观的例子
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">iff</span> <span style="color: #ECBE7B;">&lt;p&gt;</span> <span style="color: #ECBE7B;">&lt;c&gt;</span> <span style="color: #ECBE7B;">&lt;a&gt;</span>) (<span style="color: #51afef;">if</span> <span style="color: #ECBE7B;">&lt;p&gt;</span> <span style="color: #ECBE7B;">&lt;c&gt;</span> <span style="color: #ECBE7B;">&lt;a&gt;</span>))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">tryif</span> a) (<span style="color: #51afef;">if</span> (= a 0) 1 (/ 1 0))) 
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">tryiff</span> a) (iff (= a 0) 1 (/ 1 0)))
+</pre>
+</div>
+
+<pre class="example">
+Welcome to DrRacket, version 7.5 [3m].
+Language: R5RS; memory limit: 128 MB.
+&gt; (tryif 0)
+1
+&gt; (tryif 1)
+. . /: division by zero
+&gt; (tryiff 0)
+. . /: division by zero
+&gt; (tryiff 1)
+. . /: division by zero
+&gt; 
+</pre>
+<p>
+可以看到，执行到 tryiff 0的时候，也返回了不符合的结果，证明已经执行了param中的内容
+</p>
+</div>
+</div>
+<div id="outline-container-orga12806b" class="outline-4">
+<h4 id="orga12806b"><span class="section-number-4">1.1.7.</span> <span class="done DONE">DONE</span> Exercise 1.7 优化goods-enouth</h4>
+<div class="outline-text-4" id="text-1-1-7">
+<p>
+上面的方法，在数字特别小，或者特别大的情况下，执行的不给力，会死循环
+比如
+</p>
+
+<pre class="example">
+Welcome to Racket v8.4 [cs].
+&gt; (sqrt 300000000000000000000000000000000000)
+  C-c C-c; user break [,bt for context]
+
+</pre>
+
+<p>
+这是原来的一系列方法
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme">
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">square</span> x)
+  (* x x))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt-iter</span> guess x)
+  (<span style="color: #51afef;">if</span> (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x) x)))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">improve</span> guess x)
+  (average guess (/ x guess)))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">average</span> x y)
+  (/ (+ x y) 2))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">good-enough?</span> guess x)
+  (&lt; (abs (- (square guess) x)) 0.001))
+
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt</span> x)
+  (sqrt-iter 1.0 x))
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-scheme">
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">square</span> x)
+  (* x x))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt-iter</span> guess x)
+  (<span style="color: #51afef;">define</span> <span style="color: #c678dd;">guess_n</span> (improve guess x))
+  (<span style="color: #51afef;">if</span> (good-enough? guess_n guess)
+      guess_n
+      (sqrt-iter guess_n x)))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">improve</span> guess x)
+  (average guess (/ x guess)))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">average</span> x y)
+  (/ (+ x y) 2))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">good-enough?</span> guess_n guess)
+  (&lt; (abs (- guess_n guess)) 0.00001))
+
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt</span> x)
+  (sqrt-iter 1.0 x))
+
+</pre>
+</div>
+
+<p>
+改写完成之后，可以发现，执行运算成功了
+</p>
+
+<pre class="example">
+&gt; (sqrt 300000000000000000000000000000000000)
+547722557505166100.0
+&gt; 
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc482edd" class="outline-4">
+<h4 id="orgc482edd"><span class="section-number-4">1.1.8.</span> <span class="done DONE">DONE</span> Exercise 1.8 求立方根</h4>
+<div class="outline-text-4" id="text-1-1-8">
+<p>
+已经给出了函数概念了，实现就比较简单
+</p>
+
+<p>
+\[\frac{x/y^2 + 2y }{3}\]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">cube</span> x)
+    (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">cube-iter</span> guess)
+      (<span style="color: #51afef;">if</span> (goods-enouth? guess)
+          guess
+          (cube-iter (improve guess))))
+
+    (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">goods-enouth?</span> guess)
+     (&lt; (abs (- (* guess guess guess) x)) 0.001)
+     )
+
+    (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">improve</span> guess)
+      (/ (+ (/ x (* guess guess)) (* 2 guess)) 3))
+   (cube-iter 1.0)
+   )
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">cases</span>
+  (cube 9)
+  (cube 8)
+  (cube 10)
+  (cube 27)
+  (cube 81)
+  (cube 1000)
+  (cube 0.001)
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org62fad2c" class="outline-3">
+<h3 id="org62fad2c"><span class="section-number-3">1.2.</span> 1.2 Procedures and the Processes They Generate</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-orge6cd6ad" class="outline-4">
+<h4 id="orge6cd6ad"><span class="section-number-4">1.2.1.</span> <span class="done DONE">DONE</span> Exercise 1.9 直观感受递归和迭代的不同</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<div class="org-src-container">
+<pre class="src src-scheme">    (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">+</span> a b)
+     (<span style="color: #51afef;">if</span> ( = a 0)
+         b
+         (inc (+ (dec a) b)))
+  )
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(++ 4 5)</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (++ 3 5)))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (++ 2 5)))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (inc (++ 1 5))))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (inc (inc (++ 0 5)))))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (inc (inc (5)))))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (inc (6))))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc 7))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc 8)</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">9</span>
+
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-scheme">  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">+</span> a b)
+   (<span style="color: #51afef;">if</span> ( = a 0)
+   b
+   (+ (dec a) (inc b))))
+
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 4 5)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 3 6)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 2 7)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 1 8)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 0 9)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">9</span>
+</pre>
+</div>
+
+<p>
+The easiest way to spot that the first process is recursive (without writing out the substitution) is to note that the "+" procedure calls itself at the end while nested in another expression; the second calls itself, but as the top expression.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgce94ca1" class="outline-4">
+<h4 id="orgce94ca1"><span class="section-number-4">1.2.2.</span> <span class="done DONE">DONE</span> Exercise 1.10 Ackermann 函数</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">A</span> x y)
+   (<span style="color: #51afef;">cond</span> ((= y 0) 0)
+         ((= x 0) (* 2 y))
+         ((= y 1) 2)
+         (<span style="color: #51afef;">else</span> (A (- x 1) (A x (- y 1))))))
+</pre>
+</div>
+
+<p>
+阿克曼函数，增长非常快，通过模型代换看下内容
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 2)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">((A 0 (A 1 1))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">((A 0 2))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(* 2 2)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">4</span>
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 4&#65289;</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 0 (A 1 3))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 0 (A 0 (A 1 2)))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 0 (A 0 (A 0 (A 1 1)))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 0 (A 0 (A 0 2))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 0 (A 0 4))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 0 8)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">16</span>
+</pre>
+</div>
+
+<p>
+可以看到，在 <code>(g n) = (A 1 n)</code> 中，基本上，函数的内容为 \(2^n\)
+</p>
+
+<p>
+同理，计算 <code>(f n) =(A 0 n)</code> 其实就等于 \(2n\)
+</p>
+
+<p>
+看下 =(A 2 n)=的话，
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 2 3)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 (A 2 2))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 (A 1 (A 2 1)))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 (A 1 2))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 (A 0 (A 1 1)))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 (A 0 (A 1 1)))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 (A 0 2))</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(A 1 4)</span>
+</pre>
+</div>
+
+<p>
+首先，=(A 2 n)= 会完全变成 多个(A 1 n)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(A 2 4)
+(A 1 (A 2 3))
+(A 1 (A 1 (A 2 2)))
+(A 1 (A 1 (A 1 (A 2 1))))
+(A 1 (A 1 (A 1 2)))
+(A 1 (A 1 (A 0 (A 1 1))))
+(A 1 (A 1 (A 0 2)))
+(A 1 (A 1 4))
+(A 1 (A 0 (A 1 3)))
+(A 1 (A 0 (A 0 (A 1 2))))
+(A 1 (A 0 (A 0 (A 0 (A 1 1)))))
+(A 1 (A 0 (A 0 (A 0 2))))
+(A 1 (A 0 (A 0 4)))
+(A 1 (A 0 8))
+(A 1 16)
+
+</pre>
+</div>
+
+<p>
+答案中的 <code>(define (h n) (A 2 n))</code> 相当于是 \(2^(2^(2^(2...(n times)))) for n>1\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc094c0f" class="outline-4">
+<h4 id="orgc094c0f"><span class="section-number-4">1.2.3.</span> <span class="done DONE">DONE</span> Exercise 1.11 分别用递归和迭代编写一个函数</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+递归写法
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">f</span> n)
+  (<span style="color: #51afef;">cond</span> [(&lt; n 3) n]
+        (<span style="color: #51afef;">else</span> (+ (f (- n 1))
+                 (* 2 (f (- n 2)))
+                 (* 3 (f (- n 3)))))))
+</pre>
+</div>
+
+<p>
+迭代写法
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">f2</span> n)
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">f-iter</span> a b c count)
+    (<span style="color: #51afef;">cond</span> [(&lt; n 3) n]
+          [(&lt;= count 0) a]
+          [else (f-iter (+ a (* 2 b) (* 3 c)) a b (- count 1))]))
+  (f-iter 2 1 0 (- n 2)))
+</pre>
+</div>
+
+<p>
+一开始，其实我弄不明白这个函数的迭代写法，不知道为啥会这么写
+</p>
+
+<p>
+他们在逻辑上非常相似
+</p>
+<ol class="org-ol">
+<li>迭代:  <code>f(n-1) + 2f(n-2)+ 3f(n-3)</code></li>
+<li>递归:  <code>f-iter(a + 2b + 3c)</code></li>
+</ol>
+
+<p>
+你看，基本上就是把f拿出来了，感觉和提取公因式一样，但是仔细想一下，看起来很爽
+但是逻辑上想不通
+</p>
+
+<blockquote>
+<p>
+没办法，我就是这么个死脑筋，想不明白就想要想明白，想不明白就很难受
+</p>
+
+<p>
+并且必须非常直观才能想明白，说白了就是抽象思维差劲
+</p>
+</blockquote>
+
+<p>
+最近又阅读了动态规划的一些文章，突然发现，这个思路貌似是符合动态规划的。
+</p>
+
+<p>
+简言之，就是 <code>从下到上，通过空间换时间，其实是一种备忘录算法</code> 。
+</p>
+
+<p>
+这个迭代写法，从底层说，就是上面一句话的最简实现。
+</p>
+
+<ol class="org-ol">
+<li><code>f-iter</code> 中的3个参数，其实就是动态规划中的 <code>d[]</code> 数组</li>
+<li>由于 <code>f-iter</code> 函数本身 有4个入参，相当于是 <code>d[0]~d[3]</code></li>
+<li>由于 <code>f-iter</code> 本身逻辑较为简单，因此只需要 d[n-1], d[n-2], d[n-3] 即可，在上面的 <code>d[0]~d[2]</code> 中，循环设置了这3个值，即空间复杂度是 o(3)</li>
+</ol>
+
+<p>
+为了方便理解，这样解释一下, 参见下面的表格
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">f(n) 's n</th>
+<th scope="col" class="org-left">f(n) 's value</th>
+<th scope="col" class="org-left">f-iter 's param</th>
+<th scope="col" class="org-left">d array</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">2</td>
+<td class="org-left">2 1 0</td>
+<td class="org-left">f(2) f(1) f(0)  0</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">2+2*2           4</td>
+<td class="org-left">4 2 1</td>
+<td class="org-left">f(3) f(2) f(1)  1</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">4+2*2+3*1       11</td>
+<td class="org-left">11 4 2</td>
+<td class="org-left">f(4) f(3) f(2)  2</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">11+2*4+3*2      25</td>
+<td class="org-left">25 11 4</td>
+<td class="org-left">f(5) f(4) f(2)  3</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">25+2*11+3*4     59</td>
+<td class="org-left">59 25 11</td>
+<td class="org-left">f(6) f(5) f(4)  4</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">59+2*25+3*11    142</td>
+<td class="org-left">142 59 25</td>
+<td class="org-left">f(7) f(6) f(5)  5</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+你会发现，f-iter中的所有参数，真真实实的是把f(n) 中需要的val存储起来了，这就是没有数组的存储
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb35439b" class="outline-4">
+<h4 id="orgb35439b"><span class="section-number-4">1.2.4.</span> <span class="done DONE">DONE</span> Exercise 1.12 帕斯卡三角形</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">pascal</span> r c) 
+  (<span style="color: #51afef;">if</span> (<span style="color: #51afef;">or</span> (= c 1) (= c r)) 
+      1 
+      (+ (pascal (- r 1) (- c 1)) (pascal (- r 1) c))))
+</pre>
+</div>
+<p>
+编写杨辉三角，只求某行某列的value比较简单，直接递归即可
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga523a73" class="outline-4">
+<h4 id="orga523a73"><span class="section-number-4">1.2.5.</span> <span class="todo HOLD">HOLD</span> Exercise 1.13 证明斐波那契数列是最接近的整数&#xa0;&#xa0;&#xa0;<span class="tag"><span class="WAITING">WAITING</span>&#xa0;<span class="HOLD">HOLD</span></span></h4>
+<div class="outline-text-4" id="text-1-2-5">
+\begin{equation}
+\phi^n/\sqrt{5}, 其中，\phi = (1 + \sqrt{5}/2)
+提示： Fib(n) = (\phi^n -\gamma^n)/\sqrt{5}
+\end{equation}
+</div>
+</div>
+
+
+<div id="outline-container-org3fbeca8" class="outline-4">
+<h4 id="org3fbeca8"><span class="section-number-4">1.2.6.</span> <span class="todo TODO">TODO</span> Exercise 1.14 分析找零钱的计算过程，分析时间和空间复杂度</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<p>
+通过脑图画出来了，并且将脑图中的数据导出，可以看出来，不同的分支中走了很多很多的重复，如果顺利剪枝的话，效率会提高很多
+<img src="http://img.skydrift.cn/expend-of-count-money-11.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+</p>
+<pre class="example">
+cc 11 [1 2 5 10]
+   cc 11 [1 2 5]
+    cc 11 [1 2]
+      cc 11 [1]
+        cc 11 []
+          0
+        cc 10 [1]
+          cc 10 []
+            0
+          cc 9 [1]
+            cc 9 []
+              0
+            cc 8 [1]
+              cc 8 []
+                0
+              cc 7 [1]
+                cc 7 []
+                  0
+                cc 6 [1]
+                  cc 6 []
+                    0
+                  cc 5 [1]
+                    cc 5 []
+                      0
+                    cc 4 [1]
+                      cc 4 []
+                        0
+                      cc 3 [1]
+                        cc 3 []
+                          0
+                        cc 2 [1]
+                          cc 2 []
+                            0
+                          cc 1 [1]
+                            cc 1 []
+                              0
+                            cc 0 [1]
+                              1
+      cc 9 [1 2]
+        cc 9 [1]
+          cc 9 []
+            0
+          cc 8 [1]
+            cc 8 []
+              0
+            cc 7 [1]
+              cc 7 []
+                0
+              cc 6 [1]
+                cc 6 []
+                  0
+                cc 5 [1]
+                  cc 5 []
+                    0
+                  cc 4 [1]
+                    cc 4 []
+                      0
+                    cc 3 [1]
+                      cc 3 []
+                        0
+                      cc 2 [1]
+                        cc 2 []
+                          0
+                        cc 1 [1]
+                          cc 1 []
+                            0
+                          cc 0 [1]
+                            1
+
+        cc 7 [1 2]
+          cc 7 [1]
+            cc 7 []
+              0
+
+            cc 6 [1]
+              cc 6 []
+                0
+              cc 5 [1]
+                cc 5 []
+                  0
+                cc 4 [1]
+                  cc 4 []
+                    0
+                  cc 3 [1]
+                    cc 3 []
+                      0
+                    cc 2 [1]
+                      cc 2 []
+                        0
+                      cc 1 [1]
+                        cc 1 []
+                          0
+                        cc 0 [1]
+                          1
+
+          cc 5 [1 2]
+            cc 5 [1]
+              cc 5 []
+                0
+              cc 4 [1]
+                cc 4 []
+                  0
+                cc 3 [1]
+                  cc 3 []
+                    0
+                  cc 2 [1]
+                    cc 2 []
+                      0
+                    cc 1 [1]
+                      cc 1 []
+                        0
+                      cc 0 [1]
+                        1
+
+            cc 3 [1 2]
+              cc 3 [1]
+                cc 3 []
+                  0
+                cc 2 [1]
+                  cc 2 []
+                    0
+                  cc 1 [1]
+                    cc 1 []
+                      0
+                    cc 0 [1]
+                      1
+
+              cc 1 [1 2]
+                cc 1 [1]
+                  cc 1 []
+                    0
+
+                  cc 0 [1]
+                    1
+
+                cc -1 [1 2]
+                  0
+    cc 6 [1 2 5]
+      cc 6 [1 2]
+        cc 6 [1]
+          cc 6 []
+            0
+
+          cc 5 [1]
+            cc 5 []
+              0
+            cc 4 [1]
+              cc 4 []
+                0
+              cc 3 [1]
+                cc 3 []
+                  0
+                cc 2 [1]
+                  cc 2 []
+                    0
+                  cc 1 [1]
+                    cc 1 []
+                      0
+                    cc 0 [1]
+                      1
+
+
+        cc 4 [1 2]
+          cc 4 [1]
+            cc 4 []
+              0
+
+            cc 3 [1]
+              cc 3 []
+                0
+              cc 2 [1]
+                cc 2 []
+                  0
+                cc 1 [1]
+                  cc 1 []
+                    0
+                  cc 0 [1]
+                    1
+
+          cc 2 [1 2]
+            cc 2 [1]
+              cc 2 []
+                0
+
+              cc 1 [1]
+                cc 1 []
+                  0
+                cc 0 [1]
+                  1
+
+            cc 0 [1 2]
+              1
+
+      cc 1 [1 2 5]
+        cc 1 [1 2]
+          cc 1 [1]
+            cc 1 []
+              0
+            cc 0 [1]
+              1
+          cc -1 [1 2]
+            0
+
+        cc -4 [ 1 2 5]
+          0
+
+  (cc 1 [ 1 2 5 10])
+    cc 1 [1 2 5]
+      cc 1 [1 2]
+        cc 1 [1]
+          cc 1 []
+            0
+          cc 0 [1]
+            1
+        cc -1 [1 2]
+          0
+      cc -4 [ 1 2 5]
+        0
+    cc -9 [ 1 2 5 10]
+      0
+</pre>
+
+<p>
+可以看到，通过这样的方式进行剪枝，可以极大的节省计算逻辑
+<img src="http://img.skydrift.cn/expend-of-count-money-11-fast.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: j56</p>
+<p class="date">Created: 2024-03-13 Wed 19:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

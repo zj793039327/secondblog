@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN ::导出时候，会显示目录而不是「toc」" xml:lang="zh-CN ::导出时候，会显示目录而不是「toc」">
 <head>
-<!-- 2024-02-21 Wed 13:30 -->
+<!-- 2024-03-07 Thu 13:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>21天 master SICP</title>
-<meta name="author" content="zj56" />
+<meta name="author" content="joe567" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -234,49 +234,146 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf5abeb1">1. <span class="done DONE">DONE</span> Day 1 构造过程抽象&#xa0;&#xa0;&#xa0;<span class="tag"><span class="tech">tech</span></span></a>
+<li><a href="#org61b5dd3">1. Day 0 SICP概览</a>
 <ul>
-<li><a href="#org8b22626">1.1. 计算过程的定义</a></li>
-<li><a href="#orga569e6a">1.2. 用Lisp编程</a></li>
-<li><a href="#org0a91b58">1.3. 程序设计的基本元素</a>
+<li><a href="#orgff5bb13">1.1. 序言</a>
 <ul>
-<li><a href="#org519215a">1.3.1. Expressions 表达式</a></li>
-<li><a href="#org5bdc408">1.3.2. Naming and the Environment 命名和环境&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></a></li>
-<li><a href="#org3badd00">1.3.3. Evaluation Combinations 组合式求值</a></li>
-<li><a href="#org31f9bca">1.3.4. Compound Procedures 复合过程</a></li>
-<li><a href="#orgb53330e">1.3.5. The Substitution Model for Procedure Application 过程的代换模型</a></li>
-<li><a href="#org04c79ac">1.3.6. Conditional Expressions and Predicates&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></a></li>
+<li><a href="#orgf9617fa">1.1.1. SICP的含义</a></li>
+<li><a href="#orga62c0bd">1.1.2. SICP在讲些什么</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org40ba22d">2. <span class="todo TODO">TODO</span> Day 2 实践，求牛顿平方根</a>
+<li><a href="#org433801c">2. <span class="done DONE">DONE</span> Day 1 构造过程抽象&#xa0;&#xa0;&#xa0;<span class="tag"><span class="tech">tech</span></span></a>
 <ul>
-<li><a href="#org498dbd1">2.1. Day 1 的复习</a></li>
-<li><a href="#orgbc074ee">2.2. 数学概念和计算机概念的区分</a></li>
-<li><a href="#orgfdccb84">2.3. 可操作的平方根计算</a>
+<li><a href="#orgae5a70e">2.1. 计算过程的定义</a></li>
+<li><a href="#org7174946">2.2. 用Lisp编程</a></li>
+<li><a href="#orga77f3fc">2.3. 程序设计的基本元素</a>
 <ul>
-<li><a href="#org914db03">2.3.1. 牛顿法求平方根的数学理解</a></li>
+<li><a href="#org2fbcc98">2.3.1. Expressions 表达式</a></li>
+<li><a href="#orgec0d616">2.3.2. Naming and the Environment 命名和环境&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></a></li>
+<li><a href="#org897aa73">2.3.3. Evaluation Combinations 组合式求值</a></li>
+<li><a href="#org79b2811">2.3.4. Compound Procedures 复合过程</a></li>
+<li><a href="#orgd3a64b1">2.3.5. The Substitution Model for Procedure Application 过程的代换模型</a></li>
+<li><a href="#orgfa3c7af">2.3.6. Conditional Expressions and Predicates&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#orga39e904">3. <span class="done DONE">DONE</span> Day 2 实践，求牛顿平方&#xa0;&#xa0;&#xa0;<span class="tag"><span class="tec">tec</span></span></a>
+<ul>
+<li><a href="#orgcfe6376">3.1. Day 1 的复习</a></li>
+<li><a href="#orgb5acda1">3.2. 数学概念和计算机概念的区分</a></li>
+<li><a href="#org4e10326">3.3. 可操作的平方根计算</a>
+<ul>
+<li><a href="#orge343ff7">3.3.1. 牛顿法求平方根的数学理解</a></li>
+<li><a href="#org00d3fd9">3.3.2. 使用scheme实现牛顿法</a></li>
+</ul>
+</li>
+<li><a href="#orgc7f4d16">3.4. 块封装 和 局部变量控制</a></li>
+<li><a href="#orgcfc6300">3.5. 过程和计算</a>
+<ul>
+<li><a href="#org6850211">3.5.1. 迭代 VS 递归</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org62d081c">4. <span class="todo TODO">TODO</span> Day 3 深入递归</a>
+<ul>
+<li><a href="#orgc241da6">4.1. 树形递归</a></li>
+<li><a href="#org6271369">4.2. 树形递归的案例：找零钱</a>
+<ul>
+<li><a href="#orgf670b43">4.2.1. 优化1：使用备忘录方式提升效率</a></li>
+<li><a href="#org9eddf54">4.2.2. 优化2：使用dp 动态规划解决问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgffa4f71">5. Day 4 深入递归02</a>
+<ul>
+<li><a href="#orgaeedf16">5.1. 评估递归对资源的消耗</a></li>
+<li><a href="#org4655332">5.2. 降低递归时候资源消耗的办法</a>
+<ul>
+<li><a href="#org13eaf02">5.2.1. 求幂过程引出的点</a></li>
+<li><a href="#org91fd62b">5.2.2. 最大公约数过程引出的点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org1c7d5c4">6. Day 5 高阶函数</a>
+<ul>
+<li><a href="#orgf944824">6.1. 玩法1：入参是函数的</a></li>
+<li><a href="#org4d4c021">6.2. 玩法2：函数中定义变量</a></li>
+<li><a href="#orgdcb187d">6.3. 玩法3：出参是函数的玩法</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-
-<div id="outline-container-orgf5abeb1" class="outline-2">
-<h2 id="orgf5abeb1"><span class="section-number-2">1.</span> <span class="done DONE">DONE</span> Day 1 构造过程抽象&#xa0;&#xa0;&#xa0;<span class="tag"><span class="tech">tech</span></span></h2>
+<div id="outline-container-org61b5dd3" class="outline-2">
+<h2 id="org61b5dd3"><span class="section-number-2">1.</span> Day 0 SICP概览</h2>
 <div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgff5bb13" class="outline-3">
+<h3 id="orgff5bb13"><span class="section-number-3">1.1.</span> 序言</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-orgf9617fa" class="outline-4">
+<h4 id="orgf9617fa"><span class="section-number-4">1.1.1.</span> SICP的含义</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+<code>SICP</code>
+Structure and Interpretation of Computer Programs
+主要是讲述计算机程序的一本书，比较适合在大学或者研究生阶段学习
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><a href="https://ocw.mit.edu/courses/6-001-structure-and-interpretation-of-computer-programs-spring-2005/">mit在线课程</a></td>
+<td class="org-left"><img src="http://img.skydrift.cn/1709570302.png?imageMogr2/thumbnail/!70p" alt="!70p" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-orga62c0bd" class="outline-4">
+<h4 id="orga62c0bd"><span class="section-number-4">1.1.2.</span> SICP在讲些什么</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+<code>抽象</code>
+</p>
+
+<ul class="org-ul">
+<li>算法</li>
+<li>计算机程序</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org433801c" class="outline-2">
+<h2 id="org433801c"><span class="section-number-2">2.</span> <span class="done DONE">DONE</span> Day 1 构造过程抽象&#xa0;&#xa0;&#xa0;<span class="tag"><span class="tech">tech</span></span></h2>
+<div class="outline-text-2" id="text-2">
 <p>
 第一天的学习，会从基本开始，了解程序的基本概念，了解lisp语言，掌握基本代码的编写
 </p>
 </div>
 
-<div id="outline-container-org8b22626" class="outline-3">
-<h3 id="org8b22626"><span class="section-number-3">1.1.</span> 计算过程的定义</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-orgae5a70e" class="outline-3">
+<h3 id="orgae5a70e"><span class="section-number-3">2.1.</span> 计算过程的定义</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 计算过程是思维的高级抽象，看不见摸不着，但是又有现实的意义，可以完成某些智力的工作。
 </p>
@@ -287,7 +384,7 @@
 </p>
 
 
-<div id="orgf61f112" class="figure">
+<div id="org202bd37" class="figure">
 <p><img src="http://img.skydrift.cn/1708322070.png?imageMogr2/thumbnail/!70p" alt="!70p" width="50%" height="50%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>sora</p>
@@ -308,9 +405,9 @@
 </div>
 </div>
 
-<div id="outline-container-orga569e6a" class="outline-3">
-<h3 id="orga569e6a"><span class="section-number-3">1.2.</span> 用Lisp编程</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org7174946" class="outline-3">
+<h3 id="org7174946"><span class="section-number-3">2.2.</span> 用Lisp编程</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 lisp是20世纪50年代后期发明的一种语言，主要是为了对 list 进行 processing的语言。
 称为【递归方程】，作者是John McCarthy<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
@@ -321,7 +418,7 @@ lisp是20世纪50年代后期发明的一种语言，主要是为了对 list 进
 </p>
 </blockquote>
 <p>
-Lisp的名字，来自表表处理（LISt PROCESSING），Lisp语言的设计是提供了符号计算的能力，去解决一些程序设计问题
+Lisp的名字，来自表处理（LISt PROCESSING），Lisp语言的设计是提供了符号计算的能力，去解决一些程序设计问题
 比如代数表达式的符号微分和积分。
 </p>
 
@@ -330,7 +427,7 @@ Lisp不是刻意设计的结果，是一种实验性的，非正式的发展实�
 </p>
 
 
-<div id="orgf7ae556" class="figure">
+<div id="org2cc2af3" class="figure">
 <p><img src="http://img.skydrift.cn/1708328694.png" alt="1708328694.png" width="50%" height="50%" />
 </p>
 <p><span class="figure-number">Figure 2: </span>lisp的发展历程(from wikipedia)]</p>
@@ -347,9 +444,9 @@ lisp 主要的特点，在于将『数据』和『程序』进行了几乎无差
 </div>
 </div>
 
-<div id="outline-container-org0a91b58" class="outline-3">
-<h3 id="org0a91b58"><span class="section-number-3">1.3.</span> 程序设计的基本元素</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-orga77f3fc" class="outline-3">
+<h3 id="orga77f3fc"><span class="section-number-3">2.3.</span> 程序设计的基本元素</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 任何一门强力的程序设计语言，都需要考虑以下的一些概念
 </p>
@@ -366,9 +463,9 @@ lisp 主要的特点，在于将『数据』和『程序』进行了几乎无差
 </p>
 </blockquote>
 </div>
-<div id="outline-container-org519215a" class="outline-4">
-<h4 id="org519215a"><span class="section-number-4">1.3.1.</span> Expressions 表达式</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-org2fbcc98" class="outline-4">
+<h4 id="org2fbcc98"><span class="section-number-4">2.3.1.</span> Expressions 表达式</h4>
+<div class="outline-text-4" id="text-2-3-1">
 <p>
 学习语言最好的方式，就是有一个运行环境，在命令行里面敲代码，一边敲代码，一边执行。
 </p>
@@ -380,7 +477,7 @@ lisp 主要的特点，在于将『数据』和『程序』进行了几乎无差
 pycharm就带一个python的REPL环境，如下图
 </p>
 
-<div id="org0c80fc9" class="figure">
+<div id="orgf6c5a04" class="figure">
 <p><img src="http://img.skydrift.cn/1708330824.png?imageMogr2/thumbnail/!70p" alt="!70p" />
 </p>
 <p><span class="figure-number">Figure 3: </span>python Console(REPL)</p>
@@ -391,7 +488,7 @@ pycharm就带一个python的REPL环境，如下图
 </p>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(+ 137 349)
-;486
+<span style="color: #5B6268;">;</span><span style="color: #5B6268;">486</span>
 </pre>
 </div>
 
@@ -409,9 +506,9 @@ pycharm就带一个python的REPL环境，如下图
 </p>
 </div>
 </div>
-<div id="outline-container-org5bdc408" class="outline-4">
-<h4 id="org5bdc408"><span class="section-number-4">1.3.2.</span> Naming and the Environment 命名和环境&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-orgec0d616" class="outline-4">
+<h4 id="orgec0d616"><span class="section-number-4">2.3.2.</span> Naming and the Environment 命名和环境&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></h4>
+<div class="outline-text-4" id="text-2-3-2">
 <p>
 <b>命名</b> ：将一段代码，通过 <code>define</code> 关键字，创建别名，可以随意引用
 </p>
@@ -420,15 +517,15 @@ pycharm就带一个python的REPL环境，如下图
 <b>环境</b> ：环境是程序运行中的内存，会存储已经命名过的名字+名字代表的对象（pair）
 </p>
 <div class="org-src-container">
-<pre class="src src-scheme">(define size 2)
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> <span style="color: #c678dd;">size</span> 2)
 (* 2 size)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org3badd00" class="outline-4">
-<h4 id="org3badd00"><span class="section-number-4">1.3.3.</span> Evaluation Combinations 组合式求值</h4>
-<div class="outline-text-4" id="text-1-3-3">
+<div id="outline-container-org897aa73" class="outline-4">
+<h4 id="org897aa73"><span class="section-number-4">2.3.3.</span> Evaluation Combinations 组合式求值</h4>
+<div class="outline-text-4" id="text-2-3-3">
 <p>
 一种分而治之的思想，整体程序的运行，其实就是两步
 </p>
@@ -451,7 +548,7 @@ pycharm就带一个python的REPL环境，如下图
 </pre>
 </div>
 
-<div id="orgd9b09b9" class="figure">
+<div id="orgeceddf0" class="figure">
 <p><img src="http://img.skydrift.cn/1708335477.png" alt="1708335477.png" />
 </p>
 <p><span class="figure-number">Figure 4: </span>表达式求值示意图（来源原书）</p>
@@ -465,9 +562,9 @@ pycharm就带一个python的REPL环境，如下图
 </p>
 </div>
 </div>
-<div id="outline-container-org31f9bca" class="outline-4">
-<h4 id="org31f9bca"><span class="section-number-4">1.3.4.</span> Compound Procedures 复合过程</h4>
-<div class="outline-text-4" id="text-1-3-4">
+<div id="outline-container-org79b2811" class="outline-4">
+<h4 id="org79b2811"><span class="section-number-4">2.3.4.</span> Compound Procedures 复合过程</h4>
+<div class="outline-text-4" id="text-2-3-4">
 <p>
 lisp中的元素到现在，总体介绍分为以下的
 </p>
@@ -488,16 +585,16 @@ lisp中的元素到现在，总体介绍分为以下的
 </blockquote>
 
 <div class="org-src-container">
-<pre class="src src-scheme">(define (square x) (* x x))
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">square</span> x) (* x x))
 
-   ;基本的定义语句如下：
-(define (⟨name⟩ ⟨formal parameters⟩)
-  ⟨ body⟩)
+   <span style="color: #5B6268;">;</span><span style="color: #5B6268;">&#22522;&#26412;&#30340;&#23450;&#20041;&#35821;&#21477;&#22914;&#19979;&#65306;</span>
+(<span style="color: #51afef;">define</span> (&#10216;name&#10217; &#10216;formal parameters&#10217;)
+  &#10216; body&#10217;)
 
-(define (sum-of-squares x y)
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sum-of-squares</span> x y)
   (+ (square x) (square y)))
 
-(define (f a)
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">f</span> a)
  (sum-of-squares (+ a 1) (* a 2)))
 
 </pre>
@@ -508,9 +605,9 @@ lisp中的元素到现在，总体介绍分为以下的
 </p>
 </div>
 </div>
-<div id="outline-container-orgb53330e" class="outline-4">
-<h4 id="orgb53330e"><span class="section-number-4">1.3.5.</span> The Substitution Model for Procedure Application 过程的代换模型</h4>
-<div class="outline-text-4" id="text-1-3-5">
+<div id="outline-container-orgd3a64b1" class="outline-4">
+<h4 id="orgd3a64b1"><span class="section-number-4">2.3.5.</span> The Substitution Model for Procedure Application 过程的代换模型</h4>
+<div class="outline-text-4" id="text-2-3-5">
 <p>
 代换模型（substitution model）简言之，就是在过程执行的时候，
 系统会将抽象的名字换成原始的过程，并且运行。
@@ -541,8 +638,8 @@ lisp中的元素到现在，总体介绍分为以下的
 </div>
 
 <ol class="org-ol">
-<li><a id="org5526703"></a>Applicative order versus normal order 应用序 和正则序<br />
-<div class="outline-text-5" id="text-1-3-5-1">
+<li><a id="orga13f362"></a>Applicative order versus normal order 应用序 和正则序<br />
+<div class="outline-text-5" id="text-2-3-5-1">
 <p>
 比如计算下面的表达式
 </p>
@@ -551,7 +648,7 @@ lisp中的元素到现在，总体介绍分为以下的
 </pre>
 </div>
 
-<div id="orgf1f34dd" class="figure">
+<div id="orgf160919" class="figure">
 <p><img src="http://img.skydrift.cn/1708354294.png" alt="1708354294.png" width="50%" height="50%" />
 </p>
 <p><span class="figure-number">Figure 5: </span>应用序</p>
@@ -564,7 +661,7 @@ lisp中的元素到现在，总体介绍分为以下的
 </p>
 
 
-<div id="orgbed1908" class="figure">
+<div id="orgfba1972" class="figure">
 <p><img src="http://img.skydrift.cn/1708354305.png" alt="1708354305.png" width="50%" height="50%" />
 </p>
 <p><span class="figure-number">Figure 6: </span>正则序</p>
@@ -582,15 +679,15 @@ lisp中的元素到现在，总体介绍分为以下的
 
 <div class="org-src-container">
 <pre class="src src-scheme">
-; Exercise 1.5
-  (define (p) (p))
-  (define (test x y)
-    (if (= x 0) 0 y))
+<span style="color: #5B6268;">; </span><span style="color: #5B6268;">Exercise 1.5</span>
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">p</span>) (p))
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">test</span> x y)
+    (<span style="color: #51afef;">if</span> (= x 0) 0 y))
 
-; (test 0 (p)) 直接死循环了
-;; 这里用了app order的话，会先对param求值，(p)本身就是死循环
-;; 如果用了正则序，则不会求值，会一直expend，(p)不会被执行，则返回0
-;; https://www.cnblogs.com/ssaylo/p/13633403.html
+<span style="color: #5B6268;">; </span><span style="color: #5B6268;">(test 0 (p)) &#30452;&#25509;&#27515;&#24490;&#29615;&#20102;</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">&#36825;&#37324;&#29992;&#20102;app order&#30340;&#35805;&#65292;&#20250;&#20808;&#23545;param&#27714;&#20540;&#65292;(p)&#26412;&#36523;&#23601;&#26159;&#27515;&#24490;&#29615;</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">&#22914;&#26524;&#29992;&#20102;&#27491;&#21017;&#24207;&#65292;&#21017;&#19981;&#20250;&#27714;&#20540;&#65292;&#20250;&#19968;&#30452;expend&#65292;(p)&#19981;&#20250;&#34987;&#25191;&#34892;&#65292;&#21017;&#36820;&#22238;0</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">https://www.cnblogs.com/ssaylo/p/13633403.html</span>
 </pre>
 </div>
 </div>
@@ -598,16 +695,16 @@ lisp中的元素到现在，总体介绍分为以下的
 </ol>
 </div>
 
-<div id="outline-container-org04c79ac" class="outline-4">
-<h4 id="org04c79ac"><span class="section-number-4">1.3.6.</span> Conditional Expressions and Predicates&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></h4>
-<div class="outline-text-4" id="text-1-3-6">
+<div id="outline-container-orgfa3c7af" class="outline-4">
+<h4 id="orgfa3c7af"><span class="section-number-4">2.3.6.</span> Conditional Expressions and Predicates&#xa0;&#xa0;&#xa0;<span class="tag"><span class="lispbase">lispbase</span></span></h4>
+<div class="outline-text-4" id="text-2-3-6">
 <p>
 这是介绍第二个 special form
 就是控制流：if
 </p>
 <div class="org-src-container">
-<pre class="src src-scheme">(define (abs x)  
-  (cond ((&gt; x 0) x)
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">abs</span> x)  
+  (<span style="color: #51afef;">cond</span> ((&gt; x 0) x)
         ((= x 0) 0)
         ((&lt; x 0) (- x))
   )
@@ -621,10 +718,10 @@ lisp中的元素到现在，总体介绍分为以下的
 从p1 开始执行，如果true，则执行，如果fase，就执行下一个。如果都为false，则返回 undifined
 </p>
 <div class="org-src-container">
-<pre class="src src-scheme">(cond (⟨p1 ⟩ ⟨e1 ⟩)
-      (⟨p2 ⟩ ⟨e2 ⟩)
+<pre class="src src-scheme">(<span style="color: #51afef;">cond</span> (&#10216;p1 &#10217; &#10216;e1 &#10217;)
+      (&#10216;p2 &#10217; &#10216;e2 &#10217;)
        ...
-      (⟨pn ⟩ ⟨en ⟩))
+      (&#10216;pn &#10217; &#10216;en &#10217;))
 </pre>
 </div>
 
@@ -633,9 +730,9 @@ lisp中的元素到现在，总体介绍分为以下的
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scheme">(define (abs x)
-   (cond ((&lt; x 0) (- x))
-         (else x)))
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">abs</span> x)
+   (<span style="color: #51afef;">cond</span> ((&lt; x 0) (- x))
+         (<span style="color: #51afef;">else</span> x)))
 </pre>
 </div>
 
@@ -645,8 +742,8 @@ lisp中的元素到现在，总体介绍分为以下的
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scheme">(define (abs x)
-  (if (&lt; x 0)
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">abs</span> x)
+  (<span style="color: #51afef;">if</span> (&lt; x 0)
       (- x) x))
 
 </pre>
@@ -666,9 +763,9 @@ predicate 也支持进行组合
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scheme">(define (&gt;= x y) (or (&gt; x y) (= x y)))
-;or
-(define (&gt;= x y) (not (&lt; x y)))
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">&gt;=</span> x y) (<span style="color: #51afef;">or</span> (&gt; x y) (= x y)))
+<span style="color: #5B6268;">;</span><span style="color: #5B6268;">or</span>
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">&gt;=</span> x y) (not (&lt; x y)))
 </pre>
 </div>
 
@@ -678,25 +775,25 @@ cond 也支持对操作符进行设置，如下：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scheme">(define (a-plus-abs-b a b)
-   ((if (&gt; b 0) + -) a b))
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">a-plus-abs-b</span> a b)
+   ((<span style="color: #51afef;">if</span> (&gt; b 0) + -) a b))
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org40ba22d" class="outline-2">
-<h2 id="org40ba22d"><span class="section-number-2">2.</span> <span class="todo TODO">TODO</span> Day 2 实践，求牛顿平方根</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orga39e904" class="outline-2">
+<h2 id="orga39e904"><span class="section-number-2">3.</span> <span class="done DONE">DONE</span> Day 2 实践，求牛顿平方&#xa0;&#xa0;&#xa0;<span class="tag"><span class="tec">tec</span></span></h2>
+<div class="outline-text-2" id="text-3">
 <p>
 通过已经学习到的东西，矫正概念，进行更有意思的计算
 </p>
 </div>
 
-<div id="outline-container-org498dbd1" class="outline-3">
-<h3 id="org498dbd1"><span class="section-number-3">2.1.</span> Day 1 的复习</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-orgcfe6376" class="outline-3">
+<h3 id="orgcfe6376"><span class="section-number-3">3.1.</span> Day 1 的复习</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 通过了第一天的学习，基本上明白了以下的内容
 </p>
@@ -718,9 +815,9 @@ cond 也支持对操作符进行设置，如下：
 </div>
 </div>
 
-<div id="outline-container-orgbc074ee" class="outline-3">
-<h3 id="orgbc074ee"><span class="section-number-3">2.2.</span> 数学概念和计算机概念的区分</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orgb5acda1" class="outline-3">
+<h3 id="orgb5acda1"><span class="section-number-3">3.2.</span> 数学概念和计算机概念的区分</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 数学比较重要的是概念定义，严谨的定义；计算机概念中，更重视的是操作。
 书中举例说了，比如要计算平方根
@@ -737,9 +834,9 @@ x 的平方根 = the y such that y ≥ 0 and y 的平方 = x.
 </div>
 </div>
 
-<div id="outline-container-orgfdccb84" class="outline-3">
-<h3 id="orgfdccb84"><span class="section-number-3">2.3.</span> 可操作的平方根计算</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-org4e10326" class="outline-3">
+<h3 id="org4e10326"><span class="section-number-3">3.3.</span> 可操作的平方根计算</h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
 比较通常的办法，就是使用牛顿的逐步逼近法（successive approximations）
 </p>
@@ -760,9 +857,9 @@ x 的平方根 = the y such that y ≥ 0 and y 的平方 = x.
 </blockquote>
 </div>
 
-<div id="outline-container-org914db03" class="outline-4">
-<h4 id="org914db03"><span class="section-number-4">2.3.1.</span> 牛顿法求平方根的数学理解</h4>
-<div class="outline-text-4" id="text-2-3-1">
+<div id="outline-container-orge343ff7" class="outline-4">
+<h4 id="orge343ff7"><span class="section-number-4">3.3.1.</span> 牛顿法求平方根的数学理解</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <p>
 牛顿法的具体推导过程
 </p>
@@ -780,15 +877,15 @@ y = x<sup>2</sup> 这个函数，坐标系中，是经典的反抛物线图案�
 </p>
 
 <p>
-牛顿法的话，结合右图进行分析<img src="http://img.skydrift.cn/1708429907.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+牛顿法的话，结合右图进行分析<img src="http://img.skydrift.cn/1708429907.png" alt="1708429907.png" />
 </p>
 
 <ol class="org-ol">
 <li>将 y = x<sup>2</sup> 进行简化，变成 y= x<sup>2</sup> - 2，就变成了上图的样子</li>
 <li>这样一来，曲线和x轴的交点就变成了要求的根号2，整个函数变成了 f(x) = x<sup>2</sup> -2</li>
-<li>随便找一个x0点，针对x0进行求导，f'(x) = 2x，如图，导数是一条直线</li>
-<li>直线与x轴的交点，作为x1，可以明显看到，x1会更接近实际的x，但是不等于x</li>
-<li>继续3的步骤，直到 xn，会逐步收敛到x，进而求出非常接近的x</li>
+<li>随便找一个 x<sub>0</sub> 点，针对 x<sub>0</sub> 进行求导，f'(x) = 2x，如图，导数是一条直线</li>
+<li>直线与x轴的交点，作为 x<sub>1</sub>，可以明显看到，x<sub>1</sub> 会更接近实际的x，但是不等于x</li>
+<li>继续3的步骤，直到 x<sub>n</sub>，会逐步收敛到x，进而求出非常接近的x</li>
 </ol>
 
 <p>
@@ -804,9 +901,9 @@ y = x<sup>2</sup> 这个函数，坐标系中，是经典的反抛物线图案�
 看下上面的图，已知条件如下
 </p>
 <ol class="org-ol">
-<li>直线的斜率为 f'(x0)</li>
-<li>直线经过了一个点：(x0, f(x0))，这就是在曲线找到的一个随机点</li>
-<li>直线经过了另一个点：(x1, 0)，这就是x轴的交点</li>
+<li>直线的斜率为 f'(x<sub>0</sub>)</li>
+<li>直线经过了一个点：(x<sub>0</sub>, f(x<sub>0</sub>))，这就是在曲线找到的一个随机点</li>
+<li>直线经过了另一个点：(x<sub>1</sub>, 0)，这就是x轴的交点</li>
 </ol>
 
 <p>
@@ -814,15 +911,7 @@ y = x<sup>2</sup> 这个函数，坐标系中，是经典的反抛物线图案�
 </p>
 
 <p>
-$$
-</p>
-
-<p>
-基础公式：y = f'(x<sub>0</sub>)x<sub>1</sub> + b , 其中, 斜率为 f'(x<sub>0</sub>)
-</p>
-
-<p>
-$$
+\[ 基础公式：y = f'(x_0)x_1 + b , 其中, 斜率为 f'(x_0) \]
 </p>
 
 <p>
@@ -830,57 +919,847 @@ $$
 </p>
 
 <p>
-$$
+\[ 1. 套用(x_0, f(x_0)) : f(x_0) = f'(x_0)x_0+b \]
+\[ 2. 套用(x_1, 0) : 0 = f'(x_0)x_1+b \]
 </p>
-<ol class="org-ol">
-<li>套用(x<sub>0</sub>, f(x<sub>0</sub>)) : f(x<sub>0</sub>) = f'(x<sub>0</sub>)x<sub>0</sub>+b \</li>
 
-<li>套用(x<sub>1</sub>, 0) : 0 = f'(x<sub>0</sub>)x<sub>1</sub>+b \</li>
-</ol>
-<p>
-$$
-</p>
 
 <p>
 两个公式进行相减，可以将b消除，并且得到可以便于计算的公式
 </p>
 
 <p>
-$$
-</p>
-
-<p>
-f(x<sub>0</sub>) = f'(x<sub>0</sub>)x<sub>0</sub> - f'(x<sub>0</sub>)x<sub>1</sub>
-</p>
-
-<p>
-$$
+\[ f(x_0) = f'(x_0)x_0 - f'(x_0)x_1 \]
 </p>
 
 <p>
 公式进行变换，则可以得到对于 \(x_1\) 的求值公式
 </p>
 
+\begin{eqnarray}
+
+f'(x_0)x_1 = f'(x_0)x_0 - f(x_0) \\
+
+x_1 = \frac{f'(x_0)x_0 - f(x_0)}{f'(x_0)} \\
+
+x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}
+
+\end{eqnarray}
 
 <p>
-f'(x<sub>0</sub>)x<sub>1</sub> = f'(x<sub>0</sub>)x<sub>0</sub> - f(x<sub>0</sub>)\
+至此，求值公式已经ok，对于一元二次方程，展开的方式<sup><a id="fnr.7" class="footref" href="#fn.7" role="doc-backlink">7</a></sup>已经非常明显了。
 </p>
 
 <p>
-x<sub>1</sub> = \frac{f'(x_0)x_0 - f(x_0)}{f'(x_0)} \
+将公式套用到 \(f(x) = x^2-2\) 的话，从 \(x_0\) 计算 \(x_1\) 的方式就很简单了
 </p>
-
-<p>
-x<sub>1</sub> = x<sub>0</sub> - \frac{f(x_0)}{f'(x_0)}
-</p>
-
-
 
 \begin{equation}
-\label{eq:1}
-C = W\log_{2} (1+\mathrm{SNR})
+x_1=x_0 - \frac{x_0^2-2}{2x_0}
+\end{equation}
+
+
+<p>
+经过简化，公式如下
+</p>
+
+\begin{equation}
+x_1=\frac{x_0+\frac{2}{x_0}}{2}
 \end{equation}
 </div>
+</div>
+
+<div id="outline-container-org00d3fd9" class="outline-4">
+<h4 id="org00d3fd9"><span class="section-number-4">3.3.2.</span> 使用scheme实现牛顿法</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+实现代码很简单
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt</span> x)
+  (sqrt-iter 1.0 x))
+</pre>
+</div>
+<p>
+主入口函数，就是sqrt这个，其中调用了
+sqrt-iter 这个函数，这个函数有2个入参
+1.0 就是初始的 \(x_0\)
+x 则是要求的目标值
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt-iter</span> guess x)
+ (<span style="color: #51afef;">if</span> (good-enough? guess x)
+     guess
+     (sqrt-iter (improve guess x) x)))
+
+</pre>
+</div>
+<p>
+<code>sqrt-iter</code> 函数的定义如上
+这个函数内部其实就只有一个判定
+如果收敛到目标值，就返回，否则，优化并且迭代
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">improve</span> guess x)
+  (average guess (/ x guess)))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">average</span> x y)
+  (/ (+ x y) 2))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">good-enough?</span> guess x)
+  (&lt; (abs (- (square guess) x)) 0.001))
+
+</pre>
+</div>
+<p>
+其中的3个子函数如上。都比较简单
+</p>
+
+<p>
+<code>good-enough?</code> 用来判定是否达到了收敛阈值，可以看到，判定是相对反向的：
+通过 <code>square</code> 方法，来判定计算的value进行平方以后和目标值的差距。
+</p>
+
+<p>
+<code>average</code> 中规中矩的函数，求平均数
+</p>
+
+<p>
+<code>improve</code> 这是核心函数，用来计算新的 \(x_n\), guess 就是 \(x_n-1\)，x就是\(y\)
+</p>
+
+<p>
+这个函数整体就是在执行公式5，即 \(x_1=\frac{x_0+\frac{2}{x_0}}{2}\)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span class="linenr"> 1: </span>
+<span class="linenr"> 2: </span>  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">square</span> x)
+<span class="linenr"> 3: </span>    (* x x))
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt-iter</span> guess x)
+<span class="linenr"> 6: </span>    (<span style="color: #51afef;">if</span> (good-enough? guess x)
+<span class="linenr"> 7: </span>        guess
+<span class="linenr"> 8: </span>        (sqrt-iter (improve guess x) x)))
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span>  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">improve</span> guess x)
+<span class="linenr">11: </span>    (average guess (/ x guess)))
+<span class="linenr">12: </span>
+<span class="linenr">13: </span>  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">average</span> x y)
+<span class="linenr">14: </span>    (/ (+ x y) 2))
+<span class="linenr">15: </span>  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">good-enough?</span> guess x)
+<span class="linenr">16: </span>    (&lt; (abs (- (square guess) x)) 0.001))
+<span class="linenr">17: </span>
+<span class="linenr">18: </span>
+<span class="linenr">19: </span>  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt</span> x)
+<span class="linenr">20: </span>    (sqrt-iter 1.0 x)
+<span class="linenr">21: </span>)
+</pre>
+</div>
+
+<p>
+版本1 的代码如上。
+</p>
+
+<p>
+可以看到，这其中是有一段递归的，比如 <code>sqrt-iter</code> 调用了自己，可以将上面的函数调用关系， 变成一棵树展示出来
+</p>
+
+
+<div id="org12613da" class="figure">
+<p><img src="http://img.skydrift.cn/1708663434.png" alt="1708663434.png" />
+</p>
+</div>
+
+<p>
+函数被拆解成了不同的小结构，每个结构各司其职，都封装了逻辑，
+每个小结构逻辑都很简单。
+</p>
+
+<p>
+每个大结构，不会也不需要关注小结构的内部实现。这就是抽象层次的问题。
+大的结构，抽象层次高，小结构抽象层次低，
+</p>
+
+<p>
+抽象层次也只是层次，不代表复杂度，抽象层次高的函数，不一定就会比低层次的更复杂。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc7f4d16" class="outline-3">
+<h3 id="orgc7f4d16"><span class="section-number-3">3.4.</span> 块封装 和 局部变量控制</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+可以看到，在这个过程中，很多函数名称出现了
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt</span> x)
+
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">good-enough?</span> guess x)
+    (&lt; (abs (- (square guess) x)) 0.001))
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">improve</span> guess x) (average guess (/ x guess)))
+
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt-iter</span> guess x)
+     (<span style="color: #51afef;">if</span> (good-enough? guess x)
+         guess
+         (sqrt-iter (improve guess x) x)))
+(sqrt-iter 1.0 x)
+)
+</pre>
+</div>
+<p>
+如上，这是第二版改动，可以看到，把一些工具函数，可以直接定义在大函数内部，这样，就算是一个更高级别的封装了
+</p>
+
+<p>
+不会污染全局变量，内部定义的函数，可见性只限制在内部
+</p>
+
+<p>
+进一步的说明，变量 <code>x</code> 也是一个局部变量，可以共享使用
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt</span> x)
+
+ (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">good-enough?</span> guess)
+  (&lt; (abs (- (square guess) x)) 0.001))
+
+ (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">improve</span> guess)
+   (average guess (/ x guess)))
+
+ (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">sqrt-iter</span> guess)
+  (<span style="color: #51afef;">if</span> (good-enough? guess)
+      guess
+      (sqrt-iter (improve guess))))
+(sqrt-iter 1.0)
+)
+</pre>
+</div>
+
+<p>
+这种情况，称之为 <b>词法作用域 (lexical scoping)</b>
+</p>
+
+<blockquote>
+<p>
+在现代的编程中，这种块结构稀松平常，比如
+</p>
+<ol class="org-ol">
+<li>面向对象编程</li>
+<li>重构改善</li>
+<li>设计模式</li>
+<li>领域对象模型等</li>
+</ol>
+
+<p>
+这些讨论的，其实都是如何用好这种 <code>块结构</code> ，却很少有人讨论这种结构一开始是怎么设计出来的，来源于 老的 Algol 60 语言。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgcfc6300" class="outline-3">
+<h3 id="orgcfc6300"><span class="section-number-3">3.5.</span> 过程和计算</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+编写程序也是有各种套路的，就像是摄影和下棋一样，学会了套路和流程，才算是上道儿了。
+接下来，就要介绍各种组合拳了。
+</p>
+
+<ol class="org-ol">
+<li>研究各种函数流程的执行结构</li>
+<li>研究不同执行流程的时间复杂度，空间复杂度</li>
+<li>这些代表性的函数，只是用来演示的，不能作为生产环境使用</li>
+</ol>
+</div>
+
+<div id="outline-container-org6850211" class="outline-4">
+<h4 id="org6850211"><span class="section-number-4">3.5.1.</span> 迭代 VS 递归</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+不知道大家是怎么看待 这两个概念的，其实我本身在阅读之前，是没有明确的区别的。
+`
+由于之前学了yin神的计算机课，大概知道了迭代是递归的一种（尾递归），但是还是看出了解一下比较好
+</p>
+
+<p>
+阶乘的实现举例
+</p>
+
+<p>
+递归实现：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">factorial</span> n)
+   (<span style="color: #51afef;">if</span> (= n 1)
+       1
+       (* n (factorial (- n 1)))))
+</pre>
+</div>
+
+
+<div id="org4171dba" class="figure">
+<p><img src="http://img.skydrift.cn/1708666024.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+</p>
+</div>
+
+<p>
+迭代实现：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">factorial</span> n)
+  (fact-iter 1 1 n))
+
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">fact-iter</span> product counter max-count)
+  (<span style="color: #51afef;">if</span> (&gt; counter max-count)
+      product
+     (fact-iter (* counter product) (+ counter 1) max-count)))
+</pre>
+</div>
+
+
+<div id="org7d63f63" class="figure">
+<p><img src="http://img.skydrift.cn/1708666046.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+</p>
+</div>
+
+<p>
+可以看到，递归在执行的时候，其实是 <code>不计算</code> 的，只有都展开之后才开始计算；而迭代则不一样，每次迭代都会计算。
+</p>
+
+<p>
+<code>递归</code> ：就递归来说，递归有明显的展开和收缩的过程，这个过程产生一种链条（chain），每次调用都有一种延迟计算（deferred operations）挂靠在链条上。
+解释器要执行递归，需要把chain都保存起来，这个例子中，空间的增长是线性的(n 的正比)，这就是一个 <code>线性递归</code> 的过程
+</p>
+
+<p>
+<code>迭代</code> ：这个过程中，没有展开和收缩的过程，每次执行，就是单独的，这种过程就是一个 <code>迭代计算</code> 过程
+</p>
+
+<p>
+注意，代码中有递归调用，并不代表这个计算过程是递归的，比如 迭代实现中，也有 <code>fact-iter</code> 的递归调用
+</p>
+
+<p>
+这就是 <code>递归计算过程</code> 和 <code>递归函数</code> 的区别。
+</p>
+
+<p>
+一个简单的可以看出来到底是递归还是迭代的办法，就是看下递归的表达式
+看下这个表达式，是否会阻碍了其他表达式的计算<sup><a id="fnr.8" class="footref" href="#fn.8" role="doc-backlink">8</a></sup>
+</p>
+
+<p>
+比如
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme"> (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">++</span> a b)
+   (<span style="color: #51afef;">if</span> ( = a 0)
+       b
+       (inc (++ (dec a) b))) <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">&#26368;&#21518;&#30340;&#27714;&#20540;&#34920;&#36798;&#24335;&#20013;&#65292;&#26377;inc&#22312;++&#22806;&#38754;&#65292;&#23548;&#33268;inc&#36827;&#34892;&#20102;&#24310;&#36831;&#35745;&#31639;&#65292;&#36825;&#26679;&#23601;&#20135;&#29983;&#20102;chain</span>
+   )
+
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(++ 4 5)</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (++ 3 5)))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (++ 2 5)))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (inc (++ 1 5))))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (inc (inc (++ 0 5)))))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (inc (inc (5)))))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc (inc (6))))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc (inc 7))</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(inc 8)</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">9</span>
+
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">++</span> a b)
+   (<span style="color: #51afef;">if</span> ( = a 0)
+   b
+   (++ (dec a) (inc b)))) <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">&#26368;&#21518;&#30340;&#27714;&#20540;&#34920;&#36798;&#24335;&#20013;&#65292;inc &#22312;++&#37324;&#38754;</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 4 5)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 3 6)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 2 7)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 1 8)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">(++ 0 9)</span>
+<span style="color: #5B6268;">;;</span><span style="color: #5B6268;">9</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org62d081c" class="outline-2">
+<h2 id="org62d081c"><span class="section-number-2">4.</span> <span class="todo TODO">TODO</span> Day 3 深入递归</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+
+<div id="outline-container-orgc241da6" class="outline-3">
+<h3 id="orgc241da6"><span class="section-number-3">4.1.</span> 树形递归</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+计算斐波那契数列的图形，可以看做是一个树形递归
+</p>
+
+
+<div id="org6a552d9" class="figure">
+<p><img src="http://img.skydrift.cn/1708768655.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+</p>
+</div>
+
+<p>
+斐波那契数列，很简单可以用scheme实现
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">fib</span> n)
+   (<span style="color: #51afef;">cond</span> ((= n 0) 0)
+         ((= n 1) 1)
+         (<span style="color: #51afef;">else</span> (+ (fib (- n 1))
+                  (fib (- n 2))))))
+</pre>
+</div>
+
+<p>
+可以看到，这个表达式明显是递归型的，因为会有结构的展开，有 <code>+</code> 运算符在 <code>fib</code> 的外面，因此后者阻碍了前者的计算，这个也会进行展开
+</p>
+
+<p>
+展开的结构和之前不一样，比较复杂。这个例子是展现树递归的好案例，但是在计算fib的值方面，显然效率很低，因为有很多很多的无效计算。
+</p>
+
+
+<div id="orgc68e41d" class="figure">
+<p><img src="http://img.skydrift.cn/1708769038.png?imageMogr2/thumbnail/!70p" alt="!70p" />
+</p>
+</div>
+
+<p>
+可以用线性递归的形式进行改写，Fibonacci数列本身其实就是 <code>a+b</code> ，只要不断的代换
+</p>
+<ol class="org-ol">
+<li>第一轮：a1=0，b1=1</li>
+<li>第二轮：a2=1（a1+b1），b2=1(a1)</li>
+<li>第三轮：a3=2（a2+b2），b3=1(a2)</li>
+<li>第四轮：a4=3(a3+b3), b4=2(a3)</li>
+<li>第五轮：a5=5(a4+b4),b5=3(a4)</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">fib</span> n) (fib-iter 1 0 n))
+(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">fib-iter</span> a b count)
+     (<span style="color: #51afef;">if</span> (= count 0)
+      b
+     (fib-iter (+ a b) a (- count 1))))
+</pre>
+</div>
+
+<p>
+树形递归看上去效率非常低，但是非常直观，在一定规模内，解决问题的效率非常高
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6271369" class="outline-3">
+<h3 id="org6271369"><span class="section-number-3">4.2.</span> 树形递归的案例：找零钱</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+比如这问题：100元人民币，换成零钱，1块的，5块的，10块的，20块的这几种，一共有几种算法？
+</p>
+
+<p>
+如果按照递归考虑，那么这问题可以简单化
+</p>
+<ol class="org-ol">
+<li>找出来 a 元的 零钱总数 n =</li>
+<li>将现金换成 除了 第一种零钱 之外的 其他所有零钱 的不同方式数目 +</li>
+<li>将现金 a - d 换成所有种类的零钱 的不同方式的数目 ，其中 d 是一种零钱的面额</li>
+</ol>
+
+<p>
+思路是自然解题的倒推方式
+</p>
+
+<p>
+\[
+假设 f(amount_n,coin_j) = 针对特定金额，使用 j 种硬币的找零方式 ,  其中，n代表迭代的轮次，j代表包含j种类的硬币 
+\]
+</p>
+
+<p>
+公式相对还是比较好理解的，代表的是最终的状态，目标是进行递归推导，考虑到数学归纳法，那么这个过程可以拆解成如下的部分，并且进行迭代 
+</p>
+
+<p>
+\[
+第n轮，f(amount_n, coin_j) = f(amount_n, coin_{j-1}) + f(amount_{n-1}, coin_j)
+\]
+</p>
+
+<p>
+如何理解这个递归拆分呢，用实例举例来帮助理解，比如我们要计算
+</p>
+
+<p>
+\[
+f(5,3),当 coins=[1,2,5]
+\]
+</p>
+
+<p>
+解释如下：要找总额 <code>5</code> 块的零钱，用了 <code>3</code> 种面额的硬币，分别是 <code>[1,2,5]</code> 代表 <code>1</code> 块， <code>2 块， =5</code> 块的
+</p>
+
+
+<blockquote>
+<p>
+其实就是示例1，表达式不严谨，将就看下
+</p>
+
+<ol class="org-ol">
+<li>amount<sub>n</sub> 代表第n轮中的总金额，在n轮，也就是5元</li>
+
+<li>coin<sub>j</sub> 代表此时用3种硬币进行组合，在n轮，也就是3种硬币</li>
+</ol>
+</blockquote>
+
+
+<p>
+用实例来表示如下
+$$
+</p>
+\begin{flalign}
+&n轮: f(5,3)\\
+=& f(5,2) + f(5-5=0,3) \\
+& \textcolor{grey}{;;f(5-5,3) :\quad 因为第3种硬币的面额是5元}\\
+=& f(5,2) + f(0,3) \\
+&\textcolor{grey}{;;[3种硬币(1,2,5)组合5块] = [2种硬币(1,2)组合5块] + [3种硬币(1,2,5)组合0元]}\\
+=& f(5,2) + 1 \\
+&\textcolor{grey}{;;f(0,3)：此处需要计算这个值，对于amount的解释分成3种情况}\\
+& \textcolor{green} {;;\quad amount 
+\left\{
+ \begin{array}{lrc}
+  =0,\quad 此时代表找到了方式，因为硬币的面额正好和金额整除了 \\
+  <0,\quad 此时代表没找到方式，零钱的面额比剩余的总额要大了\\
+  >0,\quad 此时代表需要继续进行处理 \\
+ \end{array}
+\right \}} \\
+&\textcolor{grey}{;;f(0,3) 中，amount=0，因此找到一种方式，返回1，即f(0,n)=1 } \\
+&\textcolor{grey}{;;[3种硬币(1,2,5)组合5块] = [2种硬币(1,2)组合5块] + 1} \\
+&&
+\end{flalign}
+<p>
+$$
+</p>
+
+
+<p>
+$$
+\require{ams}
+</p>
+\begin{flalign}
+&n-1 到 1轮：f(5,2)\\ 
+&= f(5,1)+f(3,2) \quad\quad\quad\textcolor{grey}{;; f(3,2) = f(5-2,2)}\\
+
+&= [f(5,0) + f(4,1)] + [f(3,1) + f(1,2)]\quad\quad\quad\textcolor{grey}{;; f(4,1) = f(5-1,1), f(1,2) = f(3-2,1)}\\
+& \textcolor{grey}{;;\quad对于计算 硬币的数量=0的场景，自然而然，可用的方式=0，因此f (n,0)=0} \\
+&= [0 + f(4,1)] + [f(3,1) + f(1,2)] \\
+&= \{0 + [f(4,0) + f(3,1)]\} + \{[f(2,1) + f(2,0)] + [f(0,2) + f(1,1)]\} \\
+&= \{0 + [0 + f(3,1)]\} + \{[f(2,1) + 0] + [0 + \textcolor{red}{f(1,1)}]\} \\
+&= f(3,1) + f(2,1) + \textcolor{red}{f(1,1)} \\
+&= [f(2,1) + f(0,1)] + [\textcolor{red}{f(1,1)}+f(1,0)] + [f(0,1)+f(1,0)] \\
+&= [f(2,1) + 0] + [f(1,1)+ 0] + [1+0] \\
+&= [\textcolor{red}{f(1,1)}+f(1,0)] + [f(0,1)+f(1,0)] + 1 \\
+&= \textcolor{red}{f(1,1)} + 1 + 1 \\
+&= [f(0,1)+f(1,0)] + 1 + 1 \\
+&= 1 + 1 + 1 \\
+&= 3 \\
+&&
+\end{flalign}
+<p>
+$$
+</p>
+
+<p>
+计算结果 \(f(5,3)=4,当 coins=[1,2,5]\)​，可以看到，这里面有很多的冗余计算，仅仅一个 \(f(1,1)\) 就重复计算了很多次
+</p>
+
+<p>
+因此，这种计算虽然可以给出正确的答案，但是效率比较低。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">change</span> amount coins)
+  (-&gt; exact-integer? (listof exact-integer?) exact-integer?)
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">cc</span> amount kind-of-coins)
+    (<span style="color: #51afef;">cond</span> [(= amount 0) 1]
+          [(<span style="color: #51afef;">or</span> (&lt; amount 0) (= kind-of-coins 0)) 0]
+          [else (+
+                  (cc amount (- kind-of-coins 1))
+                  (cc (- amount (list-ref coins (- kind-of-coins 1))) kind-of-coins)
+                )
+           ]
+    ))
+    (cc amount (length coins))
+  )
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf670b43" class="outline-4">
+<h4 id="orgf670b43"><span class="section-number-4">4.2.1.</span> 优化1：使用备忘录方式提升效率</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<div class="org-src-container">
+<pre class="src src-scheme">(<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">change</span> amount coins)
+  (-&gt; exact-integer? (listof exact-integer?) exact-integer?)
+  (<span style="color: #51afef;">define</span> <span style="color: #c678dd;">tb</span> (make-hash))
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">del1</span> x) (- x 1))
+  (<span style="color: #51afef;">define</span> (<span style="color: #c678dd;">cc</span> amount kind-of-coins)
+    (<span style="color: #51afef;">cond</span> [(= amount 0) 1]
+          [(<span style="color: #51afef;">or</span> (&lt; amount 0) (= kind-of-coins 0)) 0]
+          [else
+           (<span style="color: #51afef;">define</span> <span style="color: #c678dd;">k1</span> (format <span style="color: #98be65;">"~s-~s"</span> amount (del1 kind-of-coins)))
+           (<span style="color: #51afef;">define</span> <span style="color: #c678dd;">k2</span> (format <span style="color: #98be65;">"~s-~s"</span> (- amount (list-ref coins (del1 kind-of-coins))) kind-of-coins))
+           (+
+            (<span style="color: #51afef;">cond</span> [(hash-has-key? tb k1)
+                   (hash-ref tb k1)]
+                  [else
+                   (hash-set! tb k1  (cc amount (del1 kind-of-coins)))
+                   (hash-ref tb k1)
+                   ]
+                  )
+            (<span style="color: #51afef;">cond</span> [(hash-has-key? tb k2)
+                   (hash-ref tb k2)]
+                  [else 
+                   (hash-set! tb k2 (cc (- amount (list-ref coins (del1 kind-of-coins))) kind-of-coins))
+                   (hash-ref tb k2)
+                   ]
+                  )
+            )
+           ]
+          ))
+  (cc amount (length coins))
+  )
+
+</pre>
+</div>
+
+<p>
+使用了这个算法之后，很多计算过一次的 \(f(a,b)\) 可以不用重复计算，效率提高很多。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9eddf54" class="outline-4">
+<h4 id="org9eddf54"><span class="section-number-4">4.2.2.</span> 优化2：使用dp 动态规划解决问题</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<p>
+动态规划这个概念十分高大上，但是通过学习了解的话，感觉就是纸老虎。
+</p>
+
+<p>
+正常的递归，是从 n 到 n-1 一直到 1
+动态规划反其道行之，干脆从 1一直计算到 n，这样理解比较容易
+</p>
+
+<p>
+[算法-动态规划 Dynamic Programming&#x2013;从菜鸟到老鸟](<a href="https://blog.csdn.net/u013309870/article/details/75193592">https://blog.csdn.net/u013309870/article/details/75193592</a>)<sup><a id="fnr.9" class="footref" href="#fn.9" role="doc-backlink">9</a></sup>
+</p>
+
+<p>
+[算法随想录](<a href="https://programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">https://programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</a>)<sup><a id="fnr.10" class="footref" href="#fn.10" role="doc-backlink">10</a></sup>
+</p>
+
+<p>
+下面是一段来自编程随想录的动态规划介绍，我感觉一语中的
+</p>
+<blockquote>
+<p>
+动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。
+所以动态规划中每一个状态一定是由上一个状态推导出来的，**这一点就区分于贪心**，贪心没有状态推导，而是从局部直接选最优的，
+</p>
+
+<p>
+在[关于贪心算法，你该了解这些！](<a href="https://programmercarl.com/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">https://programmercarl.com/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</a>)中我举了一个背包问题的例子。
+</p>
+
+<p>
+例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。**每件物品只能用一次**，求解将哪些物品装入背包里物品价值总和最大。
+动态规划中dp[j]是由dp[j-weight[i]]推导出来的，然后取max(dp[j], dp[j - weight[i]] + value[i])。
+</p>
+
+<p>
+但如果是贪心呢，每次拿物品选一个最大的或者最小的就完事了，和上一个状态没有关系。
+所以贪心解决不了动态规划的问题。
+其实大家也不用死扣动规和贪心的理论区别，后面做做题目自然就知道了。
+而且很多讲解动态规划的文章都会讲最优子结构啊和重叠子问题啊这些，这些东西都是教科书的上定义，晦涩难懂而且不实用。
+大家知道动规是由前一个状态推导出来的，而贪心是局部直接选最优的，对于刷题来说就够用了。
+</p>
+</blockquote>
+</div>
+
+
+<ol class="org-ol">
+<li><a id="org49071da"></a>理解动态规划<br />
+<div class="outline-text-5" id="text-4-2-2-1">
+<p>
+没办法，我就是这么个死脑筋，想不明白就想要想明白，想不明白就很难受
+</p>
+
+<p>
+并且必须非常直观才能想明白，说白了就是抽象思维差劲
+#+end<sub>quote</sub>
+</p>
+
+<p>
+最近又阅读了动态规划的一些文章，突然发现，这个思路貌似是符合动态规划的。
+</p>
+
+<p>
+简言之，就是 <code>从下到上，通过空间换时间，其实是一种备忘录算法</code> 。
+</p>
+
+<p>
+这个迭代写法，从底层说，就是上面一句话的最简实现。
+</p>
+
+<ol class="org-ol">
+<li><code>f-iter</code> 中的3个参数，其实就是动态规划中的 <code>d[]</code> 数组</li>
+<li>由于 <code>f-iter</code> 函数本身 有4个入参，相当于是 <code>d[0]~d[3]</code></li>
+<li>由于 <code>f-iter</code> 本身逻辑较为简单，因此只需要 d[n-1], d[n-2], d[n-3] 即可，在上面的 <code>d[0]~d[2]</code> 中，循环设置了这3个值，即空间复杂度是 o(3)</li>
+</ol>
+
+<p>
+为了方便理解，这样解释一下, 参见下面的表格
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">f(n) 's n</th>
+<th scope="col" class="org-left">f(n) 's value</th>
+<th scope="col" class="org-left">f-iter 's param</th>
+<th scope="col" class="org-left">d array</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">2</td>
+<td class="org-left">2 1 0</td>
+<td class="org-left">f(2) f(1) f(0)  0</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">2+2*2           4</td>
+<td class="org-left">4 2 1</td>
+<td class="org-left">f(3) f(2) f(1)  1</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">4+2*2+3*1       11</td>
+<td class="org-left">11 4 2</td>
+<td class="org-left">f(4) f(3) f(2)  2</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">11+2*4+3*2      25</td>
+<td class="org-left">25 11 4</td>
+<td class="org-left">f(5) f(4) f(2)  3</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">25+2*11+3*4     59</td>
+<td class="org-left">59 25 11</td>
+<td class="org-left">f(6) f(5) f(4)  4</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">59+2*25+3*11    142</td>
+<td class="org-left">142 59 25</td>
+<td class="org-left">f(7) f(6) f(5)  5</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+你会发现，f-iter中的所有参数，真真实实的是把f(n) 中需要的val存储起来了，这就是没有数组的存储
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgffa4f71" class="outline-2">
+<h2 id="orgffa4f71"><span class="section-number-2">5.</span> Day 4 深入递归02</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgaeedf16" class="outline-3">
+<h3 id="orgaeedf16"><span class="section-number-3">5.1.</span> 评估递归对资源的消耗</h3>
+</div>
+<div id="outline-container-org4655332" class="outline-3">
+<h3 id="org4655332"><span class="section-number-3">5.2.</span> 降低递归时候资源消耗的办法</h3>
+<div class="outline-text-3" id="text-5-2">
+</div>
+<div id="outline-container-org13eaf02" class="outline-4">
+<h4 id="org13eaf02"><span class="section-number-4">5.2.1.</span> 求幂过程引出的点</h4>
+</div>
+<div id="outline-container-org91fd62b" class="outline-4">
+<h4 id="org91fd62b"><span class="section-number-4">5.2.2.</span> 最大公约数过程引出的点</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<p>
+asdasd
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1c7d5c4" class="outline-2">
+<h2 id="org1c7d5c4"><span class="section-number-2">6.</span> Day 5 高阶函数</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgf944824" class="outline-3">
+<h3 id="orgf944824"><span class="section-number-3">6.1.</span> 玩法1：入参是函数的</h3>
+</div>
+<div id="outline-container-org4d4c021" class="outline-3">
+<h3 id="org4d4c021"><span class="section-number-3">6.2.</span> 玩法2：函数中定义变量</h3>
+</div>
+<div id="outline-container-orgdcb187d" class="outline-3">
+<h3 id="orgdcb187d"><span class="section-number-3">6.3.</span> 玩法3：出参是函数的玩法</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+asd 
+</p>
 </div>
 </div>
 </div>
@@ -913,12 +1792,28 @@ openAI在24年2月推出的文生视频模型 sora <a href="https://openai.com/s
 quora的一个比较好的回答 <a href="https://www.quora.com/How-do-you-use-the-Newton-Raphson-method-to-obtain-successive-approximations-of-2-as-the-ratio-of-two-integers">link</a> 
 </p></div></div>
 
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7" role="doc-backlink">7</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://zh.wikipedia.org/wiki/%E7%89%9B%E9%A1%BF%E6%B3%95">维基百科-牛顿法</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8" role="doc-backlink">8</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+SICP解答（练习1.9）<a href="http://community.schemewiki.org/?sicp-ex-1.9">http://community.schemewiki.org/?sicp-ex-1.9</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9" role="doc-backlink">9</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+HankingHu的csdn博客 [算法-动态规划 Dynamic Programming&#x2013;从菜鸟到老鸟](<a href="https://blog.csdn.net/u013309870/article/details/75193592">https://blog.csdn.net/u013309870/article/details/75193592</a>)
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.10" class="footnum" href="#fnr.10" role="doc-backlink">10</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+专注算法编程的carl [算法随想录](<a href="https://programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">https://programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</a>)
+</p></div></div>
+
 
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="author">Author: zj56</p>
-<p class="date">Created: 2024-02-21 Wed 13:30</p>
+<p class="author">Author: joe567</p>
+<p class="date">Created: 2024-03-07 Thu 13:12</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

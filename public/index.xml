@@ -1,18 +1,68 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>JINGs BLOG</title>
     <link>https://example.org/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on JINGs BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 24 Feb 2024 17:49:00 +0800</lastBuildDate>
     <atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day 2 实践，求牛顿平方根</title>
+      <link>https://example.org/posts/21_master_sicp_day_02/</link>
+      <pubDate>Sat, 24 Feb 2024 17:49:00 +0800</pubDate>
+      <guid>https://example.org/posts/21_master_sicp_day_02/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#day-1-%e7%9a%84%e5%a4%8d%e4%b9%a0&#34;&gt;Day 1 的复习&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;2&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e6%95%b0%e5%ad%a6%e6%a6%82%e5%bf%b5%e5%92%8c%e8%ae%a1%e7%ae%97%e6%9c%ba%e6%a6%82%e5%bf%b5%e7%9a%84%e5%8c%ba%e5%88%86&#34;&gt;数学概念和计算机概念的区分&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e5%8f%af%e6%93%8d%e4%bd%9c%e7%9a%84%e5%b9%b3%e6%96%b9%e6%a0%b9%e8%ae%a1%e7%ae%97&#34;&gt;可操作的平方根计算&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.1&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e7%89%9b%e9%a1%bf%e6%b3%95%e6%b1%82%e5%b9%b3%e6%96%b9%e6%a0%b9%e7%9a%84%e6%95%b0%e5%ad%a6%e7%90%86%e8%a7%a3&#34;&gt;牛顿法求平方根的数学理解&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.2&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e4%bd%bf%e7%94%a8scheme%e5%ae%9e%e7%8e%b0%e7%89%9b%e9%a1%bf%e6%b3%95&#34;&gt;使用scheme实现牛顿法&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;4&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e5%9d%97%e5%b0%81%e8%a3%85-%e5%92%8c-%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f%e6%8e%a7%e5%88%b6&#34;&gt;块封装 和 局部变量控制&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;5&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e8%bf%87%e7%a8%8b%e5%92%8c%e8%ae%a1%e7%ae%97&#34;&gt;过程和计算&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;5.1&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e8%bf%ad%e4%bb%a3-vs-%e9%80%92%e5%bd%92&#34;&gt;迭代 VS 递归&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;通过已经学习到的东西，矫正概念，进行更有意思的计算&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 1 构造过程抽象</title>
+      <link>https://example.org/posts/21_master_sicp_day_01/</link>
+      <pubDate>Tue, 20 Feb 2024 10:17:00 +0800</pubDate>
+      <guid>https://example.org/posts/21_master_sicp_day_01/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e8%ae%a1%e7%ae%97%e8%bf%87%e7%a8%8b%e7%9a%84%e5%ae%9a%e4%b9%89&#34;&gt;计算过程的定义&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;2&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e7%94%a8lisp%e7%bc%96%e7%a8%8b&#34;&gt;用Lisp编程&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1%e7%9a%84%e5%9f%ba%e6%9c%ac%e5%85%83%e7%b4%a0&#34;&gt;程序设计的基本元素&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.1&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#expressions-%e8%a1%a8%e8%be%be%e5%bc%8f&#34;&gt;Expressions 表达式&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.2&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#naming-and-the-environment-%e5%91%bd%e5%90%8d%e5%92%8c%e7%8e%af%e5%a2%83&#34;&gt;Naming and the Environment 命名和环境&lt;/a&gt;:lispbase:&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.3&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#evaluation-combinations-%e7%bb%84%e5%90%88%e5%bc%8f%e6%b1%82%e5%80%bc&#34;&gt;Evaluation Combinations 组合式求值&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.4&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#compound-procedures-%e5%a4%8d%e5%90%88%e8%bf%87%e7%a8%8b&#34;&gt;Compound Procedures 复合过程&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.5&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#the-substitution-model-for-procedure-application-%e8%bf%87%e7%a8%8b%e7%9a%84%e4%bb%a3%e6%8d%a2%e6%a8%a1%e5%9e%8b&#34;&gt;The Substitution Model for Procedure Application 过程的代换模型&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.5.1&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#applicative-order-versus-normal-order-%e5%ba%94%e7%94%a8%e5%ba%8f-%e5%92%8c%e6%ad%a3%e5%88%99%e5%ba%8f&#34;&gt;Applicative order versus normal order 应用序 和正则序&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;!-- raw HTML omitted --&gt;3.6&lt;!-- raw HTML omitted --&gt; &lt;a href=&#34;#conditional-expressions-and-predicates&#34;&gt;Conditional Expressions and Predicates&lt;/a&gt;:lispbase:&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;第一天的学习，会从基本开始，了解程序的基本概念，了解lisp语言，掌握基本代码的编写&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Math examples</title>
+      <link>https://example.org/posts/math-examples/</link>
+      <pubDate>Wed, 24 Jan 2024 18:09:49 -0800</pubDate>
+      <guid>https://example.org/posts/math-examples/</guid>
+      <description>This is an inline \(a^*=x-b^*\) equation.&#xA;These are block equations:&#xA;\[a^*=x-b^*\] \[ a^*=x-b^* \] \[ a^*=x-b^* \] These are block equations using alternate delimiters:&#xA;$$a^*=x-b^*$$ $$ a^*=x-b^* $$ $$ a^*=x-b^* $$ A \$5 bill saved is a \$5 bill earned.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.org/sicp_execises/sicp_1_14/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.org/sicp_execises/sicp_1_14/</guid>
+      <description>SICP 练习1-14 # 题目 # Draw the tree illustrating the process generated by the count-change procedure of Section 1.2.2 in making change for 11 cents. What are the orders of growth of the space and number of steps used by this process as the amount to be changed increases?&#xA;使用『找零钱』算法，用5枚硬币找出来11美分，即$f(11,5)$，绘制这个算法的过程，并且思考在这个算法中，对于空间复杂度和时间复杂度的计算方式。&#xA;(define (change amount coins) (-&amp;gt; exact-integer? (listof exact-integer?) exact-integer?) (define (cc amount kind-of-coins) (cond [(= amount 0) 1] [(or (&amp;lt; amount 0) (= kind-of-coins 0)) 0] [else (+ (cc amount (- kind-of-coins 1)) (cc (- amount (list-ref coins (- kind-of-coins 1))) kind-of-coins) ) ] )) (cc amount (length coins)) ) ;; 使用方式 (change 11 &amp;#39;(1 2 5 10 50)) 转载 &amp;amp; 学习 # https://sicp-solutions.</description>
+    </item>
+    <item>
+      <title></title>
+      <link>https://example.org/sicp_execises/sicp_1_15/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.org/sicp_execises/sicp_1_15/</guid>
+      <description>Exercise 1.15 # The sine of an angle (specified in radians) can be computed by making use of the approximation $sinx≈x$ if x is sufficiently small, and the trigonometric identity $$ sinx=3sin\frac{x}{3}−4sin^3\frac{x}{3} $$ to reduce the size of the argument of sin. (For purposes of this exercise an angle is considered sufficiently small if its magnitude is not greater than 0.1 radians.) These ideas are incorporated in the following procedures:</description>
+    </item>
+    <item>
+      <title>Day 4 深入递归02</title>
+      <link>https://example.org/posts/21_master_sicp_day_04/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.org/posts/21_master_sicp_day_04/</guid>
+      <description>1 评估递归对资源的消耗 2 降低递归时候资源消耗的办法 2.1 求幂过程引出的点 2.2 最大公约数过程引出的点 1 评估递归对资源的消耗 # 2 降低递归时候资源消耗的办法 # 2.1 求幂过程引出的点 # 2.2 最大公约数过程引出的点 # asdasd</description>
+    </item>
+    <item>
+      <title>Day 5 高阶函数</title>
+      <link>https://example.org/posts/21_master_sicp_day_05/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://example.org/posts/21_master_sicp_day_05/</guid>
+      <description>1 玩法1：入参是函数的 2 玩法2：函数中定义变量 3 玩法3：出参是函数的玩法 1 玩法1：入参是函数的 # 2 玩法2：函数中定义变量 # 3 玩法3：出参是函数的玩法 # asd</description>
+    </item>
     <item>
       <title>my-first-blog</title>
       <link>https://example.org/posts/my-first-blog/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://example.org/posts/my-first-blog/</guid>
-      <description>This is my post body&#xA;headline 1 title headline 2 title3 headline 3 title5 </description>
+      <description>This is my post body&#xA;headline 1 # title # headline 2 # title3 # headline 3 # title5 # </description>
     </item>
   </channel>
 </rss>

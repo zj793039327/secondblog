@@ -1,0 +1,17 @@
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  MathJax = {
+    loader: {load: ['[tex]/color']},
+    tex: {
+	  packages: {'[+]': ['color']},
+          displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
+	  inlineMath: [['\\(', '\\)'],['$', '$']],               // inline
+	  formatError: (jax, err) => {
+	      console.log(jax, err);
+	      jax.formatError(err);
+	  }
+
+      },
+      
+  };
+</script>

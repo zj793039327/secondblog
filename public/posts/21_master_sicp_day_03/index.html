@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="1 树形递归 2 树形递归的案例：找零钱 2.1 优化1：使用备忘录方式提升效率 2.2 优化2：使用dp 动态规划解决问题 2.2.1 理解动态规划 3 找零钱的算法复杂度 3.1 空间复杂度 3.2 时间复杂度 4 1 树形递归 # 计算斐波那契数列的图形，可以看做是一个树形递归
+斐波那契数列，很简单可以用scheme实现
+(define (fib n) (cond ((= n 0) 0) ((= n 1) 1) (else (&#43; (fib (- n 1)) (fib (- n 2)))))) 可以看到，这个表达式明显是递归型的，因为会有结构的展开，有 &#43; 运算符在 fib 的外面，因此后者阻碍了前者的计算，这个也会进行展开
+展开的结构和之前不一样，比较复杂。这个例子是展现树递归的好案例，但是在计算fib的值方面，显然效率很低，因为有很多很多的无效计算。
+可以用线性递归的形式进行改写，Fibonacci数列本身其实就是 a&#43;b ，只要不断的代换
+第一轮：a1=0，b1=1 第二轮：a2=1（a1&#43;b1），b2=1(a1) 第三轮：a3=2（a2&#43;b2），b3=1(a2) 第四轮：a4=3(a3&#43;b3), b4=2(a3) 第五轮：a5=5(a4&#43;b4),b5=3(a4) (define (fib n) (fib-iter 1 0 n)) (define (fib-iter a b count) (if (= count 0) b (fib-iter (&#43; a b) a (- count 1)))) 树形递归看上去效率非常低，但是非常直观，在一定规模内，解决问题的效率非常高">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Day 3 深入递归" />
+<meta property="og:description" content="1 树形递归 2 树形递归的案例：找零钱 2.1 优化1：使用备忘录方式提升效率 2.2 优化2：使用dp 动态规划解决问题 2.2.1 理解动态规划 3 找零钱的算法复杂度 3.1 空间复杂度 3.2 时间复杂度 4 1 树形递归 # 计算斐波那契数列的图形，可以看做是一个树形递归
+斐波那契数列，很简单可以用scheme实现
+(define (fib n) (cond ((= n 0) 0) ((= n 1) 1) (else (&#43; (fib (- n 1)) (fib (- n 2)))))) 可以看到，这个表达式明显是递归型的，因为会有结构的展开，有 &#43; 运算符在 fib 的外面，因此后者阻碍了前者的计算，这个也会进行展开
+展开的结构和之前不一样，比较复杂。这个例子是展现树递归的好案例，但是在计算fib的值方面，显然效率很低，因为有很多很多的无效计算。
+可以用线性递归的形式进行改写，Fibonacci数列本身其实就是 a&#43;b ，只要不断的代换
+第一轮：a1=0，b1=1 第二轮：a2=1（a1&#43;b1），b2=1(a1) 第三轮：a3=2（a2&#43;b2），b3=1(a2) 第四轮：a4=3(a3&#43;b3), b4=2(a3) 第五轮：a5=5(a4&#43;b4),b5=3(a4) (define (fib n) (fib-iter 1 0 n)) (define (fib-iter a b count) (if (= count 0) b (fib-iter (&#43; a b) a (- count 1)))) 树形递归看上去效率非常低，但是非常直观，在一定规模内，解决问题的效率非常高" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/21_master_sicp_day_03/" /><meta property="article:section" content="posts" />
+
+
+
+<title>Day 3 深入递归 | JINGs BLOG</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="http://localhost:1313/posts/21_master_sicp_day_03/">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.cbaf0dc19cdbd781c28088b6c12241dea3183344636bb7734d5ce54fe80d2aae.js" integrity="sha256-y68NwZzb14HCgIi2wSJB3qMYM0Rja7dzTVzlT&#43;gNKq4=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  MathJax = {
+    loader: {load: ['[tex]/color']},
+    tex: {
+	  packages: {'[+]': ['color']},
+          displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+	  inlineMath: [['\\(', '\\)'],['$', '$']],               
+	  formatError: (jax, err) => {
+	      console.log(jax, err);
+	      jax.formatError(err);
+	  }
+
+      },
+      
+  };
+</script>
+
+  
+
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>JINGs BLOG</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Day 3 深入递归</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#树形递归"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> 树形递归</a></li>
+    <li><a href="#树形递归的案例-找零钱"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> 树形递归的案例：找零钱</a>
+      <ul>
+        <li><a href="#优化1-使用备忘录方式提升效率"><!-- raw HTML omitted -->2.1<!-- raw HTML omitted --> 优化1：使用备忘录方式提升效率</a></li>
+        <li><a href="#优化2-使用dp-动态规划解决问题"><!-- raw HTML omitted -->2.2<!-- raw HTML omitted --> 优化2：使用dp 动态规划解决问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#找零钱的算法复杂度"><!-- raw HTML omitted -->3<!-- raw HTML omitted --> 找零钱的算法复杂度</a>
+      <ul>
+        <li><a href="#空间复杂度"><!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> 空间复杂度</a></li>
+        <li><a href="#时间复杂度"><!-- raw HTML omitted -->3.2<!-- raw HTML omitted --> 时间复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#d41d8c"><!-- raw HTML omitted -->4<!-- raw HTML omitted --> </a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/21_master_sicp_day_03/">Day 3 深入递归</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><!-- raw HTML omitted -->1<!-- raw HTML omitted --> <a href="#%e6%a0%91%e5%bd%a2%e9%80%92%e5%bd%92">树形递归</a></li>
+<li><!-- raw HTML omitted -->2<!-- raw HTML omitted --> <a href="#%e6%a0%91%e5%bd%a2%e9%80%92%e5%bd%92%e7%9a%84%e6%a1%88%e4%be%8b-%e6%89%be%e9%9b%b6%e9%92%b1">树形递归的案例：找零钱</a>
+<ul>
+<li><!-- raw HTML omitted -->2.1<!-- raw HTML omitted --> <a href="#%e4%bc%98%e5%8c%961-%e4%bd%bf%e7%94%a8%e5%a4%87%e5%bf%98%e5%bd%95%e6%96%b9%e5%bc%8f%e6%8f%90%e5%8d%87%e6%95%88%e7%8e%87">优化1：使用备忘录方式提升效率</a></li>
+<li><!-- raw HTML omitted -->2.2<!-- raw HTML omitted --> <a href="#%e4%bc%98%e5%8c%962-%e4%bd%bf%e7%94%a8dp-%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e8%a7%a3%e5%86%b3%e9%97%ae%e9%a2%98">优化2：使用dp 动态规划解决问题</a>
+<ul>
+<li><!-- raw HTML omitted -->2.2.1<!-- raw HTML omitted --> <a href="#%e7%90%86%e8%a7%a3%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92">理解动态规划</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><!-- raw HTML omitted -->3<!-- raw HTML omitted --> <a href="#%e6%89%be%e9%9b%b6%e9%92%b1%e7%9a%84%e7%ae%97%e6%b3%95%e5%a4%8d%e6%9d%82%e5%ba%a6">找零钱的算法复杂度</a>
+<ul>
+<li><!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> <a href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6">空间复杂度</a></li>
+<li><!-- raw HTML omitted -->3.2<!-- raw HTML omitted --> <a href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6">时间复杂度</a></li>
+</ul>
+</li>
+<li><!-- raw HTML omitted -->4<!-- raw HTML omitted --> <a href="#d41d8c"></a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="树形递归">
+  <!-- raw HTML omitted -->1<!-- raw HTML omitted --> 树形递归
+  <a class="anchor" href="#%e6%a0%91%e5%bd%a2%e9%80%92%e5%bd%92">#</a>
+</h2>
+<p>计算斐波那契数列的图形，可以看做是一个树形递归</p>
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+<figure><img src="http://img.skydrift.cn/1708768655.png?imageMogr2/thumbnail/!70p"/>
+</figure>
+
+<p>斐波那契数列，很简单可以用scheme实现</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fib</span> n)
+</span></span><span style="display:flex;"><span>   (<span style="color:#66d9ef">cond </span>((= n <span style="color:#ae81ff">0</span>) <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>         ((= n <span style="color:#ae81ff">1</span>) <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>         (<span style="color:#66d9ef">else </span>(+ (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>                  (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">2</span>))))))
+</span></span></code></pre></div><p>可以看到，这个表达式明显是递归型的，因为会有结构的展开，有 <code>+</code> 运算符在 <code>fib</code> 的外面，因此后者阻碍了前者的计算，这个也会进行展开</p>
+<p>展开的结构和之前不一样，比较复杂。这个例子是展现树递归的好案例，但是在计算fib的值方面，显然效率很低，因为有很多很多的无效计算。</p>
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+<figure><img src="http://img.skydrift.cn/1708769038.png?imageMogr2/thumbnail/!70p"/>
+</figure>
+
+<p>可以用线性递归的形式进行改写，Fibonacci数列本身其实就是 <code>a+b</code> ，只要不断的代换</p>
+<ol>
+<li>第一轮：a1=0，b1=1</li>
+<li>第二轮：a2=1（a1+b1），b2=1(a1)</li>
+<li>第三轮：a3=2（a2+b2），b3=1(a2)</li>
+<li>第四轮：a4=3(a3+b3), b4=2(a3)</li>
+<li>第五轮：a5=5(a4+b4),b5=3(a4)</li>
+</ol>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fib</span> n) (<span style="color:#a6e22e">fib-iter</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">0</span> n))
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">fib-iter</span> a b count)
+</span></span><span style="display:flex;"><span>     (<span style="color:#66d9ef">if </span>(= count <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>      b
+</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">fib-iter</span> (+ a b) a (- count <span style="color:#ae81ff">1</span>))))
+</span></span></code></pre></div><p>树形递归看上去效率非常低，但是非常直观，在一定规模内，解决问题的效率非常高</p>
+<h2 id="树形递归的案例-找零钱">
+  <!-- raw HTML omitted -->2<!-- raw HTML omitted --> 树形递归的案例：找零钱
+  <a class="anchor" href="#%e6%a0%91%e5%bd%a2%e9%80%92%e5%bd%92%e7%9a%84%e6%a1%88%e4%be%8b-%e6%89%be%e9%9b%b6%e9%92%b1">#</a>
+</h2>
+<p>比如这问题：100元人民币，换成零钱，1块的，5块的，10块的，20块的这几种，一共有几种算法？</p>
+<p>如果按照递归考虑，那么这问题可以简单化</p>
+<ol>
+<li>找出来 a 元的 零钱总数 n =</li>
+<li>将现金换成 除了 第一种零钱 之外的 其他所有零钱 的不同方式数目 +</li>
+<li>将现金 a - d 换成所有种类的零钱 的不同方式的数目 ，其中 d 是一种零钱的面额</li>
+</ol>
+<p>思路是自然解题的倒推方式</p>
+<p>\[
+假设 f(amount_n,coin_j) = 针对特定金额，使用 j 种硬币的找零方式 ,  其中，n代表迭代的轮次，j代表包含j种类的硬币
+\]</p>
+<p>公式相对还是比较好理解的，代表的是最终的状态，目标是进行递归推导，考虑到数学归纳法，那么这个过程可以拆解成如下的部分，并且进行迭代</p>
+<p>\[
+第n轮，f(amount_n, coin_j) = f(amount_n, coin_{j-1}) + f(amount_{n-1}, coin_j)
+\]</p>
+<p>如何理解这个递归拆分呢，用实例举例来帮助理解，比如我们要计算</p>
+<p>\[
+f(5,3),当 coins=[1,2,5]
+\]</p>
+<p>解释如下：要找总额 <code>5</code> 块的零钱，用了 <code>3</code> 种面额的硬币，分别是 <code>[1,2,5]</code> 代表 <code>1</code> 块， <code>2 块， =5</code> 块的</p>
+<blockquote>
+<p>其实就是示例1，表达式不严谨，将就看下</p>
+<ol>
+<li>
+<p>amount_n 代表第n轮中的总金额，在n轮，也就是5元</p>
+</li>
+<li>
+<p>coin_j 代表此时用3种硬币进行组合，在n轮，也就是3种硬币</p>
+</li>
+</ol>
+</blockquote>
+<p>用实例来表示如下
+$$</p>
+<p>\begin{flalign}
+&amp;n轮: f(5,3)\\
+=&amp; f(5,2) + f(5-5=0,3) \\
+&amp; \textcolor{grey}{;;f(5-5,3) :\quad 因为第3种硬币的面额是5元}\\
+=&amp; f(5,2) + f(0,3) \\
+&amp;\textcolor{grey}{;;[3种硬币(1,2,5)组合5块] = [2种硬币(1,2)组合5块] + [3种硬币(1,2,5)组合0元]}\\
+=&amp; f(5,2) + 1 \\
+&amp;\textcolor{grey}{;;f(0,3)：此处需要计算这个值，对于amount的解释分成3种情况}\\
+&amp; \textcolor{green} {;;\quad amount
+\left\{
+\begin{array}{lrc}
+=0,\quad 此时代表找到了方式，因为硬币的面额正好和金额整除了 \\
+&lt;0,\quad 此时代表没找到方式，零钱的面额比剩余的总额要大了\\</p>
+<blockquote>
+<p>0,\quad 此时代表需要继续进行处理 \\
+\end{array}
+\right \}} \\
+&amp;\textcolor{grey}{;;f(0,3) 中，amount=0，因此找到一种方式，返回1，即f(0,n)=1 } \\
+&amp;\textcolor{grey}{;;[3种硬币(1,2,5)组合5块] = [2种硬币(1,2)组合5块] + 1} \\
+&amp;&amp;
+\end{flalign}</p>
+</blockquote>
+<p>$$</p>
+<p>$$
+\require{ams}</p>
+<p>\begin{flalign}
+&amp;n-1 到 1轮：f(5,2)\\
+&amp;= f(5,1)+f(3,2) \quad\quad\quad\textcolor{grey}{;; f(3,2) = f(5-2,2)}\\</p>
+<p>&amp;= [f(5,0) + f(4,1)] + [f(3,1) + f(1,2)]\quad\quad\quad\textcolor{grey}{;; f(4,1) = f(5-1,1), f(1,2) = f(3-2,1)}\\
+&amp; \textcolor{grey}{;;\quad对于计算 硬币的数量=0的场景，自然而然，可用的方式=0，因此f (n,0)=0} \\
+&amp;= [0 + f(4,1)] + [f(3,1) + f(1,2)] \\
+&amp;= \{0 + [f(4,0) + f(3,1)]\} + \{[f(2,1) + f(2,0)] + [f(0,2) + f(1,1)]\} \\
+&amp;= \{0 + [0 + f(3,1)]\} + \{[f(2,1) + 0] + [0 + \textcolor{red}{f(1,1)}]\} \\
+&amp;= f(3,1) + f(2,1) + \textcolor{red}{f(1,1)} \\
+&amp;= [f(2,1) + f(0,1)] + [\textcolor{red}{f(1,1)}+f(1,0)] + [f(0,1)+f(1,0)] \\
+&amp;= [f(2,1) + 0] + [f(1,1)+ 0] + [1+0] \\
+&amp;= [\textcolor{red}{f(1,1)}+f(1,0)] + [f(0,1)+f(1,0)] + 1 \\
+&amp;= \textcolor{red}{f(1,1)} + 1 + 1 \\
+&amp;= [f(0,1)+f(1,0)] + 1 + 1 \\
+&amp;= 1 + 1 + 1 \\
+&amp;= 3 \\
+&amp;&amp;
+\end{flalign}</p>
+<p>$$</p>
+<p>计算结果 \(f(5,3)=4,当 coins=[1,2,5]\)​，可以看到，这里面有很多的冗余计算，仅仅一个 \(f(1,1)\) 就重复计算了很多次</p>
+<p>因此，这种计算虽然可以给出正确的答案，但是效率比较低。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">change</span> amount coins)
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">-&gt;</span> exact-integer? (<span style="color:#a6e22e">listof</span> exact-integer?) exact-integer?)
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">cc</span> amount kind-of-coins)
+</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">cond </span>[(= amount <span style="color:#ae81ff">0</span>) <span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>          [(<span style="color:#66d9ef">or </span>(&lt; amount <span style="color:#ae81ff">0</span>) (= kind-of-coins <span style="color:#ae81ff">0</span>)) <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>          [<span style="color:#66d9ef">else </span>(<span style="color:#a6e22e">+</span>
+</span></span><span style="display:flex;"><span>                  (<span style="color:#a6e22e">cc</span> amount (- kind-of-coins <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>                  (<span style="color:#a6e22e">cc</span> (- amount (list-ref coins (- kind-of-coins <span style="color:#ae81ff">1</span>))) kind-of-coins)
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>           ]
+</span></span><span style="display:flex;"><span>    ))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">cc</span> amount (length coins))
+</span></span><span style="display:flex;"><span>  )
+</span></span></code></pre></div><h3 id="优化1-使用备忘录方式提升效率">
+  <!-- raw HTML omitted -->2.1<!-- raw HTML omitted --> 优化1：使用备忘录方式提升效率
+  <a class="anchor" href="#%e4%bc%98%e5%8c%961-%e4%bd%bf%e7%94%a8%e5%a4%87%e5%bf%98%e5%bd%95%e6%96%b9%e5%bc%8f%e6%8f%90%e5%8d%87%e6%95%88%e7%8e%87">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">change</span> amount coins)
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">-&gt;</span> exact-integer? (<span style="color:#a6e22e">listof</span> exact-integer?) exact-integer?)
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>tb (<span style="color:#a6e22e">make-hash</span>))
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">del1</span> x) (- x <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">define </span>(<span style="color:#a6e22e">cc</span> amount kind-of-coins)
+</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">cond </span>[(= amount <span style="color:#ae81ff">0</span>) <span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>          [(<span style="color:#66d9ef">or </span>(&lt; amount <span style="color:#ae81ff">0</span>) (= kind-of-coins <span style="color:#ae81ff">0</span>)) <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>          [else
+</span></span><span style="display:flex;"><span>           (<span style="color:#66d9ef">define </span>k1 (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;~s-~s&#34;</span> amount (<span style="color:#a6e22e">del1</span> kind-of-coins)))
+</span></span><span style="display:flex;"><span>           (<span style="color:#66d9ef">define </span>k2 (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;~s-~s&#34;</span> (- amount (list-ref coins (<span style="color:#a6e22e">del1</span> kind-of-coins))) kind-of-coins))
+</span></span><span style="display:flex;"><span>           (<span style="color:#a6e22e">+</span>
+</span></span><span style="display:flex;"><span>            (<span style="color:#66d9ef">cond </span>[(<span style="color:#a6e22e">hash-has-key?</span> tb k1)
+</span></span><span style="display:flex;"><span>                   (<span style="color:#a6e22e">hash-ref</span> tb k1)]
+</span></span><span style="display:flex;"><span>                  [else
+</span></span><span style="display:flex;"><span>                   (<span style="color:#a6e22e">hash-set!</span> tb k1  (<span style="color:#a6e22e">cc</span> amount (<span style="color:#a6e22e">del1</span> kind-of-coins)))
+</span></span><span style="display:flex;"><span>                   (<span style="color:#a6e22e">hash-ref</span> tb k1)
+</span></span><span style="display:flex;"><span>                   ]
+</span></span><span style="display:flex;"><span>                  )
+</span></span><span style="display:flex;"><span>            (<span style="color:#66d9ef">cond </span>[(<span style="color:#a6e22e">hash-has-key?</span> tb k2)
+</span></span><span style="display:flex;"><span>                   (<span style="color:#a6e22e">hash-ref</span> tb k2)]
+</span></span><span style="display:flex;"><span>                  [else
+</span></span><span style="display:flex;"><span>                   (<span style="color:#a6e22e">hash-set!</span> tb k2 (<span style="color:#a6e22e">cc</span> (- amount (list-ref coins (<span style="color:#a6e22e">del1</span> kind-of-coins))) kind-of-coins))
+</span></span><span style="display:flex;"><span>                   (<span style="color:#a6e22e">hash-ref</span> tb k2)
+</span></span><span style="display:flex;"><span>                   ]
+</span></span><span style="display:flex;"><span>                  )
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>           ]
+</span></span><span style="display:flex;"><span>          ))
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">cc</span> amount (length coins))
+</span></span><span style="display:flex;"><span>  )
+</span></span></code></pre></div><p>使用了这个算法之后，很多计算过一次的 \(f(a,b)\) 可以不用重复计算，效率提高很多。</p>
+<h3 id="优化2-使用dp-动态规划解决问题">
+  <!-- raw HTML omitted -->2.2<!-- raw HTML omitted --> 优化2：使用dp 动态规划解决问题
+  <a class="anchor" href="#%e4%bc%98%e5%8c%962-%e4%bd%bf%e7%94%a8dp-%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92%e8%a7%a3%e5%86%b3%e9%97%ae%e9%a2%98">#</a>
+</h3>
+<p>动态规划这个概念十分高大上，但是通过学习了解的话，感觉就是纸老虎。</p>
+<p>正常的递归，是从 n 到 n-1 一直到 1
+动态规划反其道行之，干脆从 1一直计算到 n，这样理解比较容易</p>
+<p><a href="https://blog.csdn.net/u013309870/article/details/75193592">算法-动态规划 Dynamic Programming&ndash;从菜鸟到老鸟</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p><a href="https://programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">算法随想录</a><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>下面是一段来自编程随想录的动态规划介绍，我感觉一语中的</p>
+<blockquote>
+<p>动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。
+所以动态规划中每一个状态一定是由上一个状态推导出来的，**这一点就区分于贪心**，贪心没有状态推导，而是从局部直接选最优的，</p>
+<p>在<a href="https://programmercarl.com/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">关于贪心算法，你该了解这些！</a>中我举了一个背包问题的例子。</p>
+<p>例如：有N件物品和一个最多能背重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。**每件物品只能用一次**，求解将哪些物品装入背包里物品价值总和最大。
+动态规划中dp[j]是由dp[j-weight[i]]推导出来的，然后取max(dp[j], dp[j - weight[i]] + value[i])。</p>
+<p>但如果是贪心呢，每次拿物品选一个最大的或者最小的就完事了，和上一个状态没有关系。
+所以贪心解决不了动态规划的问题。
+其实大家也不用死扣动规和贪心的理论区别，后面做做题目自然就知道了。
+而且很多讲解动态规划的文章都会讲最优子结构啊和重叠子问题啊这些，这些东西都是教科书的上定义，晦涩难懂而且不实用。
+大家知道动规是由前一个状态推导出来的，而贪心是局部直接选最优的，对于刷题来说就够用了。</p>
+</blockquote>
+<h4 id="理解动态规划">
+  <!-- raw HTML omitted -->2.2.1<!-- raw HTML omitted --> 理解动态规划
+  <a class="anchor" href="#%e7%90%86%e8%a7%a3%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92">#</a>
+</h4>
+<p>没办法，我就是这么个死脑筋，想不明白就想要想明白，想不明白就很难受</p>
+<p>并且必须非常直观才能想明白，说白了就是抽象思维差劲
+#+end_quote</p>
+<p>最近又阅读了动态规划的一些文章，突然发现，这个思路貌似是符合动态规划的。</p>
+<p>简言之，就是 <code>从下到上，通过空间换时间，其实是一种备忘录算法</code> 。</p>
+<p>这个迭代写法，从底层说，就是上面一句话的最简实现。</p>
+<ol>
+<li><code>f-iter</code> 中的3个参数，其实就是动态规划中的 <code>d[]</code> 数组</li>
+<li>由于 <code>f-iter</code> 函数本身 有4个入参，相当于是 <code>d[0]~d[3]</code></li>
+<li>由于 <code>f-iter</code> 本身逻辑较为简单，因此只需要 d[n-1], d[n-2], d[n-3] 即可，在上面的 <code>d[0]~d[2]</code> 中，循环设置了这3个值，即空间复杂度是 o(3)</li>
+</ol>
+<p>为了方便理解，这样解释一下, 参见下面的表格</p>
+<table>
+<thead>
+<tr>
+<th>f(n) &rsquo;s n</th>
+<th>f(n) &rsquo;s value</th>
+<th>f-iter &rsquo;s param</th>
+<th>d array</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>2 1 0</td>
+<td>f(2) f(1) f(0)  0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2+2*2           4</td>
+<td>4 2 1</td>
+<td>f(3) f(2) f(1)  1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4+2*2+3*1       11</td>
+<td>11 4 2</td>
+<td>f(4) f(3) f(2)  2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>11+2*4+3*2      25</td>
+<td>25 11 4</td>
+<td>f(5) f(4) f(2)  3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>25+2*11+3*4     59</td>
+<td>59 25 11</td>
+<td>f(6) f(5) f(4)  4</td>
+</tr>
+<tr>
+<td>7</td>
+<td>59+2*25+3*11    142</td>
+<td>142 59 25</td>
+<td>f(7) f(6) f(5)  5</td>
+</tr>
+</tbody>
+</table>
+<p>你会发现，f-iter中的所有参数，真真实实的是把f(n) 中需要的val存储起来了，这就是没有数组的存储</p>
+<h2 id="找零钱的算法复杂度">
+  <!-- raw HTML omitted -->3<!-- raw HTML omitted --> 找零钱的算法复杂度
+  <a class="anchor" href="#%e6%89%be%e9%9b%b6%e9%92%b1%e7%9a%84%e7%ae%97%e6%b3%95%e5%a4%8d%e6%9d%82%e5%ba%a6">#</a>
+</h2>
+<p>这是一个标准的递归树形结构算法，
+时间复杂度和空间复杂度的计算，都有逻辑，通过一点点的进行 <code>代换</code> 可以比较好的掌握
+具体的讨论，参见本人练习题 1.14的解答</p>
+<h3 id="空间复杂度">
+  <!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> 空间复杂度
+  <a class="anchor" href="#%e7%a9%ba%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6">#</a>
+</h3>
+<p>递归算法中，就是递归的调用层次，本题中，就是 S(n,m)=Θ(n)</p>
+<h3 id="时间复杂度">
+  <!-- raw HTML omitted -->3.2<!-- raw HTML omitted --> 时间复杂度
+  <a class="anchor" href="#%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6">#</a>
+</h3>
+<p>时间复杂度的计算，最初摸不着头脑，但是可以分解进行计算，比如先算 f(n,1)的，然后计算 f(n,2)的</p>
+<p>以此类推
+最终，时间复杂度，应该是 T(n,m) = Θ(n^m)</p>
+<h2 id="d41d8c">
+  <!-- raw HTML omitted -->4<!-- raw HTML omitted --> 
+  <a class="anchor" href="#d41d8c">#</a>
+</h2>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>HankingHu的csdn博客 <a href="https://blog.csdn.net/u013309870/article/details/75193592">算法-动态规划 Dynamic Programming&ndash;从菜鸟到老鸟</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>专注算法编程的carl <a href="https://programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html">算法随想录</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#树形递归"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> 树形递归</a></li>
+    <li><a href="#树形递归的案例-找零钱"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> 树形递归的案例：找零钱</a>
+      <ul>
+        <li><a href="#优化1-使用备忘录方式提升效率"><!-- raw HTML omitted -->2.1<!-- raw HTML omitted --> 优化1：使用备忘录方式提升效率</a></li>
+        <li><a href="#优化2-使用dp-动态规划解决问题"><!-- raw HTML omitted -->2.2<!-- raw HTML omitted --> 优化2：使用dp 动态规划解决问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#找零钱的算法复杂度"><!-- raw HTML omitted -->3<!-- raw HTML omitted --> 找零钱的算法复杂度</a>
+      <ul>
+        <li><a href="#空间复杂度"><!-- raw HTML omitted -->3.1<!-- raw HTML omitted --> 空间复杂度</a></li>
+        <li><a href="#时间复杂度"><!-- raw HTML omitted -->3.2<!-- raw HTML omitted --> 时间复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#d41d8c"><!-- raw HTML omitted -->4<!-- raw HTML omitted --> </a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

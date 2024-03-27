@@ -13,6 +13,10 @@ draft = true
     - <span class="section-num">2.1</span> [优化1：使用备忘录方式提升效率](#优化1-使用备忘录方式提升效率)
     - <span class="section-num">2.2</span> [优化2：使用dp 动态规划解决问题](#优化2-使用dp-动态规划解决问题)
         - <span class="section-num">2.2.1</span> [理解动态规划](#理解动态规划)
+- <span class="section-num">3</span> [找零钱的算法复杂度](#找零钱的算法复杂度)
+    - <span class="section-num">3.1</span> [空间复杂度](#空间复杂度)
+    - <span class="section-num">3.2</span> [时间复杂度](#时间复杂度)
+- <span class="section-num">4</span> [](#d41d8c)
 
 </div>
 <!--endtoc-->
@@ -99,6 +103,7 @@ f(5,3),当 coins=[1,2,5]
 
 用实例来表示如下
 $$
+
 \begin{flalign}
 &n轮: f(5,3)\\\\
 =& f(5,2) + f(5-5=0,3) \\\\
@@ -119,9 +124,12 @@ $$
 &\textcolor{grey}{;;[3种硬币(1,2,5)组合5块] = [2种硬币(1,2)组合5块] + 1} \\\\
 &&
 \end{flalign}
+
 $$
 
 $$
+\require{ams}
+
 \begin{flalign}
 &n-1 到 1轮：f(5,2)\\\\
 &= f(5,1)+f(3,2) \quad\quad\quad\textcolor{grey}{;; f(3,2) = f(5-2,2)}\\\\
@@ -141,6 +149,7 @@ $$
 &= 3 \\\\
 &&
 \end{flalign}
+
 $$
 
 计算结果 \\(f(5,3)=4,当 coins=[1,2,5]\\)​，可以看到，这里面有很多的冗余计算，仅仅一个 \\(f(1,1)\\) 就重复计算了很多次
@@ -259,6 +268,29 @@ $$
 | 7         | 59+2\*25+3\*11    142 | 142 59 25       | f(7) f(6) f(5)  5 |
 
 你会发现，f-iter中的所有参数，真真实实的是把f(n) 中需要的val存储起来了，这就是没有数组的存储
+
+
+## <span class="section-num">3</span> 找零钱的算法复杂度 {#找零钱的算法复杂度}
+
+这是一个标准的递归树形结构算法，
+时间复杂度和空间复杂度的计算，都有逻辑，通过一点点的进行 `代换` 可以比较好的掌握
+具体的讨论，参见本人练习题 1.14的解答
+
+
+### <span class="section-num">3.1</span> 空间复杂度 {#空间复杂度}
+
+递归算法中，就是递归的调用层次，本题中，就是 S(n,m)=&Theta;(n)
+
+
+### <span class="section-num">3.2</span> 时间复杂度 {#时间复杂度}
+
+时间复杂度的计算，最初摸不着头脑，但是可以分解进行计算，比如先算 f(n,1)的，然后计算 f(n,2)的
+
+以此类推
+最终，时间复杂度，应该是 T(n,m) = &Theta;(n^m)
+
+
+## <span class="section-num">4</span>  {#d41d8c}
 
 [^fn:1]: HankingHu的csdn博客 [算法-动态规划 Dynamic Programming--从菜鸟到老鸟](<https://blog.csdn.net/u013309870/article/details/75193592>)
 [^fn:2]: 专注算法编程的carl [算法随想录](<https://programmercarl.com/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html>)

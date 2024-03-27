@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="1 评估递归对资源的消耗 2 降低递归时候资源消耗的办法 2.1 求幂过程引出的点 2.2 最大公约数过程引出的点 1 评估递归对资源的消耗 # 2 降低递归时候资源消耗的办法 # 2.1 求幂过程引出的点 # 2.2 最大公约数过程引出的点 # asdasd">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Day 4 深入递归02" />
+<meta property="og:description" content="1 评估递归对资源的消耗 2 降低递归时候资源消耗的办法 2.1 求幂过程引出的点 2.2 最大公约数过程引出的点 1 评估递归对资源的消耗 # 2 降低递归时候资源消耗的办法 # 2.1 求幂过程引出的点 # 2.2 最大公约数过程引出的点 # asdasd" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.org/posts/21_master_sicp_day_04/" /><meta property="article:section" content="posts" />
+
+
+
+<title>Day 4 深入递归02 | JINGs BLOG</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" >
+<link rel="canonical" href="https://example.org/posts/21_master_sicp_day_04/">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.781e31156237cb34456e4cdb81249c4c1713e03a940c4bac2453e2178133bc68.js" integrity="sha256-eB4xFWI3yzRFbkzbgSScTBcT4DqUDEusJFPiF4EzvGg=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  MathJax = {
+    loader: {load: ['[tex]/color']},
+    tex: {
+	  packages: {'[+]': ['color']},
+          displayMath: [['\\[', '\\]'], ['$$', '$$']],  
+	  inlineMath: [['\\(', '\\)'],['$', '$']],               
+	  formatError: (jax, err) => {
+	      console.log(jax, err);
+	      jax.formatError(err);
+	  }
+
+      },
+      
+  };
+</script>
+
+  
+
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>JINGs BLOG</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Day 4 深入递归02</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#评估递归对资源的消耗"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> 评估递归对资源的消耗</a></li>
+    <li><a href="#降低递归时候资源消耗的办法"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> 降低递归时候资源消耗的办法</a>
+      <ul>
+        <li><a href="#求幂过程引出的点"><!-- raw HTML omitted -->2.1<!-- raw HTML omitted --> 求幂过程引出的点</a></li>
+        <li><a href="#最大公约数过程引出的点"><!-- raw HTML omitted -->2.2<!-- raw HTML omitted --> 最大公约数过程引出的点</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    <a href="/posts/21_master_sicp_day_04/">Day 4 深入递归02</a>
+  </h1>
+  
+
+
+  
+
+  
+
+
+
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><!-- raw HTML omitted -->1<!-- raw HTML omitted --> <a href="#%e8%af%84%e4%bc%b0%e9%80%92%e5%bd%92%e5%af%b9%e8%b5%84%e6%ba%90%e7%9a%84%e6%b6%88%e8%80%97">评估递归对资源的消耗</a></li>
+<li><!-- raw HTML omitted -->2<!-- raw HTML omitted --> <a href="#%e9%99%8d%e4%bd%8e%e9%80%92%e5%bd%92%e6%97%b6%e5%80%99%e8%b5%84%e6%ba%90%e6%b6%88%e8%80%97%e7%9a%84%e5%8a%9e%e6%b3%95">降低递归时候资源消耗的办法</a>
+<ul>
+<li><!-- raw HTML omitted -->2.1<!-- raw HTML omitted --> <a href="#%e6%b1%82%e5%b9%82%e8%bf%87%e7%a8%8b%e5%bc%95%e5%87%ba%e7%9a%84%e7%82%b9">求幂过程引出的点</a></li>
+<li><!-- raw HTML omitted -->2.2<!-- raw HTML omitted --> <a href="#%e6%9c%80%e5%a4%a7%e5%85%ac%e7%ba%a6%e6%95%b0%e8%bf%87%e7%a8%8b%e5%bc%95%e5%87%ba%e7%9a%84%e7%82%b9">最大公约数过程引出的点</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="评估递归对资源的消耗">
+  <!-- raw HTML omitted -->1<!-- raw HTML omitted --> 评估递归对资源的消耗
+  <a class="anchor" href="#%e8%af%84%e4%bc%b0%e9%80%92%e5%bd%92%e5%af%b9%e8%b5%84%e6%ba%90%e7%9a%84%e6%b6%88%e8%80%97">#</a>
+</h2>
+<h2 id="降低递归时候资源消耗的办法">
+  <!-- raw HTML omitted -->2<!-- raw HTML omitted --> 降低递归时候资源消耗的办法
+  <a class="anchor" href="#%e9%99%8d%e4%bd%8e%e9%80%92%e5%bd%92%e6%97%b6%e5%80%99%e8%b5%84%e6%ba%90%e6%b6%88%e8%80%97%e7%9a%84%e5%8a%9e%e6%b3%95">#</a>
+</h2>
+<h3 id="求幂过程引出的点">
+  <!-- raw HTML omitted -->2.1<!-- raw HTML omitted --> 求幂过程引出的点
+  <a class="anchor" href="#%e6%b1%82%e5%b9%82%e8%bf%87%e7%a8%8b%e5%bc%95%e5%87%ba%e7%9a%84%e7%82%b9">#</a>
+</h3>
+<h3 id="最大公约数过程引出的点">
+  <!-- raw HTML omitted -->2.2<!-- raw HTML omitted --> 最大公约数过程引出的点
+  <a class="anchor" href="#%e6%9c%80%e5%a4%a7%e5%85%ac%e7%ba%a6%e6%95%b0%e8%bf%87%e7%a8%8b%e5%bc%95%e5%87%ba%e7%9a%84%e7%82%b9">#</a>
+</h3>
+<p>asdasd</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#评估递归对资源的消耗"><!-- raw HTML omitted -->1<!-- raw HTML omitted --> 评估递归对资源的消耗</a></li>
+    <li><a href="#降低递归时候资源消耗的办法"><!-- raw HTML omitted -->2<!-- raw HTML omitted --> 降低递归时候资源消耗的办法</a>
+      <ul>
+        <li><a href="#求幂过程引出的点"><!-- raw HTML omitted -->2.1<!-- raw HTML omitted --> 求幂过程引出的点</a></li>
+        <li><a href="#最大公约数过程引出的点"><!-- raw HTML omitted -->2.2<!-- raw HTML omitted --> 最大公约数过程引出的点</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

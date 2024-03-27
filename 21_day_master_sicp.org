@@ -9,23 +9,6 @@
 #+AUTHOR: joe567
 #+EMAIL: joestar1563@hotmail.com
 
-* Day 0 SICP概览
-** 序言
-*** SICP的含义
-~SICP~
-Structure and Interpretation of Computer Programs
-主要是讲述计算机程序的一本书，比较适合在大学或者研究生阶段学习
-
-|-----------+-----------------------------------------------------------------|
-| [[https://ocw.mit.edu/courses/6-001-structure-and-interpretation-of-computer-programs-spring-2005/][mit在线课程]] | [[http://img.skydrift.cn/1709570302.png?imageMogr2/thumbnail/!70p]] |
-
-
-*** SICP在讲些什么
-~抽象~
-
-+ 算法
-+ 计算机程序
-
 * DONE Day 1 构造过程抽象                                              :tech:
 CLOSED: [2024-02-20 Tue 10:17] SCHEDULED: <2024-02-19 Mon>
 :PROPERTIES:
@@ -729,6 +712,7 @@ $$
 
 
 $$
+\require{ams}
 \begin{flalign}
 &n-1 到 1轮：f(5,2)\\ 
 &= f(5,1)+f(3,2) \quad\quad\quad\textcolor{grey}{;; f(3,2) = f(5-2,2)}\\
@@ -866,6 +850,24 @@ $$
 
 
 
+
+** 找零钱的算法复杂度
+这是一个标准的递归树形结构算法，
+时间复杂度和空间复杂度的计算，都有逻辑，通过一点点的进行 =代换= 可以比较好的掌握
+具体的讨论，参见本人练习题 1.14的解答
+
+
+*** 空间复杂度
+递归算法中，就是递归的调用层次，本题中，就是 S(n,m)=\Theta(n)
+
+*** 时间复杂度
+时间复杂度的计算，最初摸不着头脑，但是可以分解进行计算，比如先算 f(n,1)的，然后计算 f(n,2)的
+
+以此类推
+最终，时间复杂度，应该是 T(n,m) = \Theta(n^m)
+** 
+
+
 * Day 4 深入递归02
 :PROPERTIES:
 :EXPORT_FILE_NAME: 21_master_sicp_day_04
@@ -898,3 +900,4 @@ asd
 [fn:5] 迭代法求平方根 https://www.physixfan.com/diedaifaqiupingfanggen/
 [fn:6] 平方根的逼近求值法 https://blog.csdn.net/weixin_42290927/article/details/106453060
 [fn:7] [[https://zh.wikipedia.org/wiki/%E7%89%9B%E9%A1%BF%E6%B3%95][维基百科-牛顿法]]
+

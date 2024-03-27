@@ -1,10 +1,22 @@
 baseURL = 'https://example.org/'
 languageCode = 'zh-CN'
 title = "JINGs BLOG"
-#theme = 'hugo-theme-learn'
-theme = 'capsule'
+#theme = 'hugo-onyx-theme:'
+#theme = 'capsule'
+theme = 'hugo-book'
 toc = true
 
 #[module]
 #  [[module.imports]]
 #    path = "hugo-onyx-theme"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)'],['$','$']]
+[params]
+  math = true

@@ -4,10 +4,10 @@
 #+AUTHOR: j56
 #+STARTUP: indent
 
-* Chapter 1. Building Abstractions with Procedures [0/0]
+* Chapter 1. Building Abstractions with Procedures [14/15]
 ** 1.1 The Elements of Programming
 *** DONE Exercise 1.1 basics
-CLOSED: [2024-03-06 Wed 18:25]
+CLOSED: [2024-03-06 Wed 19:48]
 #+begin_src emacs-lisp
 
   10
@@ -265,7 +265,8 @@ $$\frac{x/y^2 + 2y }{3}$$
 
 #+end_src
 ** 1.2 Procedures and the Processes They Generate
-*** TODO Exercise 1.9 直观感受递归和迭代的不同
+*** DONE Exercise 1.9 直观感受递归和迭代的不同
+CLOSED: [2024-03-06 Wed 18:57]
 
 #+begin_src scheme
     (define (+ a b)
@@ -305,7 +306,7 @@ $$\frac{x/y^2 + 2y }{3}$$
 The easiest way to spot that the first process is recursive (without writing out the substitution) is to note that the "+" procedure calls itself at the end while nested in another expression; the second calls itself, but as the top expression.
 
 *** DONE Exercise 1.10 Ackermann 函数
-CLOSED: [2024-02-24 Sat 17:49]
+CLOSED: [2024-03-06 Wed 18:57]
 #+begin_src scheme
 (define (A x y)
    (cond ((= y 0) 0)
@@ -447,8 +448,263 @@ CLOSED: [2024-03-02 Sat 21:06]
 编写杨辉三角，只求某行某列的value比较简单，直接递归即可
 
 *** HOLD Exercise 1.13 证明斐波那契数列是最接近的整数        :WAITING:HOLD:
+:LOGBOOK:
+CLOCK: [2024-03-06 Wed 19:50]--[2024-03-06 Wed 20:00] =>  0:10
+CLOCK: [2024-03-06 Wed 19:25]--[2024-03-06 Wed 19:50] =>  0:25
+:END:
 \begin{equation}
 \phi^n/\sqrt{5}, 其中，\phi = (1 + \sqrt{5}/2)
 提示： Fib(n) = (\phi^n -\gamma^n)/\sqrt{5}
 \end{equation}
 
+
+*** DONE Exercise 1.14 分析找零钱的计算过程，分析时间和空间复杂度
+CLOSED: [2024-03-13 Wed 19:46]
+:LOGBOOK:
+CLOCK: [2024-03-13 Wed 18:54]--[2024-03-14 Thu 13:33] => 18:39
+:END:
+通过脑图画出来了，并且将脑图中的数据导出，可以看出来，不同的分支中走了很多很多的重复，如果顺利剪枝的话，效率会提高很多
+[[http://img.skydrift.cn/expend-of-count-money-11.png?imageMogr2/thumbnail/!70p]]
+#+begin_src 
+cc 11 [1 2 5 10]
+   cc 11 [1 2 5]
+    cc 11 [1 2]
+      cc 11 [1]
+        cc 11 []
+          0
+        cc 10 [1]
+          cc 10 []
+            0
+          cc 9 [1]
+            cc 9 []
+              0
+            cc 8 [1]
+              cc 8 []
+                0
+              cc 7 [1]
+                cc 7 []
+                  0
+                cc 6 [1]
+                  cc 6 []
+                    0
+                  cc 5 [1]
+                    cc 5 []
+                      0
+                    cc 4 [1]
+                      cc 4 []
+                        0
+                      cc 3 [1]
+                        cc 3 []
+                          0
+                        cc 2 [1]
+                          cc 2 []
+                            0
+                          cc 1 [1]
+                            cc 1 []
+                              0
+                            cc 0 [1]
+                              1
+      cc 9 [1 2]
+        cc 9 [1]
+          cc 9 []
+            0
+          cc 8 [1]
+            cc 8 []
+              0
+            cc 7 [1]
+              cc 7 []
+                0
+              cc 6 [1]
+                cc 6 []
+                  0
+                cc 5 [1]
+                  cc 5 []
+                    0
+                  cc 4 [1]
+                    cc 4 []
+                      0
+                    cc 3 [1]
+                      cc 3 []
+                        0
+                      cc 2 [1]
+                        cc 2 []
+                          0
+                        cc 1 [1]
+                          cc 1 []
+                            0
+                          cc 0 [1]
+                            1
+
+        cc 7 [1 2]
+          cc 7 [1]
+            cc 7 []
+              0
+
+            cc 6 [1]
+              cc 6 []
+                0
+              cc 5 [1]
+                cc 5 []
+                  0
+                cc 4 [1]
+                  cc 4 []
+                    0
+                  cc 3 [1]
+                    cc 3 []
+                      0
+                    cc 2 [1]
+                      cc 2 []
+                        0
+                      cc 1 [1]
+                        cc 1 []
+                          0
+                        cc 0 [1]
+                          1
+
+          cc 5 [1 2]
+            cc 5 [1]
+              cc 5 []
+                0
+              cc 4 [1]
+                cc 4 []
+                  0
+                cc 3 [1]
+                  cc 3 []
+                    0
+                  cc 2 [1]
+                    cc 2 []
+                      0
+                    cc 1 [1]
+                      cc 1 []
+                        0
+                      cc 0 [1]
+                        1
+
+            cc 3 [1 2]
+              cc 3 [1]
+                cc 3 []
+                  0
+                cc 2 [1]
+                  cc 2 []
+                    0
+                  cc 1 [1]
+                    cc 1 []
+                      0
+                    cc 0 [1]
+                      1
+
+              cc 1 [1 2]
+                cc 1 [1]
+                  cc 1 []
+                    0
+
+                  cc 0 [1]
+                    1
+
+                cc -1 [1 2]
+                  0
+    cc 6 [1 2 5]
+      cc 6 [1 2]
+        cc 6 [1]
+          cc 6 []
+            0
+
+          cc 5 [1]
+            cc 5 []
+              0
+            cc 4 [1]
+              cc 4 []
+                0
+              cc 3 [1]
+                cc 3 []
+                  0
+                cc 2 [1]
+                  cc 2 []
+                    0
+                  cc 1 [1]
+                    cc 1 []
+                      0
+                    cc 0 [1]
+                      1
+
+
+        cc 4 [1 2]
+          cc 4 [1]
+            cc 4 []
+              0
+
+            cc 3 [1]
+              cc 3 []
+                0
+              cc 2 [1]
+                cc 2 []
+                  0
+                cc 1 [1]
+                  cc 1 []
+                    0
+                  cc 0 [1]
+                    1
+
+          cc 2 [1 2]
+            cc 2 [1]
+              cc 2 []
+                0
+
+              cc 1 [1]
+                cc 1 []
+                  0
+                cc 0 [1]
+                  1
+
+            cc 0 [1 2]
+              1
+
+      cc 1 [1 2 5]
+        cc 1 [1 2]
+          cc 1 [1]
+            cc 1 []
+              0
+            cc 0 [1]
+              1
+          cc -1 [1 2]
+            0
+
+        cc -4 [ 1 2 5]
+          0
+
+  (cc 1 [ 1 2 5 10])
+    cc 1 [1 2 5]
+      cc 1 [1 2]
+        cc 1 [1]
+          cc 1 []
+            0
+          cc 0 [1]
+            1
+        cc -1 [1 2]
+          0
+      cc -4 [ 1 2 5]
+        0
+    cc -9 [ 1 2 5 10]
+      0
+#+end_src
+时间复杂度为：
+O
+可以看到，通过这样的方式进行剪枝，可以极大的节省计算逻辑
+[[http://img.skydrift.cn/expend-of-count-money-11-fast.png?imageMogr2/thumbnail/!70p]]
+
+*** DONE Exercise 1.15 正弦计算题
+CLOSED: [2024-03-14 Thu 15:22]
+:LOGBOOK:
+CLOCK: [2024-03-14 Thu 13:33]--[2024-03-14 Thu 15:22] =>  1:49
+:END:
+
+#+begin_src
+  (define (cube x) (* x x x))
+  (define (p x) (- (* 3 x) (* 4 (cube x))))
+
+  (define (sine angle)
+   (if (not (> (abs angle) 0.1))
+        angle
+       (p (sine (/ angle 3.0)))))
+
+#+end_src
